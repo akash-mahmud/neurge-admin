@@ -1,0 +1,49 @@
+query tasksWithoutrelationalData($where: TaskWhereInput, $orderBy: [TaskOrderByWithRelationInput!], $take: Int) {
+  tasks(where: $where, orderBy: $orderBy, take: $take) {
+    tags
+    slug
+    name
+    imoji
+    id
+  }
+}
+
+query AggregateTask($where: TaskWhereInput, $tasksWhere2: TaskWhereInput) {
+  aggregateTask(where: $where) {
+    _count {
+      _all
+      
+    }
+
+  }}
+
+  query Task($where: TaskWhereUniqueInput!) {
+  task(where: $where) {
+       slug
+    tags
+
+    description
+    createdAt
+   
+    id
+    imoji
+    name
+    updatedAt
+    categoryId
+    prompts {
+      description
+      id
+      name
+    }
+        tips {
+      id
+      description
+    }
+     category {
+      name
+      
+    }
+ 
+  }
+}
+
