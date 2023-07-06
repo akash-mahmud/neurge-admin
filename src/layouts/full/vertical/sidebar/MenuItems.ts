@@ -78,42 +78,16 @@ const Menuitems: MenuitemsType[] = [
     href: '/',
     // chip: 'New',
     chipColor: 'secondary',
-    children: [
-      {
-        id: uniqueId(),
-        title: 'Create',
-        icon: IconPoint,
-        href: '/task/create',
-      },
-      {
-        id: uniqueId(),
-        title: 'View',
-        icon: IconPoint,
-        href: '/',
-      },
-    ]
+  
   },
   {
     id: uniqueId(),
     title: 'Category',
     icon: IconAperture,
-    href: '/',
-    // chip: 'New',
+    href: '/category',
+        // chip: 'New',
     chipColor: 'secondary',
-    children: [
-      {
-        id: uniqueId(),
-        title: 'Create',
-        icon: IconPoint,
-        href: '/category/create',
-      },
-      {
-        id: uniqueId(),
-        title: 'View',
-        icon: IconPoint,
-        href: '/category',
-      },
-    ]
+
   },
 
   {

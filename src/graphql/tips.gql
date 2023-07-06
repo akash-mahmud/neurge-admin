@@ -1,0 +1,25 @@
+mutation DeleteManyTip($where: TipWhereInput) {
+  deleteManyTip(where: $where) {
+    count
+  }
+}
+
+mutation DeleteOneTip($where: TipWhereUniqueInput!) {
+  deleteOneTip(where: $where) {
+    id
+  }
+}
+
+mutation UpdateManyTip($data: TipUpdateManyMutationInput!) {
+  updateManyTip(data: $data) {
+    count
+  }
+}
+
+query TipsAfterDeleteFromTask($where: TipWhereInput) {
+  tips(where: $where) {
+    id
+    description
+  }
+}
+

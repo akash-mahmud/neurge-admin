@@ -8,14 +8,33 @@ query tasksWithoutrelationalData($where: TaskWhereInput, $orderBy: [TaskOrderByW
   }
 }
 
-query AggregateTask($where: TaskWhereInput, $tasksWhere2: TaskWhereInput) {
-  aggregateTask(where: $where) {
+query TasksViewTable($where: TaskWhereInput, $orderBy: [TaskOrderByWithRelationInput!], $cursor: TaskWhereUniqueInput, $take: Int, $skip: Int, $distinct: [TaskScalarFieldEnum!]) {
+  tasks(where: $where, orderBy: $orderBy, cursor: $cursor, take: $take, skip: $skip, distinct: $distinct) {
+    _count {
+      prompts
+      tips
+    }
+    category {
+      name
+      id
+    }
+    createdAt
+    imoji
+    name
+    slug
+    tags
+    id
+  }
+}
+
+
+query AggregateTask($where: TaskWhereInput, $cursor: TaskWhereUniqueInput) {
+  aggregateTask(where: $where, cursor: $cursor) {
     _count {
       _all
-      
     }
-
-  }}
+  }
+}
 
   query Task($where: TaskWhereUniqueInput!) {
   task(where: $where) {
@@ -47,3 +66,25 @@ query AggregateTask($where: TaskWhereInput, $tasksWhere2: TaskWhereInput) {
   }
 }
 
+
+mutation CreateOneTask($data: TaskCreateInput!) {
+  createOneTask(data: $data) {
+    id
+  }
+}
+mutation DeleteOneTask($where: TaskWhereUniqueInput!) {
+  deleteOneTask(where: $where) {
+    id
+  }
+}
+mutation UpdateOneTask($data: TaskUpdateInput!, $where: TaskWhereUniqueInput!) {
+  updateOneTask(data: $data, where: $where) {
+    id
+  }
+}
+
+mutation UpdateManyTask($data: TaskUpdateManyMutationInput!, $where: TaskWhereInput) {
+  updateManyTask(data: $data, where: $where) {
+    count
+  }
+}

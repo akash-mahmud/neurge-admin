@@ -26,6 +26,7 @@ import "../components/landingpage/testimonial/testimonial.css";
 import "../components/landingpage/demo-slider/demo-slider.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "../styles/custom.css";
 import { ApolloClient, ApolloProvider } from "@apollo/client";
 import client from "@/apollo/client";
 

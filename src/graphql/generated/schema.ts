@@ -18,9 +18,830 @@ export type Scalars = {
   DateTime: { input: any; output: any; }
 };
 
+export type Addon = {
+  __typename?: 'Addon';
+  _count?: Maybe<AddonCount>;
+  addonBlogCategory: Array<AddonBlogCategory>;
+  blog: Array<Blog>;
+  createdAt: Scalars['DateTime']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  id: Scalars['String']['output'];
+  img: Scalars['String']['output'];
+  imoji?: Maybe<Scalars['String']['output']>;
+  name: Scalars['String']['output'];
+  purchaseUrl?: Maybe<Scalars['String']['output']>;
+  purchasedByUsers: Array<User>;
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+
+export type AddonAddonBlogCategoryArgs = {
+  cursor?: InputMaybe<AddonBlogCategoryWhereUniqueInput>;
+  distinct?: InputMaybe<Array<AddonBlogCategoryScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<AddonBlogCategoryOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<AddonBlogCategoryWhereInput>;
+};
+
+
+export type AddonBlogArgs = {
+  cursor?: InputMaybe<BlogWhereUniqueInput>;
+  distinct?: InputMaybe<Array<BlogScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<BlogOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<BlogWhereInput>;
+};
+
+
+export type AddonPurchasedByUsersArgs = {
+  cursor?: InputMaybe<UserWhereUniqueInput>;
+  distinct?: InputMaybe<Array<UserScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<UserOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<UserWhereInput>;
+};
+
+export type AddonBlogCategory = {
+  __typename?: 'AddonBlogCategory';
+  _count?: Maybe<AddonBlogCategoryCount>;
+  addon?: Maybe<Addon>;
+  addonId: Scalars['String']['output'];
+  blog: Array<Blog>;
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+
+export type AddonBlogCategoryBlogArgs = {
+  cursor?: InputMaybe<BlogWhereUniqueInput>;
+  distinct?: InputMaybe<Array<BlogScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<BlogOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<BlogWhereInput>;
+};
+
+export type AddonBlogCategoryCount = {
+  __typename?: 'AddonBlogCategoryCount';
+  blog: Scalars['Int']['output'];
+};
+
+
+export type AddonBlogCategoryCountBlogArgs = {
+  where?: InputMaybe<BlogWhereInput>;
+};
+
+export type AddonBlogCategoryCountAggregate = {
+  __typename?: 'AddonBlogCategoryCountAggregate';
+  _all: Scalars['Int']['output'];
+  addonId: Scalars['Int']['output'];
+  createdAt: Scalars['Int']['output'];
+  id: Scalars['Int']['output'];
+  name: Scalars['Int']['output'];
+  updatedAt: Scalars['Int']['output'];
+};
+
+export type AddonBlogCategoryCountOrderByAggregateInput = {
+  addonId?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export type AddonBlogCategoryCreateInput = {
+  addon?: InputMaybe<AddonCreateNestedOneWithoutAddonBlogCategoryInput>;
+  blog?: InputMaybe<BlogCreateNestedManyWithoutAddonBlogCategoryInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type AddonBlogCategoryCreateManyAddonInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type AddonBlogCategoryCreateManyAddonInputEnvelope = {
+  data: Array<AddonBlogCategoryCreateManyAddonInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type AddonBlogCategoryCreateManyInput = {
+  addonId: Scalars['String']['input'];
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type AddonBlogCategoryCreateNestedManyWithoutAddonInput = {
+  connect?: InputMaybe<Array<AddonBlogCategoryWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<AddonBlogCategoryCreateOrConnectWithoutAddonInput>>;
+  create?: InputMaybe<Array<AddonBlogCategoryCreateWithoutAddonInput>>;
+  createMany?: InputMaybe<AddonBlogCategoryCreateManyAddonInputEnvelope>;
+};
+
+export type AddonBlogCategoryCreateNestedOneWithoutBlogInput = {
+  connect?: InputMaybe<AddonBlogCategoryWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<AddonBlogCategoryCreateOrConnectWithoutBlogInput>;
+  create?: InputMaybe<AddonBlogCategoryCreateWithoutBlogInput>;
+};
+
+export type AddonBlogCategoryCreateOrConnectWithoutAddonInput = {
+  create: AddonBlogCategoryCreateWithoutAddonInput;
+  where: AddonBlogCategoryWhereUniqueInput;
+};
+
+export type AddonBlogCategoryCreateOrConnectWithoutBlogInput = {
+  create: AddonBlogCategoryCreateWithoutBlogInput;
+  where: AddonBlogCategoryWhereUniqueInput;
+};
+
+export type AddonBlogCategoryCreateWithoutAddonInput = {
+  blog?: InputMaybe<BlogCreateNestedManyWithoutAddonBlogCategoryInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type AddonBlogCategoryCreateWithoutBlogInput = {
+  addon?: InputMaybe<AddonCreateNestedOneWithoutAddonBlogCategoryInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type AddonBlogCategoryGroupBy = {
+  __typename?: 'AddonBlogCategoryGroupBy';
+  _count?: Maybe<AddonBlogCategoryCountAggregate>;
+  _max?: Maybe<AddonBlogCategoryMaxAggregate>;
+  _min?: Maybe<AddonBlogCategoryMinAggregate>;
+  addonId: Scalars['String']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+export type AddonBlogCategoryListRelationFilter = {
+  every?: InputMaybe<AddonBlogCategoryWhereInput>;
+  none?: InputMaybe<AddonBlogCategoryWhereInput>;
+  some?: InputMaybe<AddonBlogCategoryWhereInput>;
+};
+
+export type AddonBlogCategoryMaxAggregate = {
+  __typename?: 'AddonBlogCategoryMaxAggregate';
+  addonId?: Maybe<Scalars['String']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type AddonBlogCategoryMaxOrderByAggregateInput = {
+  addonId?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export type AddonBlogCategoryMinAggregate = {
+  __typename?: 'AddonBlogCategoryMinAggregate';
+  addonId?: Maybe<Scalars['String']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type AddonBlogCategoryMinOrderByAggregateInput = {
+  addonId?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export type AddonBlogCategoryOrderByRelationAggregateInput = {
+  _count?: InputMaybe<SortOrder>;
+};
+
+export type AddonBlogCategoryOrderByWithAggregationInput = {
+  _count?: InputMaybe<AddonBlogCategoryCountOrderByAggregateInput>;
+  _max?: InputMaybe<AddonBlogCategoryMaxOrderByAggregateInput>;
+  _min?: InputMaybe<AddonBlogCategoryMinOrderByAggregateInput>;
+  addonId?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export type AddonBlogCategoryOrderByWithRelationInput = {
+  addon?: InputMaybe<AddonOrderByWithRelationInput>;
+  addonId?: InputMaybe<SortOrder>;
+  blog?: InputMaybe<BlogOrderByRelationAggregateInput>;
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export type AddonBlogCategoryRelationFilter = {
+  is?: InputMaybe<AddonBlogCategoryWhereInput>;
+  isNot?: InputMaybe<AddonBlogCategoryWhereInput>;
+};
+
+export enum AddonBlogCategoryScalarFieldEnum {
+  AddonId = 'addonId',
+  CreatedAt = 'createdAt',
+  Id = 'id',
+  Name = 'name',
+  UpdatedAt = 'updatedAt'
+}
+
+export type AddonBlogCategoryScalarWhereInput = {
+  AND?: InputMaybe<Array<AddonBlogCategoryScalarWhereInput>>;
+  NOT?: InputMaybe<Array<AddonBlogCategoryScalarWhereInput>>;
+  OR?: InputMaybe<Array<AddonBlogCategoryScalarWhereInput>>;
+  addonId?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  id?: InputMaybe<StringFilter>;
+  name?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+};
+
+export type AddonBlogCategoryScalarWhereWithAggregatesInput = {
+  AND?: InputMaybe<Array<AddonBlogCategoryScalarWhereWithAggregatesInput>>;
+  NOT?: InputMaybe<Array<AddonBlogCategoryScalarWhereWithAggregatesInput>>;
+  OR?: InputMaybe<Array<AddonBlogCategoryScalarWhereWithAggregatesInput>>;
+  addonId?: InputMaybe<StringWithAggregatesFilter>;
+  createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
+  id?: InputMaybe<StringWithAggregatesFilter>;
+  name?: InputMaybe<StringWithAggregatesFilter>;
+  updatedAt?: InputMaybe<DateTimeWithAggregatesFilter>;
+};
+
+export type AddonBlogCategoryUpdateInput = {
+  addon?: InputMaybe<AddonUpdateOneWithoutAddonBlogCategoryNestedInput>;
+  blog?: InputMaybe<BlogUpdateManyWithoutAddonBlogCategoryNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type AddonBlogCategoryUpdateManyMutationInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type AddonBlogCategoryUpdateManyWithWhereWithoutAddonInput = {
+  data: AddonBlogCategoryUpdateManyMutationInput;
+  where: AddonBlogCategoryScalarWhereInput;
+};
+
+export type AddonBlogCategoryUpdateManyWithoutAddonNestedInput = {
+  connect?: InputMaybe<Array<AddonBlogCategoryWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<AddonBlogCategoryCreateOrConnectWithoutAddonInput>>;
+  create?: InputMaybe<Array<AddonBlogCategoryCreateWithoutAddonInput>>;
+  createMany?: InputMaybe<AddonBlogCategoryCreateManyAddonInputEnvelope>;
+  delete?: InputMaybe<Array<AddonBlogCategoryWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<AddonBlogCategoryScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<AddonBlogCategoryWhereUniqueInput>>;
+  set?: InputMaybe<Array<AddonBlogCategoryWhereUniqueInput>>;
+  update?: InputMaybe<Array<AddonBlogCategoryUpdateWithWhereUniqueWithoutAddonInput>>;
+  updateMany?: InputMaybe<Array<AddonBlogCategoryUpdateManyWithWhereWithoutAddonInput>>;
+  upsert?: InputMaybe<Array<AddonBlogCategoryUpsertWithWhereUniqueWithoutAddonInput>>;
+};
+
+export type AddonBlogCategoryUpdateOneWithoutBlogNestedInput = {
+  connect?: InputMaybe<AddonBlogCategoryWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<AddonBlogCategoryCreateOrConnectWithoutBlogInput>;
+  create?: InputMaybe<AddonBlogCategoryCreateWithoutBlogInput>;
+  delete?: InputMaybe<Scalars['Boolean']['input']>;
+  disconnect?: InputMaybe<Scalars['Boolean']['input']>;
+  update?: InputMaybe<AddonBlogCategoryUpdateWithoutBlogInput>;
+  upsert?: InputMaybe<AddonBlogCategoryUpsertWithoutBlogInput>;
+};
+
+export type AddonBlogCategoryUpdateWithWhereUniqueWithoutAddonInput = {
+  data: AddonBlogCategoryUpdateWithoutAddonInput;
+  where: AddonBlogCategoryWhereUniqueInput;
+};
+
+export type AddonBlogCategoryUpdateWithoutAddonInput = {
+  blog?: InputMaybe<BlogUpdateManyWithoutAddonBlogCategoryNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type AddonBlogCategoryUpdateWithoutBlogInput = {
+  addon?: InputMaybe<AddonUpdateOneWithoutAddonBlogCategoryNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type AddonBlogCategoryUpsertWithWhereUniqueWithoutAddonInput = {
+  create: AddonBlogCategoryCreateWithoutAddonInput;
+  update: AddonBlogCategoryUpdateWithoutAddonInput;
+  where: AddonBlogCategoryWhereUniqueInput;
+};
+
+export type AddonBlogCategoryUpsertWithoutBlogInput = {
+  create: AddonBlogCategoryCreateWithoutBlogInput;
+  update: AddonBlogCategoryUpdateWithoutBlogInput;
+};
+
+export type AddonBlogCategoryWhereInput = {
+  AND?: InputMaybe<Array<AddonBlogCategoryWhereInput>>;
+  NOT?: InputMaybe<Array<AddonBlogCategoryWhereInput>>;
+  OR?: InputMaybe<Array<AddonBlogCategoryWhereInput>>;
+  addon?: InputMaybe<AddonRelationFilter>;
+  addonId?: InputMaybe<StringFilter>;
+  blog?: InputMaybe<BlogListRelationFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  id?: InputMaybe<StringFilter>;
+  name?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+};
+
+export type AddonBlogCategoryWhereUniqueInput = {
+  id?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AddonCount = {
+  __typename?: 'AddonCount';
+  addonBlogCategory: Scalars['Int']['output'];
+  blog: Scalars['Int']['output'];
+  purchasedByUsers: Scalars['Int']['output'];
+};
+
+
+export type AddonCountAddonBlogCategoryArgs = {
+  where?: InputMaybe<AddonBlogCategoryWhereInput>;
+};
+
+
+export type AddonCountBlogArgs = {
+  where?: InputMaybe<BlogWhereInput>;
+};
+
+
+export type AddonCountPurchasedByUsersArgs = {
+  where?: InputMaybe<UserWhereInput>;
+};
+
+export type AddonCountAggregate = {
+  __typename?: 'AddonCountAggregate';
+  _all: Scalars['Int']['output'];
+  createdAt: Scalars['Int']['output'];
+  description: Scalars['Int']['output'];
+  id: Scalars['Int']['output'];
+  img: Scalars['Int']['output'];
+  imoji: Scalars['Int']['output'];
+  name: Scalars['Int']['output'];
+  purchaseUrl: Scalars['Int']['output'];
+  updatedAt: Scalars['Int']['output'];
+};
+
+export type AddonCountOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  description?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  img?: InputMaybe<SortOrder>;
+  imoji?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  purchaseUrl?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export type AddonCreateInput = {
+  addonBlogCategory?: InputMaybe<AddonBlogCategoryCreateNestedManyWithoutAddonInput>;
+  blog?: InputMaybe<BlogCreateNestedManyWithoutAddonInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  img: Scalars['String']['input'];
+  imoji?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  purchaseUrl?: InputMaybe<Scalars['String']['input']>;
+  purchasedByUsers?: InputMaybe<UserCreateNestedManyWithoutPurchasedAddonsInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type AddonCreateManyInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  img: Scalars['String']['input'];
+  imoji?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  purchaseUrl?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type AddonCreateNestedManyWithoutPurchasedByUsersInput = {
+  connect?: InputMaybe<Array<AddonWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<AddonCreateOrConnectWithoutPurchasedByUsersInput>>;
+  create?: InputMaybe<Array<AddonCreateWithoutPurchasedByUsersInput>>;
+};
+
+export type AddonCreateNestedOneWithoutAddonBlogCategoryInput = {
+  connect?: InputMaybe<AddonWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<AddonCreateOrConnectWithoutAddonBlogCategoryInput>;
+  create?: InputMaybe<AddonCreateWithoutAddonBlogCategoryInput>;
+};
+
+export type AddonCreateNestedOneWithoutBlogInput = {
+  connect?: InputMaybe<AddonWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<AddonCreateOrConnectWithoutBlogInput>;
+  create?: InputMaybe<AddonCreateWithoutBlogInput>;
+};
+
+export type AddonCreateOrConnectWithoutAddonBlogCategoryInput = {
+  create: AddonCreateWithoutAddonBlogCategoryInput;
+  where: AddonWhereUniqueInput;
+};
+
+export type AddonCreateOrConnectWithoutBlogInput = {
+  create: AddonCreateWithoutBlogInput;
+  where: AddonWhereUniqueInput;
+};
+
+export type AddonCreateOrConnectWithoutPurchasedByUsersInput = {
+  create: AddonCreateWithoutPurchasedByUsersInput;
+  where: AddonWhereUniqueInput;
+};
+
+export type AddonCreateWithoutAddonBlogCategoryInput = {
+  blog?: InputMaybe<BlogCreateNestedManyWithoutAddonInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  img: Scalars['String']['input'];
+  imoji?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  purchaseUrl?: InputMaybe<Scalars['String']['input']>;
+  purchasedByUsers?: InputMaybe<UserCreateNestedManyWithoutPurchasedAddonsInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type AddonCreateWithoutBlogInput = {
+  addonBlogCategory?: InputMaybe<AddonBlogCategoryCreateNestedManyWithoutAddonInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  img: Scalars['String']['input'];
+  imoji?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  purchaseUrl?: InputMaybe<Scalars['String']['input']>;
+  purchasedByUsers?: InputMaybe<UserCreateNestedManyWithoutPurchasedAddonsInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type AddonCreateWithoutPurchasedByUsersInput = {
+  addonBlogCategory?: InputMaybe<AddonBlogCategoryCreateNestedManyWithoutAddonInput>;
+  blog?: InputMaybe<BlogCreateNestedManyWithoutAddonInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  img: Scalars['String']['input'];
+  imoji?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  purchaseUrl?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type AddonGroupBy = {
+  __typename?: 'AddonGroupBy';
+  _count?: Maybe<AddonCountAggregate>;
+  _max?: Maybe<AddonMaxAggregate>;
+  _min?: Maybe<AddonMinAggregate>;
+  createdAt: Scalars['DateTime']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  id: Scalars['String']['output'];
+  img: Scalars['String']['output'];
+  imoji?: Maybe<Scalars['String']['output']>;
+  name: Scalars['String']['output'];
+  purchaseUrl?: Maybe<Scalars['String']['output']>;
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+export type AddonListRelationFilter = {
+  every?: InputMaybe<AddonWhereInput>;
+  none?: InputMaybe<AddonWhereInput>;
+  some?: InputMaybe<AddonWhereInput>;
+};
+
+export type AddonMaxAggregate = {
+  __typename?: 'AddonMaxAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  img?: Maybe<Scalars['String']['output']>;
+  imoji?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  purchaseUrl?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type AddonMaxOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  description?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  img?: InputMaybe<SortOrder>;
+  imoji?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  purchaseUrl?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export type AddonMinAggregate = {
+  __typename?: 'AddonMinAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  img?: Maybe<Scalars['String']['output']>;
+  imoji?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  purchaseUrl?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type AddonMinOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  description?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  img?: InputMaybe<SortOrder>;
+  imoji?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  purchaseUrl?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export type AddonOrderByRelationAggregateInput = {
+  _count?: InputMaybe<SortOrder>;
+};
+
+export type AddonOrderByWithAggregationInput = {
+  _count?: InputMaybe<AddonCountOrderByAggregateInput>;
+  _max?: InputMaybe<AddonMaxOrderByAggregateInput>;
+  _min?: InputMaybe<AddonMinOrderByAggregateInput>;
+  createdAt?: InputMaybe<SortOrder>;
+  description?: InputMaybe<SortOrderInput>;
+  id?: InputMaybe<SortOrder>;
+  img?: InputMaybe<SortOrder>;
+  imoji?: InputMaybe<SortOrderInput>;
+  name?: InputMaybe<SortOrder>;
+  purchaseUrl?: InputMaybe<SortOrderInput>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export type AddonOrderByWithRelationInput = {
+  addonBlogCategory?: InputMaybe<AddonBlogCategoryOrderByRelationAggregateInput>;
+  blog?: InputMaybe<BlogOrderByRelationAggregateInput>;
+  createdAt?: InputMaybe<SortOrder>;
+  description?: InputMaybe<SortOrderInput>;
+  id?: InputMaybe<SortOrder>;
+  img?: InputMaybe<SortOrder>;
+  imoji?: InputMaybe<SortOrderInput>;
+  name?: InputMaybe<SortOrder>;
+  purchaseUrl?: InputMaybe<SortOrderInput>;
+  purchasedByUsers?: InputMaybe<UserOrderByRelationAggregateInput>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export type AddonRelationFilter = {
+  is?: InputMaybe<AddonWhereInput>;
+  isNot?: InputMaybe<AddonWhereInput>;
+};
+
+export enum AddonScalarFieldEnum {
+  CreatedAt = 'createdAt',
+  Description = 'description',
+  Id = 'id',
+  Img = 'img',
+  Imoji = 'imoji',
+  Name = 'name',
+  PurchaseUrl = 'purchaseUrl',
+  UpdatedAt = 'updatedAt'
+}
+
+export type AddonScalarWhereInput = {
+  AND?: InputMaybe<Array<AddonScalarWhereInput>>;
+  NOT?: InputMaybe<Array<AddonScalarWhereInput>>;
+  OR?: InputMaybe<Array<AddonScalarWhereInput>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  description?: InputMaybe<StringNullableFilter>;
+  id?: InputMaybe<StringFilter>;
+  img?: InputMaybe<StringFilter>;
+  imoji?: InputMaybe<StringNullableFilter>;
+  name?: InputMaybe<StringFilter>;
+  purchaseUrl?: InputMaybe<StringNullableFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+};
+
+export type AddonScalarWhereWithAggregatesInput = {
+  AND?: InputMaybe<Array<AddonScalarWhereWithAggregatesInput>>;
+  NOT?: InputMaybe<Array<AddonScalarWhereWithAggregatesInput>>;
+  OR?: InputMaybe<Array<AddonScalarWhereWithAggregatesInput>>;
+  createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
+  description?: InputMaybe<StringNullableWithAggregatesFilter>;
+  id?: InputMaybe<StringWithAggregatesFilter>;
+  img?: InputMaybe<StringWithAggregatesFilter>;
+  imoji?: InputMaybe<StringNullableWithAggregatesFilter>;
+  name?: InputMaybe<StringWithAggregatesFilter>;
+  purchaseUrl?: InputMaybe<StringNullableWithAggregatesFilter>;
+  updatedAt?: InputMaybe<DateTimeWithAggregatesFilter>;
+};
+
+export type AddonUpdateInput = {
+  addonBlogCategory?: InputMaybe<AddonBlogCategoryUpdateManyWithoutAddonNestedInput>;
+  blog?: InputMaybe<BlogUpdateManyWithoutAddonNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  img?: InputMaybe<StringFieldUpdateOperationsInput>;
+  imoji?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  purchaseUrl?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  purchasedByUsers?: InputMaybe<UserUpdateManyWithoutPurchasedAddonsNestedInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type AddonUpdateManyMutationInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  img?: InputMaybe<StringFieldUpdateOperationsInput>;
+  imoji?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  purchaseUrl?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type AddonUpdateManyWithWhereWithoutPurchasedByUsersInput = {
+  data: AddonUpdateManyMutationInput;
+  where: AddonScalarWhereInput;
+};
+
+export type AddonUpdateManyWithoutPurchasedByUsersNestedInput = {
+  connect?: InputMaybe<Array<AddonWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<AddonCreateOrConnectWithoutPurchasedByUsersInput>>;
+  create?: InputMaybe<Array<AddonCreateWithoutPurchasedByUsersInput>>;
+  delete?: InputMaybe<Array<AddonWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<AddonScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<AddonWhereUniqueInput>>;
+  set?: InputMaybe<Array<AddonWhereUniqueInput>>;
+  update?: InputMaybe<Array<AddonUpdateWithWhereUniqueWithoutPurchasedByUsersInput>>;
+  updateMany?: InputMaybe<Array<AddonUpdateManyWithWhereWithoutPurchasedByUsersInput>>;
+  upsert?: InputMaybe<Array<AddonUpsertWithWhereUniqueWithoutPurchasedByUsersInput>>;
+};
+
+export type AddonUpdateOneWithoutAddonBlogCategoryNestedInput = {
+  connect?: InputMaybe<AddonWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<AddonCreateOrConnectWithoutAddonBlogCategoryInput>;
+  create?: InputMaybe<AddonCreateWithoutAddonBlogCategoryInput>;
+  delete?: InputMaybe<Scalars['Boolean']['input']>;
+  disconnect?: InputMaybe<Scalars['Boolean']['input']>;
+  update?: InputMaybe<AddonUpdateWithoutAddonBlogCategoryInput>;
+  upsert?: InputMaybe<AddonUpsertWithoutAddonBlogCategoryInput>;
+};
+
+export type AddonUpdateOneWithoutBlogNestedInput = {
+  connect?: InputMaybe<AddonWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<AddonCreateOrConnectWithoutBlogInput>;
+  create?: InputMaybe<AddonCreateWithoutBlogInput>;
+  delete?: InputMaybe<Scalars['Boolean']['input']>;
+  disconnect?: InputMaybe<Scalars['Boolean']['input']>;
+  update?: InputMaybe<AddonUpdateWithoutBlogInput>;
+  upsert?: InputMaybe<AddonUpsertWithoutBlogInput>;
+};
+
+export type AddonUpdateWithWhereUniqueWithoutPurchasedByUsersInput = {
+  data: AddonUpdateWithoutPurchasedByUsersInput;
+  where: AddonWhereUniqueInput;
+};
+
+export type AddonUpdateWithoutAddonBlogCategoryInput = {
+  blog?: InputMaybe<BlogUpdateManyWithoutAddonNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  img?: InputMaybe<StringFieldUpdateOperationsInput>;
+  imoji?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  purchaseUrl?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  purchasedByUsers?: InputMaybe<UserUpdateManyWithoutPurchasedAddonsNestedInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type AddonUpdateWithoutBlogInput = {
+  addonBlogCategory?: InputMaybe<AddonBlogCategoryUpdateManyWithoutAddonNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  img?: InputMaybe<StringFieldUpdateOperationsInput>;
+  imoji?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  purchaseUrl?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  purchasedByUsers?: InputMaybe<UserUpdateManyWithoutPurchasedAddonsNestedInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type AddonUpdateWithoutPurchasedByUsersInput = {
+  addonBlogCategory?: InputMaybe<AddonBlogCategoryUpdateManyWithoutAddonNestedInput>;
+  blog?: InputMaybe<BlogUpdateManyWithoutAddonNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  img?: InputMaybe<StringFieldUpdateOperationsInput>;
+  imoji?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  purchaseUrl?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type AddonUpsertWithWhereUniqueWithoutPurchasedByUsersInput = {
+  create: AddonCreateWithoutPurchasedByUsersInput;
+  update: AddonUpdateWithoutPurchasedByUsersInput;
+  where: AddonWhereUniqueInput;
+};
+
+export type AddonUpsertWithoutAddonBlogCategoryInput = {
+  create: AddonCreateWithoutAddonBlogCategoryInput;
+  update: AddonUpdateWithoutAddonBlogCategoryInput;
+};
+
+export type AddonUpsertWithoutBlogInput = {
+  create: AddonCreateWithoutBlogInput;
+  update: AddonUpdateWithoutBlogInput;
+};
+
+export type AddonWhereInput = {
+  AND?: InputMaybe<Array<AddonWhereInput>>;
+  NOT?: InputMaybe<Array<AddonWhereInput>>;
+  OR?: InputMaybe<Array<AddonWhereInput>>;
+  addonBlogCategory?: InputMaybe<AddonBlogCategoryListRelationFilter>;
+  blog?: InputMaybe<BlogListRelationFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  description?: InputMaybe<StringNullableFilter>;
+  id?: InputMaybe<StringFilter>;
+  img?: InputMaybe<StringFilter>;
+  imoji?: InputMaybe<StringNullableFilter>;
+  name?: InputMaybe<StringFilter>;
+  purchaseUrl?: InputMaybe<StringNullableFilter>;
+  purchasedByUsers?: InputMaybe<UserListRelationFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+};
+
+export type AddonWhereUniqueInput = {
+  id?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type AffectedRowsOutput = {
   __typename?: 'AffectedRowsOutput';
   count: Scalars['Int']['output'];
+};
+
+export type AggregateAddon = {
+  __typename?: 'AggregateAddon';
+  _count?: Maybe<AddonCountAggregate>;
+  _max?: Maybe<AddonMaxAggregate>;
+  _min?: Maybe<AddonMinAggregate>;
+};
+
+export type AggregateAddonBlogCategory = {
+  __typename?: 'AggregateAddonBlogCategory';
+  _count?: Maybe<AddonBlogCategoryCountAggregate>;
+  _max?: Maybe<AddonBlogCategoryMaxAggregate>;
+  _min?: Maybe<AddonBlogCategoryMinAggregate>;
+};
+
+export type AggregateBlog = {
+  __typename?: 'AggregateBlog';
+  _count?: Maybe<BlogCountAggregate>;
+  _max?: Maybe<BlogMaxAggregate>;
+  _min?: Maybe<BlogMinAggregate>;
 };
 
 export type AggregateCategory = {
@@ -32,9 +853,11 @@ export type AggregateCategory = {
 
 export type AggregateProduct = {
   __typename?: 'AggregateProduct';
+  _avg?: Maybe<ProductAvgAggregate>;
   _count?: Maybe<ProductCountAggregate>;
   _max?: Maybe<ProductMaxAggregate>;
   _min?: Maybe<ProductMinAggregate>;
+  _sum?: Maybe<ProductSumAggregate>;
 };
 
 export type AggregatePrompt = {
@@ -65,14 +888,444 @@ export type AggregateUser = {
   _min?: Maybe<UserMinAggregate>;
 };
 
+export type Blog = {
+  __typename?: 'Blog';
+  addon?: Maybe<Addon>;
+  addonBlogCategory?: Maybe<AddonBlogCategory>;
+  addonBlogCategoryId?: Maybe<Scalars['String']['output']>;
+  addonId: Scalars['String']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  description: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  imoji: Scalars['String']['output'];
+  title: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+export type BlogCountAggregate = {
+  __typename?: 'BlogCountAggregate';
+  _all: Scalars['Int']['output'];
+  addonBlogCategoryId: Scalars['Int']['output'];
+  addonId: Scalars['Int']['output'];
+  createdAt: Scalars['Int']['output'];
+  description: Scalars['Int']['output'];
+  id: Scalars['Int']['output'];
+  imoji: Scalars['Int']['output'];
+  title: Scalars['Int']['output'];
+  updatedAt: Scalars['Int']['output'];
+};
+
+export type BlogCountOrderByAggregateInput = {
+  addonBlogCategoryId?: InputMaybe<SortOrder>;
+  addonId?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
+  description?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  imoji?: InputMaybe<SortOrder>;
+  title?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export type BlogCreateInput = {
+  addon?: InputMaybe<AddonCreateNestedOneWithoutBlogInput>;
+  addonBlogCategory?: InputMaybe<AddonBlogCategoryCreateNestedOneWithoutBlogInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description: Scalars['String']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  imoji: Scalars['String']['input'];
+  title: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type BlogCreateManyAddonBlogCategoryInput = {
+  addonId: Scalars['String']['input'];
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description: Scalars['String']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  imoji: Scalars['String']['input'];
+  title: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type BlogCreateManyAddonBlogCategoryInputEnvelope = {
+  data: Array<BlogCreateManyAddonBlogCategoryInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type BlogCreateManyAddonInput = {
+  addonBlogCategoryId?: InputMaybe<Scalars['String']['input']>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description: Scalars['String']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  imoji: Scalars['String']['input'];
+  title: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type BlogCreateManyAddonInputEnvelope = {
+  data: Array<BlogCreateManyAddonInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type BlogCreateManyInput = {
+  addonBlogCategoryId?: InputMaybe<Scalars['String']['input']>;
+  addonId: Scalars['String']['input'];
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description: Scalars['String']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  imoji: Scalars['String']['input'];
+  title: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type BlogCreateNestedManyWithoutAddonBlogCategoryInput = {
+  connect?: InputMaybe<Array<BlogWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<BlogCreateOrConnectWithoutAddonBlogCategoryInput>>;
+  create?: InputMaybe<Array<BlogCreateWithoutAddonBlogCategoryInput>>;
+  createMany?: InputMaybe<BlogCreateManyAddonBlogCategoryInputEnvelope>;
+};
+
+export type BlogCreateNestedManyWithoutAddonInput = {
+  connect?: InputMaybe<Array<BlogWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<BlogCreateOrConnectWithoutAddonInput>>;
+  create?: InputMaybe<Array<BlogCreateWithoutAddonInput>>;
+  createMany?: InputMaybe<BlogCreateManyAddonInputEnvelope>;
+};
+
+export type BlogCreateOrConnectWithoutAddonBlogCategoryInput = {
+  create: BlogCreateWithoutAddonBlogCategoryInput;
+  where: BlogWhereUniqueInput;
+};
+
+export type BlogCreateOrConnectWithoutAddonInput = {
+  create: BlogCreateWithoutAddonInput;
+  where: BlogWhereUniqueInput;
+};
+
+export type BlogCreateWithoutAddonBlogCategoryInput = {
+  addon?: InputMaybe<AddonCreateNestedOneWithoutBlogInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description: Scalars['String']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  imoji: Scalars['String']['input'];
+  title: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type BlogCreateWithoutAddonInput = {
+  addonBlogCategory?: InputMaybe<AddonBlogCategoryCreateNestedOneWithoutBlogInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description: Scalars['String']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  imoji: Scalars['String']['input'];
+  title: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type BlogGroupBy = {
+  __typename?: 'BlogGroupBy';
+  _count?: Maybe<BlogCountAggregate>;
+  _max?: Maybe<BlogMaxAggregate>;
+  _min?: Maybe<BlogMinAggregate>;
+  addonBlogCategoryId?: Maybe<Scalars['String']['output']>;
+  addonId: Scalars['String']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  description: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  imoji: Scalars['String']['output'];
+  title: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+export type BlogListRelationFilter = {
+  every?: InputMaybe<BlogWhereInput>;
+  none?: InputMaybe<BlogWhereInput>;
+  some?: InputMaybe<BlogWhereInput>;
+};
+
+export type BlogMaxAggregate = {
+  __typename?: 'BlogMaxAggregate';
+  addonBlogCategoryId?: Maybe<Scalars['String']['output']>;
+  addonId?: Maybe<Scalars['String']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  imoji?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type BlogMaxOrderByAggregateInput = {
+  addonBlogCategoryId?: InputMaybe<SortOrder>;
+  addonId?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
+  description?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  imoji?: InputMaybe<SortOrder>;
+  title?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export type BlogMinAggregate = {
+  __typename?: 'BlogMinAggregate';
+  addonBlogCategoryId?: Maybe<Scalars['String']['output']>;
+  addonId?: Maybe<Scalars['String']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  imoji?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type BlogMinOrderByAggregateInput = {
+  addonBlogCategoryId?: InputMaybe<SortOrder>;
+  addonId?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
+  description?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  imoji?: InputMaybe<SortOrder>;
+  title?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export type BlogOrderByRelationAggregateInput = {
+  _count?: InputMaybe<SortOrder>;
+};
+
+export type BlogOrderByWithAggregationInput = {
+  _count?: InputMaybe<BlogCountOrderByAggregateInput>;
+  _max?: InputMaybe<BlogMaxOrderByAggregateInput>;
+  _min?: InputMaybe<BlogMinOrderByAggregateInput>;
+  addonBlogCategoryId?: InputMaybe<SortOrderInput>;
+  addonId?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
+  description?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  imoji?: InputMaybe<SortOrder>;
+  title?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export type BlogOrderByWithRelationInput = {
+  addon?: InputMaybe<AddonOrderByWithRelationInput>;
+  addonBlogCategory?: InputMaybe<AddonBlogCategoryOrderByWithRelationInput>;
+  addonBlogCategoryId?: InputMaybe<SortOrderInput>;
+  addonId?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
+  description?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  imoji?: InputMaybe<SortOrder>;
+  title?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export enum BlogScalarFieldEnum {
+  AddonBlogCategoryId = 'addonBlogCategoryId',
+  AddonId = 'addonId',
+  CreatedAt = 'createdAt',
+  Description = 'description',
+  Id = 'id',
+  Imoji = 'imoji',
+  Title = 'title',
+  UpdatedAt = 'updatedAt'
+}
+
+export type BlogScalarWhereInput = {
+  AND?: InputMaybe<Array<BlogScalarWhereInput>>;
+  NOT?: InputMaybe<Array<BlogScalarWhereInput>>;
+  OR?: InputMaybe<Array<BlogScalarWhereInput>>;
+  addonBlogCategoryId?: InputMaybe<StringNullableFilter>;
+  addonId?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  description?: InputMaybe<StringFilter>;
+  id?: InputMaybe<StringFilter>;
+  imoji?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+};
+
+export type BlogScalarWhereWithAggregatesInput = {
+  AND?: InputMaybe<Array<BlogScalarWhereWithAggregatesInput>>;
+  NOT?: InputMaybe<Array<BlogScalarWhereWithAggregatesInput>>;
+  OR?: InputMaybe<Array<BlogScalarWhereWithAggregatesInput>>;
+  addonBlogCategoryId?: InputMaybe<StringNullableWithAggregatesFilter>;
+  addonId?: InputMaybe<StringWithAggregatesFilter>;
+  createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
+  description?: InputMaybe<StringWithAggregatesFilter>;
+  id?: InputMaybe<StringWithAggregatesFilter>;
+  imoji?: InputMaybe<StringWithAggregatesFilter>;
+  title?: InputMaybe<StringWithAggregatesFilter>;
+  updatedAt?: InputMaybe<DateTimeWithAggregatesFilter>;
+};
+
+export type BlogUpdateInput = {
+  addon?: InputMaybe<AddonUpdateOneWithoutBlogNestedInput>;
+  addonBlogCategory?: InputMaybe<AddonBlogCategoryUpdateOneWithoutBlogNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  imoji?: InputMaybe<StringFieldUpdateOperationsInput>;
+  title?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type BlogUpdateManyMutationInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  imoji?: InputMaybe<StringFieldUpdateOperationsInput>;
+  title?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type BlogUpdateManyWithWhereWithoutAddonBlogCategoryInput = {
+  data: BlogUpdateManyMutationInput;
+  where: BlogScalarWhereInput;
+};
+
+export type BlogUpdateManyWithWhereWithoutAddonInput = {
+  data: BlogUpdateManyMutationInput;
+  where: BlogScalarWhereInput;
+};
+
+export type BlogUpdateManyWithoutAddonBlogCategoryNestedInput = {
+  connect?: InputMaybe<Array<BlogWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<BlogCreateOrConnectWithoutAddonBlogCategoryInput>>;
+  create?: InputMaybe<Array<BlogCreateWithoutAddonBlogCategoryInput>>;
+  createMany?: InputMaybe<BlogCreateManyAddonBlogCategoryInputEnvelope>;
+  delete?: InputMaybe<Array<BlogWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<BlogScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<BlogWhereUniqueInput>>;
+  set?: InputMaybe<Array<BlogWhereUniqueInput>>;
+  update?: InputMaybe<Array<BlogUpdateWithWhereUniqueWithoutAddonBlogCategoryInput>>;
+  updateMany?: InputMaybe<Array<BlogUpdateManyWithWhereWithoutAddonBlogCategoryInput>>;
+  upsert?: InputMaybe<Array<BlogUpsertWithWhereUniqueWithoutAddonBlogCategoryInput>>;
+};
+
+export type BlogUpdateManyWithoutAddonNestedInput = {
+  connect?: InputMaybe<Array<BlogWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<BlogCreateOrConnectWithoutAddonInput>>;
+  create?: InputMaybe<Array<BlogCreateWithoutAddonInput>>;
+  createMany?: InputMaybe<BlogCreateManyAddonInputEnvelope>;
+  delete?: InputMaybe<Array<BlogWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<BlogScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<BlogWhereUniqueInput>>;
+  set?: InputMaybe<Array<BlogWhereUniqueInput>>;
+  update?: InputMaybe<Array<BlogUpdateWithWhereUniqueWithoutAddonInput>>;
+  updateMany?: InputMaybe<Array<BlogUpdateManyWithWhereWithoutAddonInput>>;
+  upsert?: InputMaybe<Array<BlogUpsertWithWhereUniqueWithoutAddonInput>>;
+};
+
+export type BlogUpdateWithWhereUniqueWithoutAddonBlogCategoryInput = {
+  data: BlogUpdateWithoutAddonBlogCategoryInput;
+  where: BlogWhereUniqueInput;
+};
+
+export type BlogUpdateWithWhereUniqueWithoutAddonInput = {
+  data: BlogUpdateWithoutAddonInput;
+  where: BlogWhereUniqueInput;
+};
+
+export type BlogUpdateWithoutAddonBlogCategoryInput = {
+  addon?: InputMaybe<AddonUpdateOneWithoutBlogNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  imoji?: InputMaybe<StringFieldUpdateOperationsInput>;
+  title?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type BlogUpdateWithoutAddonInput = {
+  addonBlogCategory?: InputMaybe<AddonBlogCategoryUpdateOneWithoutBlogNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  imoji?: InputMaybe<StringFieldUpdateOperationsInput>;
+  title?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type BlogUpsertWithWhereUniqueWithoutAddonBlogCategoryInput = {
+  create: BlogCreateWithoutAddonBlogCategoryInput;
+  update: BlogUpdateWithoutAddonBlogCategoryInput;
+  where: BlogWhereUniqueInput;
+};
+
+export type BlogUpsertWithWhereUniqueWithoutAddonInput = {
+  create: BlogCreateWithoutAddonInput;
+  update: BlogUpdateWithoutAddonInput;
+  where: BlogWhereUniqueInput;
+};
+
+export type BlogWhereInput = {
+  AND?: InputMaybe<Array<BlogWhereInput>>;
+  NOT?: InputMaybe<Array<BlogWhereInput>>;
+  OR?: InputMaybe<Array<BlogWhereInput>>;
+  addon?: InputMaybe<AddonRelationFilter>;
+  addonBlogCategory?: InputMaybe<AddonBlogCategoryRelationFilter>;
+  addonBlogCategoryId?: InputMaybe<StringNullableFilter>;
+  addonId?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  description?: InputMaybe<StringFilter>;
+  id?: InputMaybe<StringFilter>;
+  imoji?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+};
+
+export type BlogWhereUniqueInput = {
+  id?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type BoolFilter = {
+  equals?: InputMaybe<Scalars['Boolean']['input']>;
+  not?: InputMaybe<NestedBoolFilter>;
+};
+
+export type BoolWithAggregatesFilter = {
+  _count?: InputMaybe<NestedIntFilter>;
+  _max?: InputMaybe<NestedBoolFilter>;
+  _min?: InputMaybe<NestedBoolFilter>;
+  equals?: InputMaybe<Scalars['Boolean']['input']>;
+  not?: InputMaybe<NestedBoolWithAggregatesFilter>;
+};
+
 export type Category = {
   __typename?: 'Category';
   _count?: Maybe<CategoryCount>;
   createdAt: Scalars['DateTime']['output'];
   id: Scalars['String']['output'];
   name: Scalars['String']['output'];
+  products: Array<Product>;
+  purchasedByUsers: Array<User>;
   tasks: Array<Task>;
   updatedAt: Scalars['DateTime']['output'];
+};
+
+
+export type CategoryProductsArgs = {
+  cursor?: InputMaybe<ProductWhereUniqueInput>;
+  distinct?: InputMaybe<Array<ProductScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<ProductOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<ProductWhereInput>;
+};
+
+
+export type CategoryPurchasedByUsersArgs = {
+  cursor?: InputMaybe<UserWhereUniqueInput>;
+  distinct?: InputMaybe<Array<UserScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<UserOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<UserWhereInput>;
 };
 
 
@@ -87,7 +1340,19 @@ export type CategoryTasksArgs = {
 
 export type CategoryCount = {
   __typename?: 'CategoryCount';
+  products: Scalars['Int']['output'];
+  purchasedByUsers: Scalars['Int']['output'];
   tasks: Scalars['Int']['output'];
+};
+
+
+export type CategoryCountProductsArgs = {
+  where?: InputMaybe<ProductWhereInput>;
+};
+
+
+export type CategoryCountPurchasedByUsersArgs = {
+  where?: InputMaybe<UserWhereInput>;
 };
 
 
@@ -115,6 +1380,8 @@ export type CategoryCreateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
+  products?: InputMaybe<ProductCreateNestedManyWithoutCategoryInput>;
+  purchasedByUsers?: InputMaybe<UserCreateNestedManyWithoutPurchasedCategoriesInput>;
   tasks?: InputMaybe<TaskCreateNestedManyWithoutCategoryInput>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
 };
@@ -126,10 +1393,32 @@ export type CategoryCreateManyInput = {
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
+export type CategoryCreateNestedManyWithoutPurchasedByUsersInput = {
+  connect?: InputMaybe<Array<CategoryWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CategoryCreateOrConnectWithoutPurchasedByUsersInput>>;
+  create?: InputMaybe<Array<CategoryCreateWithoutPurchasedByUsersInput>>;
+};
+
+export type CategoryCreateNestedOneWithoutProductsInput = {
+  connect?: InputMaybe<CategoryWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<CategoryCreateOrConnectWithoutProductsInput>;
+  create?: InputMaybe<CategoryCreateWithoutProductsInput>;
+};
+
 export type CategoryCreateNestedOneWithoutTasksInput = {
   connect?: InputMaybe<CategoryWhereUniqueInput>;
   connectOrCreate?: InputMaybe<CategoryCreateOrConnectWithoutTasksInput>;
   create?: InputMaybe<CategoryCreateWithoutTasksInput>;
+};
+
+export type CategoryCreateOrConnectWithoutProductsInput = {
+  create: CategoryCreateWithoutProductsInput;
+  where: CategoryWhereUniqueInput;
+};
+
+export type CategoryCreateOrConnectWithoutPurchasedByUsersInput = {
+  create: CategoryCreateWithoutPurchasedByUsersInput;
+  where: CategoryWhereUniqueInput;
 };
 
 export type CategoryCreateOrConnectWithoutTasksInput = {
@@ -137,10 +1426,30 @@ export type CategoryCreateOrConnectWithoutTasksInput = {
   where: CategoryWhereUniqueInput;
 };
 
+export type CategoryCreateWithoutProductsInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  purchasedByUsers?: InputMaybe<UserCreateNestedManyWithoutPurchasedCategoriesInput>;
+  tasks?: InputMaybe<TaskCreateNestedManyWithoutCategoryInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type CategoryCreateWithoutPurchasedByUsersInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  products?: InputMaybe<ProductCreateNestedManyWithoutCategoryInput>;
+  tasks?: InputMaybe<TaskCreateNestedManyWithoutCategoryInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
 export type CategoryCreateWithoutTasksInput = {
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
+  products?: InputMaybe<ProductCreateNestedManyWithoutCategoryInput>;
+  purchasedByUsers?: InputMaybe<UserCreateNestedManyWithoutPurchasedCategoriesInput>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
@@ -153,6 +1462,12 @@ export type CategoryGroupBy = {
   id: Scalars['String']['output'];
   name: Scalars['String']['output'];
   updatedAt: Scalars['DateTime']['output'];
+};
+
+export type CategoryListRelationFilter = {
+  every?: InputMaybe<CategoryWhereInput>;
+  none?: InputMaybe<CategoryWhereInput>;
+  some?: InputMaybe<CategoryWhereInput>;
 };
 
 export type CategoryMaxAggregate = {
@@ -185,6 +1500,10 @@ export type CategoryMinOrderByAggregateInput = {
   updatedAt?: InputMaybe<SortOrder>;
 };
 
+export type CategoryOrderByRelationAggregateInput = {
+  _count?: InputMaybe<SortOrder>;
+};
+
 export type CategoryOrderByWithAggregationInput = {
   _count?: InputMaybe<CategoryCountOrderByAggregateInput>;
   _max?: InputMaybe<CategoryMaxOrderByAggregateInput>;
@@ -199,6 +1518,8 @@ export type CategoryOrderByWithRelationInput = {
   createdAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
+  products?: InputMaybe<ProductOrderByRelationAggregateInput>;
+  purchasedByUsers?: InputMaybe<UserOrderByRelationAggregateInput>;
   tasks?: InputMaybe<TaskOrderByRelationAggregateInput>;
   updatedAt?: InputMaybe<SortOrder>;
 };
@@ -215,6 +1536,16 @@ export enum CategoryScalarFieldEnum {
   UpdatedAt = 'updatedAt'
 }
 
+export type CategoryScalarWhereInput = {
+  AND?: InputMaybe<Array<CategoryScalarWhereInput>>;
+  NOT?: InputMaybe<Array<CategoryScalarWhereInput>>;
+  OR?: InputMaybe<Array<CategoryScalarWhereInput>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  id?: InputMaybe<StringFilter>;
+  name?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+};
+
 export type CategoryScalarWhereWithAggregatesInput = {
   AND?: InputMaybe<Array<CategoryScalarWhereWithAggregatesInput>>;
   NOT?: InputMaybe<Array<CategoryScalarWhereWithAggregatesInput>>;
@@ -229,6 +1560,8 @@ export type CategoryUpdateInput = {
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  products?: InputMaybe<ProductUpdateManyWithoutCategoryNestedInput>;
+  purchasedByUsers?: InputMaybe<UserUpdateManyWithoutPurchasedCategoriesNestedInput>;
   tasks?: InputMaybe<TaskUpdateManyWithoutCategoryNestedInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
@@ -238,6 +1571,34 @@ export type CategoryUpdateManyMutationInput = {
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type CategoryUpdateManyWithWhereWithoutPurchasedByUsersInput = {
+  data: CategoryUpdateManyMutationInput;
+  where: CategoryScalarWhereInput;
+};
+
+export type CategoryUpdateManyWithoutPurchasedByUsersNestedInput = {
+  connect?: InputMaybe<Array<CategoryWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CategoryCreateOrConnectWithoutPurchasedByUsersInput>>;
+  create?: InputMaybe<Array<CategoryCreateWithoutPurchasedByUsersInput>>;
+  delete?: InputMaybe<Array<CategoryWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<CategoryScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<CategoryWhereUniqueInput>>;
+  set?: InputMaybe<Array<CategoryWhereUniqueInput>>;
+  update?: InputMaybe<Array<CategoryUpdateWithWhereUniqueWithoutPurchasedByUsersInput>>;
+  updateMany?: InputMaybe<Array<CategoryUpdateManyWithWhereWithoutPurchasedByUsersInput>>;
+  upsert?: InputMaybe<Array<CategoryUpsertWithWhereUniqueWithoutPurchasedByUsersInput>>;
+};
+
+export type CategoryUpdateOneWithoutProductsNestedInput = {
+  connect?: InputMaybe<CategoryWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<CategoryCreateOrConnectWithoutProductsInput>;
+  create?: InputMaybe<CategoryCreateWithoutProductsInput>;
+  delete?: InputMaybe<Scalars['Boolean']['input']>;
+  disconnect?: InputMaybe<Scalars['Boolean']['input']>;
+  update?: InputMaybe<CategoryUpdateWithoutProductsInput>;
+  upsert?: InputMaybe<CategoryUpsertWithoutProductsInput>;
 };
 
 export type CategoryUpdateOneWithoutTasksNestedInput = {
@@ -250,11 +1611,47 @@ export type CategoryUpdateOneWithoutTasksNestedInput = {
   upsert?: InputMaybe<CategoryUpsertWithoutTasksInput>;
 };
 
+export type CategoryUpdateWithWhereUniqueWithoutPurchasedByUsersInput = {
+  data: CategoryUpdateWithoutPurchasedByUsersInput;
+  where: CategoryWhereUniqueInput;
+};
+
+export type CategoryUpdateWithoutProductsInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  purchasedByUsers?: InputMaybe<UserUpdateManyWithoutPurchasedCategoriesNestedInput>;
+  tasks?: InputMaybe<TaskUpdateManyWithoutCategoryNestedInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type CategoryUpdateWithoutPurchasedByUsersInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  products?: InputMaybe<ProductUpdateManyWithoutCategoryNestedInput>;
+  tasks?: InputMaybe<TaskUpdateManyWithoutCategoryNestedInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
 export type CategoryUpdateWithoutTasksInput = {
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  products?: InputMaybe<ProductUpdateManyWithoutCategoryNestedInput>;
+  purchasedByUsers?: InputMaybe<UserUpdateManyWithoutPurchasedCategoriesNestedInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type CategoryUpsertWithWhereUniqueWithoutPurchasedByUsersInput = {
+  create: CategoryCreateWithoutPurchasedByUsersInput;
+  update: CategoryUpdateWithoutPurchasedByUsersInput;
+  where: CategoryWhereUniqueInput;
+};
+
+export type CategoryUpsertWithoutProductsInput = {
+  create: CategoryCreateWithoutProductsInput;
+  update: CategoryUpdateWithoutProductsInput;
 };
 
 export type CategoryUpsertWithoutTasksInput = {
@@ -269,12 +1666,22 @@ export type CategoryWhereInput = {
   createdAt?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<StringFilter>;
   name?: InputMaybe<StringFilter>;
+  products?: InputMaybe<ProductListRelationFilter>;
+  purchasedByUsers?: InputMaybe<UserListRelationFilter>;
   tasks?: InputMaybe<TaskListRelationFilter>;
   updatedAt?: InputMaybe<DateTimeFilter>;
 };
 
 export type CategoryWhereUniqueInput = {
   id?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** New user data */
+export type CreateOneUserArgsCustom = {
+  avater?: InputMaybe<Scalars['String']['input']>;
+  email: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  password: Scalars['String']['input'];
 };
 
 export type DateTimeFieldUpdateOperationsInput = {
@@ -327,50 +1734,135 @@ export type EnumUserRoleWithAggregatesFilter = {
   notIn?: InputMaybe<Array<UserRole>>;
 };
 
+export type IntFieldUpdateOperationsInput = {
+  decrement?: InputMaybe<Scalars['Int']['input']>;
+  divide?: InputMaybe<Scalars['Int']['input']>;
+  increment?: InputMaybe<Scalars['Int']['input']>;
+  multiply?: InputMaybe<Scalars['Int']['input']>;
+  set?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type IntFilter = {
+  equals?: InputMaybe<Scalars['Int']['input']>;
+  gt?: InputMaybe<Scalars['Int']['input']>;
+  gte?: InputMaybe<Scalars['Int']['input']>;
+  in?: InputMaybe<Array<Scalars['Int']['input']>>;
+  lt?: InputMaybe<Scalars['Int']['input']>;
+  lte?: InputMaybe<Scalars['Int']['input']>;
+  not?: InputMaybe<NestedIntFilter>;
+  notIn?: InputMaybe<Array<Scalars['Int']['input']>>;
+};
+
+export type IntWithAggregatesFilter = {
+  _avg?: InputMaybe<NestedFloatFilter>;
+  _count?: InputMaybe<NestedIntFilter>;
+  _max?: InputMaybe<NestedIntFilter>;
+  _min?: InputMaybe<NestedIntFilter>;
+  _sum?: InputMaybe<NestedIntFilter>;
+  equals?: InputMaybe<Scalars['Int']['input']>;
+  gt?: InputMaybe<Scalars['Int']['input']>;
+  gte?: InputMaybe<Scalars['Int']['input']>;
+  in?: InputMaybe<Array<Scalars['Int']['input']>>;
+  lt?: InputMaybe<Scalars['Int']['input']>;
+  lte?: InputMaybe<Scalars['Int']['input']>;
+  not?: InputMaybe<NestedIntWithAggregatesFilter>;
+  notIn?: InputMaybe<Array<Scalars['Int']['input']>>;
+};
+
+export type LoginResponsce = {
+  __typename?: 'LoginResponsce';
+  accessToken: Scalars['String']['output'];
+  isAuthenticated: Scalars['Boolean']['output'];
+  message: Scalars['String']['output'];
+  success: Scalars['Boolean']['output'];
+  user: User;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
+  createManyAddon: AffectedRowsOutput;
+  createManyAddonBlogCategory: AffectedRowsOutput;
+  createManyBlog: AffectedRowsOutput;
   createManyCategory: AffectedRowsOutput;
   createManyProduct: AffectedRowsOutput;
   createManyPrompt: AffectedRowsOutput;
   createManyTask: AffectedRowsOutput;
   createManyTip: AffectedRowsOutput;
   createManyUser: AffectedRowsOutput;
+  createOneAddon: Addon;
+  createOneAddonBlogCategory: AddonBlogCategory;
+  createOneBlog: Blog;
   createOneCategory: Category;
   createOneProduct: Product;
   createOnePrompt: Prompt;
   createOneTask: Task;
   createOneTip: Tip;
   createOneUser: User;
+  deleteManyAddon: AffectedRowsOutput;
+  deleteManyAddonBlogCategory: AffectedRowsOutput;
+  deleteManyBlog: AffectedRowsOutput;
   deleteManyCategory: AffectedRowsOutput;
   deleteManyProduct: AffectedRowsOutput;
   deleteManyPrompt: AffectedRowsOutput;
   deleteManyTask: AffectedRowsOutput;
   deleteManyTip: AffectedRowsOutput;
   deleteManyUser: AffectedRowsOutput;
+  deleteOneAddon?: Maybe<Addon>;
+  deleteOneAddonBlogCategory?: Maybe<AddonBlogCategory>;
+  deleteOneBlog?: Maybe<Blog>;
   deleteOneCategory?: Maybe<Category>;
   deleteOneProduct?: Maybe<Product>;
   deleteOnePrompt?: Maybe<Prompt>;
   deleteOneTask?: Maybe<Task>;
   deleteOneTip?: Maybe<Tip>;
   deleteOneUser?: Maybe<User>;
+  login?: Maybe<LoginResponsce>;
+  register?: Maybe<DefaultResponsce>;
+  updateManyAddon: AffectedRowsOutput;
+  updateManyAddonBlogCategory: AffectedRowsOutput;
+  updateManyBlog: AffectedRowsOutput;
   updateManyCategory: AffectedRowsOutput;
   updateManyProduct: AffectedRowsOutput;
   updateManyPrompt: AffectedRowsOutput;
   updateManyTask: AffectedRowsOutput;
   updateManyTip: AffectedRowsOutput;
   updateManyUser: AffectedRowsOutput;
+  updateOneAddon?: Maybe<Addon>;
+  updateOneAddonBlogCategory?: Maybe<AddonBlogCategory>;
+  updateOneBlog?: Maybe<Blog>;
   updateOneCategory?: Maybe<Category>;
   updateOneProduct?: Maybe<Product>;
   updateOnePrompt?: Maybe<Prompt>;
   updateOneTask?: Maybe<Task>;
   updateOneTip?: Maybe<Tip>;
   updateOneUser?: Maybe<User>;
+  upsertOneAddon: Addon;
+  upsertOneAddonBlogCategory: AddonBlogCategory;
+  upsertOneBlog: Blog;
   upsertOneCategory: Category;
   upsertOneProduct: Product;
   upsertOnePrompt: Prompt;
   upsertOneTask: Task;
   upsertOneTip: Tip;
   upsertOneUser: User;
+};
+
+
+export type MutationCreateManyAddonArgs = {
+  data: Array<AddonCreateManyInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+export type MutationCreateManyAddonBlogCategoryArgs = {
+  data: Array<AddonBlogCategoryCreateManyInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+export type MutationCreateManyBlogArgs = {
+  data: Array<BlogCreateManyInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
@@ -410,6 +1902,21 @@ export type MutationCreateManyUserArgs = {
 };
 
 
+export type MutationCreateOneAddonArgs = {
+  data: AddonCreateInput;
+};
+
+
+export type MutationCreateOneAddonBlogCategoryArgs = {
+  data: AddonBlogCategoryCreateInput;
+};
+
+
+export type MutationCreateOneBlogArgs = {
+  data: BlogCreateInput;
+};
+
+
 export type MutationCreateOneCategoryArgs = {
   data: CategoryCreateInput;
 };
@@ -437,6 +1944,21 @@ export type MutationCreateOneTipArgs = {
 
 export type MutationCreateOneUserArgs = {
   data: UserCreateInput;
+};
+
+
+export type MutationDeleteManyAddonArgs = {
+  where?: InputMaybe<AddonWhereInput>;
+};
+
+
+export type MutationDeleteManyAddonBlogCategoryArgs = {
+  where?: InputMaybe<AddonBlogCategoryWhereInput>;
+};
+
+
+export type MutationDeleteManyBlogArgs = {
+  where?: InputMaybe<BlogWhereInput>;
 };
 
 
@@ -470,6 +1992,21 @@ export type MutationDeleteManyUserArgs = {
 };
 
 
+export type MutationDeleteOneAddonArgs = {
+  where: AddonWhereUniqueInput;
+};
+
+
+export type MutationDeleteOneAddonBlogCategoryArgs = {
+  where: AddonBlogCategoryWhereUniqueInput;
+};
+
+
+export type MutationDeleteOneBlogArgs = {
+  where: BlogWhereUniqueInput;
+};
+
+
 export type MutationDeleteOneCategoryArgs = {
   where: CategoryWhereUniqueInput;
 };
@@ -497,6 +2034,35 @@ export type MutationDeleteOneTipArgs = {
 
 export type MutationDeleteOneUserArgs = {
   where: UserWhereUniqueInput;
+};
+
+
+export type MutationLoginArgs = {
+  email: Scalars['String']['input'];
+  password: Scalars['String']['input'];
+};
+
+
+export type MutationRegisterArgs = {
+  input: CreateOneUserArgsCustom;
+};
+
+
+export type MutationUpdateManyAddonArgs = {
+  data: AddonUpdateManyMutationInput;
+  where?: InputMaybe<AddonWhereInput>;
+};
+
+
+export type MutationUpdateManyAddonBlogCategoryArgs = {
+  data: AddonBlogCategoryUpdateManyMutationInput;
+  where?: InputMaybe<AddonBlogCategoryWhereInput>;
+};
+
+
+export type MutationUpdateManyBlogArgs = {
+  data: BlogUpdateManyMutationInput;
+  where?: InputMaybe<BlogWhereInput>;
 };
 
 
@@ -536,6 +2102,24 @@ export type MutationUpdateManyUserArgs = {
 };
 
 
+export type MutationUpdateOneAddonArgs = {
+  data: AddonUpdateInput;
+  where: AddonWhereUniqueInput;
+};
+
+
+export type MutationUpdateOneAddonBlogCategoryArgs = {
+  data: AddonBlogCategoryUpdateInput;
+  where: AddonBlogCategoryWhereUniqueInput;
+};
+
+
+export type MutationUpdateOneBlogArgs = {
+  data: BlogUpdateInput;
+  where: BlogWhereUniqueInput;
+};
+
+
 export type MutationUpdateOneCategoryArgs = {
   data: CategoryUpdateInput;
   where: CategoryWhereUniqueInput;
@@ -569,6 +2153,27 @@ export type MutationUpdateOneTipArgs = {
 export type MutationUpdateOneUserArgs = {
   data: UserUpdateInput;
   where: UserWhereUniqueInput;
+};
+
+
+export type MutationUpsertOneAddonArgs = {
+  create: AddonCreateInput;
+  update: AddonUpdateInput;
+  where: AddonWhereUniqueInput;
+};
+
+
+export type MutationUpsertOneAddonBlogCategoryArgs = {
+  create: AddonBlogCategoryCreateInput;
+  update: AddonBlogCategoryUpdateInput;
+  where: AddonBlogCategoryWhereUniqueInput;
+};
+
+
+export type MutationUpsertOneBlogArgs = {
+  create: BlogCreateInput;
+  update: BlogUpdateInput;
+  where: BlogWhereUniqueInput;
 };
 
 
@@ -613,6 +2218,19 @@ export type MutationUpsertOneUserArgs = {
   where: UserWhereUniqueInput;
 };
 
+export type NestedBoolFilter = {
+  equals?: InputMaybe<Scalars['Boolean']['input']>;
+  not?: InputMaybe<NestedBoolFilter>;
+};
+
+export type NestedBoolWithAggregatesFilter = {
+  _count?: InputMaybe<NestedIntFilter>;
+  _max?: InputMaybe<NestedBoolFilter>;
+  _min?: InputMaybe<NestedBoolFilter>;
+  equals?: InputMaybe<Scalars['Boolean']['input']>;
+  not?: InputMaybe<NestedBoolWithAggregatesFilter>;
+};
+
 export type NestedDateTimeFilter = {
   equals?: InputMaybe<Scalars['DateTime']['input']>;
   gt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -655,6 +2273,17 @@ export type NestedEnumUserRoleWithAggregatesFilter = {
   notIn?: InputMaybe<Array<UserRole>>;
 };
 
+export type NestedFloatFilter = {
+  equals?: InputMaybe<Scalars['Float']['input']>;
+  gt?: InputMaybe<Scalars['Float']['input']>;
+  gte?: InputMaybe<Scalars['Float']['input']>;
+  in?: InputMaybe<Array<Scalars['Float']['input']>>;
+  lt?: InputMaybe<Scalars['Float']['input']>;
+  lte?: InputMaybe<Scalars['Float']['input']>;
+  not?: InputMaybe<NestedFloatFilter>;
+  notIn?: InputMaybe<Array<Scalars['Float']['input']>>;
+};
+
 export type NestedIntFilter = {
   equals?: InputMaybe<Scalars['Int']['input']>;
   gt?: InputMaybe<Scalars['Int']['input']>;
@@ -674,6 +2303,22 @@ export type NestedIntNullableFilter = {
   lt?: InputMaybe<Scalars['Int']['input']>;
   lte?: InputMaybe<Scalars['Int']['input']>;
   not?: InputMaybe<NestedIntNullableFilter>;
+  notIn?: InputMaybe<Array<Scalars['Int']['input']>>;
+};
+
+export type NestedIntWithAggregatesFilter = {
+  _avg?: InputMaybe<NestedFloatFilter>;
+  _count?: InputMaybe<NestedIntFilter>;
+  _max?: InputMaybe<NestedIntFilter>;
+  _min?: InputMaybe<NestedIntFilter>;
+  _sum?: InputMaybe<NestedIntFilter>;
+  equals?: InputMaybe<Scalars['Int']['input']>;
+  gt?: InputMaybe<Scalars['Int']['input']>;
+  gte?: InputMaybe<Scalars['Int']['input']>;
+  in?: InputMaybe<Array<Scalars['Int']['input']>>;
+  lt?: InputMaybe<Scalars['Int']['input']>;
+  lte?: InputMaybe<Scalars['Int']['input']>;
+  not?: InputMaybe<NestedIntWithAggregatesFilter>;
   notIn?: InputMaybe<Array<Scalars['Int']['input']>>;
 };
 
@@ -750,155 +2395,402 @@ export enum NullsOrder {
 
 export type Product = {
   __typename?: 'Product';
+  category?: Maybe<Category>;
+  categoryId: Scalars['String']['output'];
   createdAt: Scalars['DateTime']['output'];
+  description: Scalars['String']['output'];
   id: Scalars['String']['output'];
+  image: Scalars['String']['output'];
+  moneyBackGuarantee: Scalars['Int']['output'];
   name: Scalars['String']['output'];
   slug: Scalars['String']['output'];
+  taskAutomateCount: Scalars['Int']['output'];
+  topTierPromptCount: Scalars['Int']['output'];
   updatedAt: Scalars['DateTime']['output'];
+};
+
+export type ProductAvgAggregate = {
+  __typename?: 'ProductAvgAggregate';
+  moneyBackGuarantee?: Maybe<Scalars['Float']['output']>;
+  taskAutomateCount?: Maybe<Scalars['Float']['output']>;
+  topTierPromptCount?: Maybe<Scalars['Float']['output']>;
+};
+
+export type ProductAvgOrderByAggregateInput = {
+  moneyBackGuarantee?: InputMaybe<SortOrder>;
+  taskAutomateCount?: InputMaybe<SortOrder>;
+  topTierPromptCount?: InputMaybe<SortOrder>;
 };
 
 export type ProductCountAggregate = {
   __typename?: 'ProductCountAggregate';
   _all: Scalars['Int']['output'];
+  categoryId: Scalars['Int']['output'];
   createdAt: Scalars['Int']['output'];
+  description: Scalars['Int']['output'];
   id: Scalars['Int']['output'];
+  image: Scalars['Int']['output'];
+  moneyBackGuarantee: Scalars['Int']['output'];
   name: Scalars['Int']['output'];
   slug: Scalars['Int']['output'];
+  taskAutomateCount: Scalars['Int']['output'];
+  topTierPromptCount: Scalars['Int']['output'];
   updatedAt: Scalars['Int']['output'];
 };
 
 export type ProductCountOrderByAggregateInput = {
+  categoryId?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
+  description?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
+  image?: InputMaybe<SortOrder>;
+  moneyBackGuarantee?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
   slug?: InputMaybe<SortOrder>;
+  taskAutomateCount?: InputMaybe<SortOrder>;
+  topTierPromptCount?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
 };
 
 export type ProductCreateInput = {
+  category?: InputMaybe<CategoryCreateNestedOneWithoutProductsInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description: Scalars['String']['input'];
   id?: InputMaybe<Scalars['String']['input']>;
+  image: Scalars['String']['input'];
+  moneyBackGuarantee: Scalars['Int']['input'];
   name: Scalars['String']['input'];
   slug: Scalars['String']['input'];
+  taskAutomateCount: Scalars['Int']['input'];
+  topTierPromptCount: Scalars['Int']['input'];
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
-export type ProductCreateManyInput = {
+export type ProductCreateManyCategoryInput = {
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description: Scalars['String']['input'];
   id?: InputMaybe<Scalars['String']['input']>;
+  image: Scalars['String']['input'];
+  moneyBackGuarantee: Scalars['Int']['input'];
   name: Scalars['String']['input'];
   slug: Scalars['String']['input'];
+  taskAutomateCount: Scalars['Int']['input'];
+  topTierPromptCount: Scalars['Int']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type ProductCreateManyCategoryInputEnvelope = {
+  data: Array<ProductCreateManyCategoryInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type ProductCreateManyInput = {
+  categoryId: Scalars['String']['input'];
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description: Scalars['String']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  image: Scalars['String']['input'];
+  moneyBackGuarantee: Scalars['Int']['input'];
+  name: Scalars['String']['input'];
+  slug: Scalars['String']['input'];
+  taskAutomateCount: Scalars['Int']['input'];
+  topTierPromptCount: Scalars['Int']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type ProductCreateNestedManyWithoutCategoryInput = {
+  connect?: InputMaybe<Array<ProductWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<ProductCreateOrConnectWithoutCategoryInput>>;
+  create?: InputMaybe<Array<ProductCreateWithoutCategoryInput>>;
+  createMany?: InputMaybe<ProductCreateManyCategoryInputEnvelope>;
+};
+
+export type ProductCreateOrConnectWithoutCategoryInput = {
+  create: ProductCreateWithoutCategoryInput;
+  where: ProductWhereUniqueInput;
+};
+
+export type ProductCreateWithoutCategoryInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description: Scalars['String']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  image: Scalars['String']['input'];
+  moneyBackGuarantee: Scalars['Int']['input'];
+  name: Scalars['String']['input'];
+  slug: Scalars['String']['input'];
+  taskAutomateCount: Scalars['Int']['input'];
+  topTierPromptCount: Scalars['Int']['input'];
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
 export type ProductGroupBy = {
   __typename?: 'ProductGroupBy';
+  _avg?: Maybe<ProductAvgAggregate>;
   _count?: Maybe<ProductCountAggregate>;
   _max?: Maybe<ProductMaxAggregate>;
   _min?: Maybe<ProductMinAggregate>;
+  _sum?: Maybe<ProductSumAggregate>;
+  categoryId: Scalars['String']['output'];
   createdAt: Scalars['DateTime']['output'];
+  description: Scalars['String']['output'];
   id: Scalars['String']['output'];
+  image: Scalars['String']['output'];
+  moneyBackGuarantee: Scalars['Int']['output'];
   name: Scalars['String']['output'];
   slug: Scalars['String']['output'];
+  taskAutomateCount: Scalars['Int']['output'];
+  topTierPromptCount: Scalars['Int']['output'];
   updatedAt: Scalars['DateTime']['output'];
+};
+
+export type ProductListRelationFilter = {
+  every?: InputMaybe<ProductWhereInput>;
+  none?: InputMaybe<ProductWhereInput>;
+  some?: InputMaybe<ProductWhereInput>;
 };
 
 export type ProductMaxAggregate = {
   __typename?: 'ProductMaxAggregate';
+  categoryId?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['String']['output']>;
+  image?: Maybe<Scalars['String']['output']>;
+  moneyBackGuarantee?: Maybe<Scalars['Int']['output']>;
   name?: Maybe<Scalars['String']['output']>;
   slug?: Maybe<Scalars['String']['output']>;
+  taskAutomateCount?: Maybe<Scalars['Int']['output']>;
+  topTierPromptCount?: Maybe<Scalars['Int']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
 export type ProductMaxOrderByAggregateInput = {
+  categoryId?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
+  description?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
+  image?: InputMaybe<SortOrder>;
+  moneyBackGuarantee?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
   slug?: InputMaybe<SortOrder>;
+  taskAutomateCount?: InputMaybe<SortOrder>;
+  topTierPromptCount?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
 };
 
 export type ProductMinAggregate = {
   __typename?: 'ProductMinAggregate';
+  categoryId?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['String']['output']>;
+  image?: Maybe<Scalars['String']['output']>;
+  moneyBackGuarantee?: Maybe<Scalars['Int']['output']>;
   name?: Maybe<Scalars['String']['output']>;
   slug?: Maybe<Scalars['String']['output']>;
+  taskAutomateCount?: Maybe<Scalars['Int']['output']>;
+  topTierPromptCount?: Maybe<Scalars['Int']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
 export type ProductMinOrderByAggregateInput = {
+  categoryId?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
+  description?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
+  image?: InputMaybe<SortOrder>;
+  moneyBackGuarantee?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
   slug?: InputMaybe<SortOrder>;
+  taskAutomateCount?: InputMaybe<SortOrder>;
+  topTierPromptCount?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
 };
 
+export type ProductOrderByRelationAggregateInput = {
+  _count?: InputMaybe<SortOrder>;
+};
+
 export type ProductOrderByWithAggregationInput = {
+  _avg?: InputMaybe<ProductAvgOrderByAggregateInput>;
   _count?: InputMaybe<ProductCountOrderByAggregateInput>;
   _max?: InputMaybe<ProductMaxOrderByAggregateInput>;
   _min?: InputMaybe<ProductMinOrderByAggregateInput>;
+  _sum?: InputMaybe<ProductSumOrderByAggregateInput>;
+  categoryId?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
+  description?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
+  image?: InputMaybe<SortOrder>;
+  moneyBackGuarantee?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
   slug?: InputMaybe<SortOrder>;
+  taskAutomateCount?: InputMaybe<SortOrder>;
+  topTierPromptCount?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
 };
 
 export type ProductOrderByWithRelationInput = {
+  category?: InputMaybe<CategoryOrderByWithRelationInput>;
+  categoryId?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
+  description?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
+  image?: InputMaybe<SortOrder>;
+  moneyBackGuarantee?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
   slug?: InputMaybe<SortOrder>;
+  taskAutomateCount?: InputMaybe<SortOrder>;
+  topTierPromptCount?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
 };
 
 export enum ProductScalarFieldEnum {
+  CategoryId = 'categoryId',
   CreatedAt = 'createdAt',
+  Description = 'description',
   Id = 'id',
+  Image = 'image',
+  MoneyBackGuarantee = 'moneyBackGuarantee',
   Name = 'name',
   Slug = 'slug',
+  TaskAutomateCount = 'taskAutomateCount',
+  TopTierPromptCount = 'topTierPromptCount',
   UpdatedAt = 'updatedAt'
 }
+
+export type ProductScalarWhereInput = {
+  AND?: InputMaybe<Array<ProductScalarWhereInput>>;
+  NOT?: InputMaybe<Array<ProductScalarWhereInput>>;
+  OR?: InputMaybe<Array<ProductScalarWhereInput>>;
+  categoryId?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  description?: InputMaybe<StringFilter>;
+  id?: InputMaybe<StringFilter>;
+  image?: InputMaybe<StringFilter>;
+  moneyBackGuarantee?: InputMaybe<IntFilter>;
+  name?: InputMaybe<StringFilter>;
+  slug?: InputMaybe<StringFilter>;
+  taskAutomateCount?: InputMaybe<IntFilter>;
+  topTierPromptCount?: InputMaybe<IntFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+};
 
 export type ProductScalarWhereWithAggregatesInput = {
   AND?: InputMaybe<Array<ProductScalarWhereWithAggregatesInput>>;
   NOT?: InputMaybe<Array<ProductScalarWhereWithAggregatesInput>>;
   OR?: InputMaybe<Array<ProductScalarWhereWithAggregatesInput>>;
+  categoryId?: InputMaybe<StringWithAggregatesFilter>;
   createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
+  description?: InputMaybe<StringWithAggregatesFilter>;
   id?: InputMaybe<StringWithAggregatesFilter>;
+  image?: InputMaybe<StringWithAggregatesFilter>;
+  moneyBackGuarantee?: InputMaybe<IntWithAggregatesFilter>;
   name?: InputMaybe<StringWithAggregatesFilter>;
   slug?: InputMaybe<StringWithAggregatesFilter>;
+  taskAutomateCount?: InputMaybe<IntWithAggregatesFilter>;
+  topTierPromptCount?: InputMaybe<IntWithAggregatesFilter>;
   updatedAt?: InputMaybe<DateTimeWithAggregatesFilter>;
 };
 
+export type ProductSumAggregate = {
+  __typename?: 'ProductSumAggregate';
+  moneyBackGuarantee?: Maybe<Scalars['Int']['output']>;
+  taskAutomateCount?: Maybe<Scalars['Int']['output']>;
+  topTierPromptCount?: Maybe<Scalars['Int']['output']>;
+};
+
+export type ProductSumOrderByAggregateInput = {
+  moneyBackGuarantee?: InputMaybe<SortOrder>;
+  taskAutomateCount?: InputMaybe<SortOrder>;
+  topTierPromptCount?: InputMaybe<SortOrder>;
+};
+
 export type ProductUpdateInput = {
+  category?: InputMaybe<CategoryUpdateOneWithoutProductsNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  image?: InputMaybe<StringFieldUpdateOperationsInput>;
+  moneyBackGuarantee?: InputMaybe<IntFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
   slug?: InputMaybe<StringFieldUpdateOperationsInput>;
+  taskAutomateCount?: InputMaybe<IntFieldUpdateOperationsInput>;
+  topTierPromptCount?: InputMaybe<IntFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
 export type ProductUpdateManyMutationInput = {
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  image?: InputMaybe<StringFieldUpdateOperationsInput>;
+  moneyBackGuarantee?: InputMaybe<IntFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
   slug?: InputMaybe<StringFieldUpdateOperationsInput>;
+  taskAutomateCount?: InputMaybe<IntFieldUpdateOperationsInput>;
+  topTierPromptCount?: InputMaybe<IntFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type ProductUpdateManyWithWhereWithoutCategoryInput = {
+  data: ProductUpdateManyMutationInput;
+  where: ProductScalarWhereInput;
+};
+
+export type ProductUpdateManyWithoutCategoryNestedInput = {
+  connect?: InputMaybe<Array<ProductWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<ProductCreateOrConnectWithoutCategoryInput>>;
+  create?: InputMaybe<Array<ProductCreateWithoutCategoryInput>>;
+  createMany?: InputMaybe<ProductCreateManyCategoryInputEnvelope>;
+  delete?: InputMaybe<Array<ProductWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<ProductScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<ProductWhereUniqueInput>>;
+  set?: InputMaybe<Array<ProductWhereUniqueInput>>;
+  update?: InputMaybe<Array<ProductUpdateWithWhereUniqueWithoutCategoryInput>>;
+  updateMany?: InputMaybe<Array<ProductUpdateManyWithWhereWithoutCategoryInput>>;
+  upsert?: InputMaybe<Array<ProductUpsertWithWhereUniqueWithoutCategoryInput>>;
+};
+
+export type ProductUpdateWithWhereUniqueWithoutCategoryInput = {
+  data: ProductUpdateWithoutCategoryInput;
+  where: ProductWhereUniqueInput;
+};
+
+export type ProductUpdateWithoutCategoryInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  image?: InputMaybe<StringFieldUpdateOperationsInput>;
+  moneyBackGuarantee?: InputMaybe<IntFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  slug?: InputMaybe<StringFieldUpdateOperationsInput>;
+  taskAutomateCount?: InputMaybe<IntFieldUpdateOperationsInput>;
+  topTierPromptCount?: InputMaybe<IntFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type ProductUpsertWithWhereUniqueWithoutCategoryInput = {
+  create: ProductCreateWithoutCategoryInput;
+  update: ProductUpdateWithoutCategoryInput;
+  where: ProductWhereUniqueInput;
 };
 
 export type ProductWhereInput = {
   AND?: InputMaybe<Array<ProductWhereInput>>;
   NOT?: InputMaybe<Array<ProductWhereInput>>;
   OR?: InputMaybe<Array<ProductWhereInput>>;
+  category?: InputMaybe<CategoryRelationFilter>;
+  categoryId?: InputMaybe<StringFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
+  description?: InputMaybe<StringFilter>;
   id?: InputMaybe<StringFilter>;
+  image?: InputMaybe<StringFilter>;
+  moneyBackGuarantee?: InputMaybe<IntFilter>;
   name?: InputMaybe<StringFilter>;
   slug?: InputMaybe<StringFilter>;
+  taskAutomateCount?: InputMaybe<IntFilter>;
+  topTierPromptCount?: InputMaybe<IntFilter>;
   updatedAt?: InputMaybe<DateTimeFilter>;
 };
 
@@ -1179,14 +3071,29 @@ export type PromptWhereUniqueInput = {
 
 export type Query = {
   __typename?: 'Query';
+  addon?: Maybe<Addon>;
+  addonBlogCategories: Array<AddonBlogCategory>;
+  addonBlogCategory?: Maybe<AddonBlogCategory>;
+  addons: Array<Addon>;
+  aggregateAddon: AggregateAddon;
+  aggregateAddonBlogCategory: AggregateAddonBlogCategory;
+  aggregateBlog: AggregateBlog;
   aggregateCategory: AggregateCategory;
   aggregateProduct: AggregateProduct;
   aggregatePrompt: AggregatePrompt;
   aggregateTask: AggregateTask;
   aggregateTip: AggregateTip;
   aggregateUser: AggregateUser;
+  blog?: Maybe<Blog>;
+  blogs: Array<Blog>;
   categories: Array<Category>;
   category?: Maybe<Category>;
+  findFirstAddon?: Maybe<Addon>;
+  findFirstAddonBlogCategory?: Maybe<AddonBlogCategory>;
+  findFirstAddonBlogCategoryOrThrow?: Maybe<AddonBlogCategory>;
+  findFirstAddonOrThrow?: Maybe<Addon>;
+  findFirstBlog?: Maybe<Blog>;
+  findFirstBlogOrThrow?: Maybe<Blog>;
   findFirstCategory?: Maybe<Category>;
   findFirstCategoryOrThrow?: Maybe<Category>;
   findFirstProduct?: Maybe<Product>;
@@ -1199,12 +3106,25 @@ export type Query = {
   findFirstTipOrThrow?: Maybe<Tip>;
   findFirstUser?: Maybe<User>;
   findFirstUserOrThrow?: Maybe<User>;
+  getAddon?: Maybe<Addon>;
+  getAddonBlogCategory?: Maybe<AddonBlogCategory>;
+  getBlog?: Maybe<Blog>;
   getCategory?: Maybe<Category>;
   getProduct?: Maybe<Product>;
   getPrompt?: Maybe<Prompt>;
   getTask?: Maybe<Task>;
   getTip?: Maybe<Tip>;
   getUser?: Maybe<User>;
+  getUserAddons: Array<Addon>;
+  getUserBlogSingle: Blog;
+  getUserCategories: Array<Category>;
+  getUserNotPurchasedAddons: Array<Addon>;
+  getUserProducts: Array<Product>;
+  getUserPurchasedSingleAddon: Addon;
+  getUserTasks: Array<Task>;
+  groupByAddon: Array<AddonGroupBy>;
+  groupByAddonBlogCategory: Array<AddonBlogCategoryGroupBy>;
+  groupByBlog: Array<BlogGroupBy>;
   groupByCategory: Array<CategoryGroupBy>;
   groupByProduct: Array<ProductGroupBy>;
   groupByPrompt: Array<PromptGroupBy>;
@@ -1221,6 +3141,63 @@ export type Query = {
   tips: Array<Tip>;
   user?: Maybe<User>;
   users: Array<User>;
+};
+
+
+export type QueryAddonArgs = {
+  where: AddonWhereUniqueInput;
+};
+
+
+export type QueryAddonBlogCategoriesArgs = {
+  cursor?: InputMaybe<AddonBlogCategoryWhereUniqueInput>;
+  distinct?: InputMaybe<Array<AddonBlogCategoryScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<AddonBlogCategoryOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<AddonBlogCategoryWhereInput>;
+};
+
+
+export type QueryAddonBlogCategoryArgs = {
+  where: AddonBlogCategoryWhereUniqueInput;
+};
+
+
+export type QueryAddonsArgs = {
+  cursor?: InputMaybe<AddonWhereUniqueInput>;
+  distinct?: InputMaybe<Array<AddonScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<AddonOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<AddonWhereInput>;
+};
+
+
+export type QueryAggregateAddonArgs = {
+  cursor?: InputMaybe<AddonWhereUniqueInput>;
+  orderBy?: InputMaybe<Array<AddonOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<AddonWhereInput>;
+};
+
+
+export type QueryAggregateAddonBlogCategoryArgs = {
+  cursor?: InputMaybe<AddonBlogCategoryWhereUniqueInput>;
+  orderBy?: InputMaybe<Array<AddonBlogCategoryOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<AddonBlogCategoryWhereInput>;
+};
+
+
+export type QueryAggregateBlogArgs = {
+  cursor?: InputMaybe<BlogWhereUniqueInput>;
+  orderBy?: InputMaybe<Array<BlogOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<BlogWhereInput>;
 };
 
 
@@ -1278,6 +3255,21 @@ export type QueryAggregateUserArgs = {
 };
 
 
+export type QueryBlogArgs = {
+  where: BlogWhereUniqueInput;
+};
+
+
+export type QueryBlogsArgs = {
+  cursor?: InputMaybe<BlogWhereUniqueInput>;
+  distinct?: InputMaybe<Array<BlogScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<BlogOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<BlogWhereInput>;
+};
+
+
 export type QueryCategoriesArgs = {
   cursor?: InputMaybe<CategoryWhereUniqueInput>;
   distinct?: InputMaybe<Array<CategoryScalarFieldEnum>>;
@@ -1290,6 +3282,66 @@ export type QueryCategoriesArgs = {
 
 export type QueryCategoryArgs = {
   where: CategoryWhereUniqueInput;
+};
+
+
+export type QueryFindFirstAddonArgs = {
+  cursor?: InputMaybe<AddonWhereUniqueInput>;
+  distinct?: InputMaybe<Array<AddonScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<AddonOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<AddonWhereInput>;
+};
+
+
+export type QueryFindFirstAddonBlogCategoryArgs = {
+  cursor?: InputMaybe<AddonBlogCategoryWhereUniqueInput>;
+  distinct?: InputMaybe<Array<AddonBlogCategoryScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<AddonBlogCategoryOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<AddonBlogCategoryWhereInput>;
+};
+
+
+export type QueryFindFirstAddonBlogCategoryOrThrowArgs = {
+  cursor?: InputMaybe<AddonBlogCategoryWhereUniqueInput>;
+  distinct?: InputMaybe<Array<AddonBlogCategoryScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<AddonBlogCategoryOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<AddonBlogCategoryWhereInput>;
+};
+
+
+export type QueryFindFirstAddonOrThrowArgs = {
+  cursor?: InputMaybe<AddonWhereUniqueInput>;
+  distinct?: InputMaybe<Array<AddonScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<AddonOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<AddonWhereInput>;
+};
+
+
+export type QueryFindFirstBlogArgs = {
+  cursor?: InputMaybe<BlogWhereUniqueInput>;
+  distinct?: InputMaybe<Array<BlogScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<BlogOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<BlogWhereInput>;
+};
+
+
+export type QueryFindFirstBlogOrThrowArgs = {
+  cursor?: InputMaybe<BlogWhereUniqueInput>;
+  distinct?: InputMaybe<Array<BlogScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<BlogOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<BlogWhereInput>;
 };
 
 
@@ -1413,6 +3465,21 @@ export type QueryFindFirstUserOrThrowArgs = {
 };
 
 
+export type QueryGetAddonArgs = {
+  where: AddonWhereUniqueInput;
+};
+
+
+export type QueryGetAddonBlogCategoryArgs = {
+  where: AddonBlogCategoryWhereUniqueInput;
+};
+
+
+export type QueryGetBlogArgs = {
+  where: BlogWhereUniqueInput;
+};
+
+
 export type QueryGetCategoryArgs = {
   where: CategoryWhereUniqueInput;
 };
@@ -1440,6 +3507,96 @@ export type QueryGetTipArgs = {
 
 export type QueryGetUserArgs = {
   where: UserWhereUniqueInput;
+};
+
+
+export type QueryGetUserAddonsArgs = {
+  cursor?: InputMaybe<AddonWhereUniqueInput>;
+  distinct?: InputMaybe<Array<AddonScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<AddonOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<AddonWhereInput>;
+};
+
+
+export type QueryGetUserBlogSingleArgs = {
+  where: BlogWhereUniqueInput;
+};
+
+
+export type QueryGetUserCategoriesArgs = {
+  cursor?: InputMaybe<CategoryWhereUniqueInput>;
+  distinct?: InputMaybe<Array<CategoryScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<CategoryOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<CategoryWhereInput>;
+};
+
+
+export type QueryGetUserNotPurchasedAddonsArgs = {
+  cursor?: InputMaybe<AddonWhereUniqueInput>;
+  distinct?: InputMaybe<Array<AddonScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<AddonOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<AddonWhereInput>;
+};
+
+
+export type QueryGetUserProductsArgs = {
+  cursor?: InputMaybe<ProductWhereUniqueInput>;
+  distinct?: InputMaybe<Array<ProductScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<ProductOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<ProductWhereInput>;
+};
+
+
+export type QueryGetUserPurchasedSingleAddonArgs = {
+  where: AddonWhereUniqueInput;
+};
+
+
+export type QueryGetUserTasksArgs = {
+  cursor?: InputMaybe<TaskWhereUniqueInput>;
+  distinct?: InputMaybe<Array<TaskScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<TaskOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<TaskWhereInput>;
+};
+
+
+export type QueryGroupByAddonArgs = {
+  by: Array<AddonScalarFieldEnum>;
+  having?: InputMaybe<AddonScalarWhereWithAggregatesInput>;
+  orderBy?: InputMaybe<Array<AddonOrderByWithAggregationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<AddonWhereInput>;
+};
+
+
+export type QueryGroupByAddonBlogCategoryArgs = {
+  by: Array<AddonBlogCategoryScalarFieldEnum>;
+  having?: InputMaybe<AddonBlogCategoryScalarWhereWithAggregatesInput>;
+  orderBy?: InputMaybe<Array<AddonBlogCategoryOrderByWithAggregationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<AddonBlogCategoryWhereInput>;
+};
+
+
+export type QueryGroupByBlogArgs = {
+  by: Array<BlogScalarFieldEnum>;
+  having?: InputMaybe<BlogScalarWhereWithAggregatesInput>;
+  orderBy?: InputMaybe<Array<BlogOrderByWithAggregationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<BlogWhereInput>;
 };
 
 
@@ -2378,14 +4535,54 @@ export type TipWhereUniqueInput = {
 
 export type User = {
   __typename?: 'User';
+  _count?: Maybe<UserCount>;
   avater?: Maybe<Scalars['String']['output']>;
   createdAt: Scalars['DateTime']['output'];
   email: Scalars['String']['output'];
   id: Scalars['String']['output'];
   name: Scalars['String']['output'];
+  nurgePlus: Scalars['Boolean']['output'];
   password: Scalars['String']['output'];
+  purchasedAddons: Array<Addon>;
+  purchasedCategories: Array<Category>;
   role: UserRole;
   updatedAt: Scalars['DateTime']['output'];
+};
+
+
+export type UserPurchasedAddonsArgs = {
+  cursor?: InputMaybe<AddonWhereUniqueInput>;
+  distinct?: InputMaybe<Array<AddonScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<AddonOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<AddonWhereInput>;
+};
+
+
+export type UserPurchasedCategoriesArgs = {
+  cursor?: InputMaybe<CategoryWhereUniqueInput>;
+  distinct?: InputMaybe<Array<CategoryScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<CategoryOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<CategoryWhereInput>;
+};
+
+export type UserCount = {
+  __typename?: 'UserCount';
+  purchasedAddons: Scalars['Int']['output'];
+  purchasedCategories: Scalars['Int']['output'];
+};
+
+
+export type UserCountPurchasedAddonsArgs = {
+  where?: InputMaybe<AddonWhereInput>;
+};
+
+
+export type UserCountPurchasedCategoriesArgs = {
+  where?: InputMaybe<CategoryWhereInput>;
 };
 
 export type UserCountAggregate = {
@@ -2396,6 +4593,7 @@ export type UserCountAggregate = {
   email: Scalars['Int']['output'];
   id: Scalars['Int']['output'];
   name: Scalars['Int']['output'];
+  nurgePlus: Scalars['Int']['output'];
   password: Scalars['Int']['output'];
   role: Scalars['Int']['output'];
   updatedAt: Scalars['Int']['output'];
@@ -2407,6 +4605,7 @@ export type UserCountOrderByAggregateInput = {
   email?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
+  nurgePlus?: InputMaybe<SortOrder>;
   password?: InputMaybe<SortOrder>;
   role?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
@@ -2418,7 +4617,10 @@ export type UserCreateInput = {
   email: Scalars['String']['input'];
   id?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
+  nurgePlus?: InputMaybe<Scalars['Boolean']['input']>;
   password: Scalars['String']['input'];
+  purchasedAddons?: InputMaybe<AddonCreateNestedManyWithoutPurchasedByUsersInput>;
+  purchasedCategories?: InputMaybe<CategoryCreateNestedManyWithoutPurchasedByUsersInput>;
   role: UserRole;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
 };
@@ -2429,7 +4631,56 @@ export type UserCreateManyInput = {
   email: Scalars['String']['input'];
   id?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
+  nurgePlus?: InputMaybe<Scalars['Boolean']['input']>;
   password: Scalars['String']['input'];
+  role: UserRole;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type UserCreateNestedManyWithoutPurchasedAddonsInput = {
+  connect?: InputMaybe<Array<UserWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<UserCreateOrConnectWithoutPurchasedAddonsInput>>;
+  create?: InputMaybe<Array<UserCreateWithoutPurchasedAddonsInput>>;
+};
+
+export type UserCreateNestedManyWithoutPurchasedCategoriesInput = {
+  connect?: InputMaybe<Array<UserWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<UserCreateOrConnectWithoutPurchasedCategoriesInput>>;
+  create?: InputMaybe<Array<UserCreateWithoutPurchasedCategoriesInput>>;
+};
+
+export type UserCreateOrConnectWithoutPurchasedAddonsInput = {
+  create: UserCreateWithoutPurchasedAddonsInput;
+  where: UserWhereUniqueInput;
+};
+
+export type UserCreateOrConnectWithoutPurchasedCategoriesInput = {
+  create: UserCreateWithoutPurchasedCategoriesInput;
+  where: UserWhereUniqueInput;
+};
+
+export type UserCreateWithoutPurchasedAddonsInput = {
+  avater?: InputMaybe<Scalars['String']['input']>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  email: Scalars['String']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  nurgePlus?: InputMaybe<Scalars['Boolean']['input']>;
+  password: Scalars['String']['input'];
+  purchasedCategories?: InputMaybe<CategoryCreateNestedManyWithoutPurchasedByUsersInput>;
+  role: UserRole;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type UserCreateWithoutPurchasedCategoriesInput = {
+  avater?: InputMaybe<Scalars['String']['input']>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  email: Scalars['String']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  nurgePlus?: InputMaybe<Scalars['Boolean']['input']>;
+  password: Scalars['String']['input'];
+  purchasedAddons?: InputMaybe<AddonCreateNestedManyWithoutPurchasedByUsersInput>;
   role: UserRole;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
 };
@@ -2444,9 +4695,16 @@ export type UserGroupBy = {
   email: Scalars['String']['output'];
   id: Scalars['String']['output'];
   name: Scalars['String']['output'];
+  nurgePlus: Scalars['Boolean']['output'];
   password: Scalars['String']['output'];
   role: UserRole;
   updatedAt: Scalars['DateTime']['output'];
+};
+
+export type UserListRelationFilter = {
+  every?: InputMaybe<UserWhereInput>;
+  none?: InputMaybe<UserWhereInput>;
+  some?: InputMaybe<UserWhereInput>;
 };
 
 export type UserMaxAggregate = {
@@ -2456,6 +4714,7 @@ export type UserMaxAggregate = {
   email?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  nurgePlus?: Maybe<Scalars['Boolean']['output']>;
   password?: Maybe<Scalars['String']['output']>;
   role?: Maybe<UserRole>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
@@ -2467,6 +4726,7 @@ export type UserMaxOrderByAggregateInput = {
   email?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
+  nurgePlus?: InputMaybe<SortOrder>;
   password?: InputMaybe<SortOrder>;
   role?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
@@ -2479,6 +4739,7 @@ export type UserMinAggregate = {
   email?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  nurgePlus?: Maybe<Scalars['Boolean']['output']>;
   password?: Maybe<Scalars['String']['output']>;
   role?: Maybe<UserRole>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
@@ -2490,9 +4751,14 @@ export type UserMinOrderByAggregateInput = {
   email?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
+  nurgePlus?: InputMaybe<SortOrder>;
   password?: InputMaybe<SortOrder>;
   role?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
+};
+
+export type UserOrderByRelationAggregateInput = {
+  _count?: InputMaybe<SortOrder>;
 };
 
 export type UserOrderByWithAggregationInput = {
@@ -2504,6 +4770,7 @@ export type UserOrderByWithAggregationInput = {
   email?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
+  nurgePlus?: InputMaybe<SortOrder>;
   password?: InputMaybe<SortOrder>;
   role?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
@@ -2515,7 +4782,10 @@ export type UserOrderByWithRelationInput = {
   email?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
+  nurgePlus?: InputMaybe<SortOrder>;
   password?: InputMaybe<SortOrder>;
+  purchasedAddons?: InputMaybe<AddonOrderByRelationAggregateInput>;
+  purchasedCategories?: InputMaybe<CategoryOrderByRelationAggregateInput>;
   role?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
 };
@@ -2532,10 +4802,26 @@ export enum UserScalarFieldEnum {
   Email = 'email',
   Id = 'id',
   Name = 'name',
+  NurgePlus = 'nurgePlus',
   Password = 'password',
   Role = 'role',
   UpdatedAt = 'updatedAt'
 }
+
+export type UserScalarWhereInput = {
+  AND?: InputMaybe<Array<UserScalarWhereInput>>;
+  NOT?: InputMaybe<Array<UserScalarWhereInput>>;
+  OR?: InputMaybe<Array<UserScalarWhereInput>>;
+  avater?: InputMaybe<StringNullableFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  email?: InputMaybe<StringFilter>;
+  id?: InputMaybe<StringFilter>;
+  name?: InputMaybe<StringFilter>;
+  nurgePlus?: InputMaybe<BoolFilter>;
+  password?: InputMaybe<StringFilter>;
+  role?: InputMaybe<EnumUserRoleFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+};
 
 export type UserScalarWhereWithAggregatesInput = {
   AND?: InputMaybe<Array<UserScalarWhereWithAggregatesInput>>;
@@ -2546,6 +4832,7 @@ export type UserScalarWhereWithAggregatesInput = {
   email?: InputMaybe<StringWithAggregatesFilter>;
   id?: InputMaybe<StringWithAggregatesFilter>;
   name?: InputMaybe<StringWithAggregatesFilter>;
+  nurgePlus?: InputMaybe<BoolWithAggregatesFilter>;
   password?: InputMaybe<StringWithAggregatesFilter>;
   role?: InputMaybe<EnumUserRoleWithAggregatesFilter>;
   updatedAt?: InputMaybe<DateTimeWithAggregatesFilter>;
@@ -2557,7 +4844,10 @@ export type UserUpdateInput = {
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  nurgePlus?: InputMaybe<BoolFieldUpdateOperationsInput>;
   password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  purchasedAddons?: InputMaybe<AddonUpdateManyWithoutPurchasedByUsersNestedInput>;
+  purchasedCategories?: InputMaybe<CategoryUpdateManyWithoutPurchasedByUsersNestedInput>;
   role?: InputMaybe<EnumUserRoleFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
@@ -2568,9 +4858,94 @@ export type UserUpdateManyMutationInput = {
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  nurgePlus?: InputMaybe<BoolFieldUpdateOperationsInput>;
   password?: InputMaybe<StringFieldUpdateOperationsInput>;
   role?: InputMaybe<EnumUserRoleFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type UserUpdateManyWithWhereWithoutPurchasedAddonsInput = {
+  data: UserUpdateManyMutationInput;
+  where: UserScalarWhereInput;
+};
+
+export type UserUpdateManyWithWhereWithoutPurchasedCategoriesInput = {
+  data: UserUpdateManyMutationInput;
+  where: UserScalarWhereInput;
+};
+
+export type UserUpdateManyWithoutPurchasedAddonsNestedInput = {
+  connect?: InputMaybe<Array<UserWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<UserCreateOrConnectWithoutPurchasedAddonsInput>>;
+  create?: InputMaybe<Array<UserCreateWithoutPurchasedAddonsInput>>;
+  delete?: InputMaybe<Array<UserWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<UserScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<UserWhereUniqueInput>>;
+  set?: InputMaybe<Array<UserWhereUniqueInput>>;
+  update?: InputMaybe<Array<UserUpdateWithWhereUniqueWithoutPurchasedAddonsInput>>;
+  updateMany?: InputMaybe<Array<UserUpdateManyWithWhereWithoutPurchasedAddonsInput>>;
+  upsert?: InputMaybe<Array<UserUpsertWithWhereUniqueWithoutPurchasedAddonsInput>>;
+};
+
+export type UserUpdateManyWithoutPurchasedCategoriesNestedInput = {
+  connect?: InputMaybe<Array<UserWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<UserCreateOrConnectWithoutPurchasedCategoriesInput>>;
+  create?: InputMaybe<Array<UserCreateWithoutPurchasedCategoriesInput>>;
+  delete?: InputMaybe<Array<UserWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<UserScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<UserWhereUniqueInput>>;
+  set?: InputMaybe<Array<UserWhereUniqueInput>>;
+  update?: InputMaybe<Array<UserUpdateWithWhereUniqueWithoutPurchasedCategoriesInput>>;
+  updateMany?: InputMaybe<Array<UserUpdateManyWithWhereWithoutPurchasedCategoriesInput>>;
+  upsert?: InputMaybe<Array<UserUpsertWithWhereUniqueWithoutPurchasedCategoriesInput>>;
+};
+
+export type UserUpdateWithWhereUniqueWithoutPurchasedAddonsInput = {
+  data: UserUpdateWithoutPurchasedAddonsInput;
+  where: UserWhereUniqueInput;
+};
+
+export type UserUpdateWithWhereUniqueWithoutPurchasedCategoriesInput = {
+  data: UserUpdateWithoutPurchasedCategoriesInput;
+  where: UserWhereUniqueInput;
+};
+
+export type UserUpdateWithoutPurchasedAddonsInput = {
+  avater?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  email?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  nurgePlus?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  purchasedCategories?: InputMaybe<CategoryUpdateManyWithoutPurchasedByUsersNestedInput>;
+  role?: InputMaybe<EnumUserRoleFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type UserUpdateWithoutPurchasedCategoriesInput = {
+  avater?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  email?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  nurgePlus?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  purchasedAddons?: InputMaybe<AddonUpdateManyWithoutPurchasedByUsersNestedInput>;
+  role?: InputMaybe<EnumUserRoleFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type UserUpsertWithWhereUniqueWithoutPurchasedAddonsInput = {
+  create: UserCreateWithoutPurchasedAddonsInput;
+  update: UserUpdateWithoutPurchasedAddonsInput;
+  where: UserWhereUniqueInput;
+};
+
+export type UserUpsertWithWhereUniqueWithoutPurchasedCategoriesInput = {
+  create: UserCreateWithoutPurchasedCategoriesInput;
+  update: UserUpdateWithoutPurchasedCategoriesInput;
+  where: UserWhereUniqueInput;
 };
 
 export type UserWhereInput = {
@@ -2582,7 +4957,10 @@ export type UserWhereInput = {
   email?: InputMaybe<StringFilter>;
   id?: InputMaybe<StringFilter>;
   name?: InputMaybe<StringFilter>;
+  nurgePlus?: InputMaybe<BoolFilter>;
   password?: InputMaybe<StringFilter>;
+  purchasedAddons?: InputMaybe<AddonListRelationFilter>;
+  purchasedCategories?: InputMaybe<CategoryListRelationFilter>;
   role?: InputMaybe<EnumUserRoleFilter>;
   updatedAt?: InputMaybe<DateTimeFilter>;
 };
@@ -2592,10 +4970,94 @@ export type UserWhereUniqueInput = {
   id?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type DefaultResponsce = {
+  __typename?: 'defaultResponsce';
+  message: Scalars['String']['output'];
+};
+
 export type CategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type CategoriesQuery = { __typename?: 'Query', categories: Array<{ __typename?: 'Category', id: string, name: string, createdAt: any }> };
+
+export type CategoriesWithoutRelationFieldQueryVariables = Exact<{
+  where?: InputMaybe<CategoryWhereInput>;
+  orderBy?: InputMaybe<Array<CategoryOrderByWithRelationInput> | CategoryOrderByWithRelationInput>;
+  cursor?: InputMaybe<CategoryWhereUniqueInput>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  distinct?: InputMaybe<Array<CategoryScalarFieldEnum> | CategoryScalarFieldEnum>;
+}>;
+
+
+export type CategoriesWithoutRelationFieldQuery = { __typename?: 'Query', categories: Array<{ __typename?: 'Category', createdAt: any, id: string, name: string, _count?: { __typename?: 'CategoryCount', products: number, purchasedByUsers: number, tasks: number } | null }> };
+
+export type UpdateOneCategoryMutationVariables = Exact<{
+  data: CategoryUpdateInput;
+  where: CategoryWhereUniqueInput;
+}>;
+
+
+export type UpdateOneCategoryMutation = { __typename?: 'Mutation', updateOneCategory?: { __typename?: 'Category', id: string } | null };
+
+export type DeleteOneCategoryMutationVariables = Exact<{
+  where: CategoryWhereUniqueInput;
+}>;
+
+
+export type DeleteOneCategoryMutation = { __typename?: 'Mutation', deleteOneCategory?: { __typename?: 'Category', id: string } | null };
+
+export type CategoryDataForUpdateQueryVariables = Exact<{
+  where: CategoryWhereUniqueInput;
+}>;
+
+
+export type CategoryDataForUpdateQuery = { __typename?: 'Query', category?: { __typename?: 'Category', id: string, name: string } | null };
+
+export type AggregateCategoryQueryVariables = Exact<{
+  where?: InputMaybe<CategoryWhereInput>;
+  orderBy?: InputMaybe<Array<CategoryOrderByWithRelationInput> | CategoryOrderByWithRelationInput>;
+  cursor?: InputMaybe<CategoryWhereUniqueInput>;
+}>;
+
+
+export type AggregateCategoryQuery = { __typename?: 'Query', aggregateCategory: { __typename?: 'AggregateCategory', _count?: { __typename?: 'CategoryCountAggregate', _all: number } | null } };
+
+export type CreateOneCategoryMutationVariables = Exact<{
+  data: CategoryCreateInput;
+}>;
+
+
+export type CreateOneCategoryMutation = { __typename?: 'Mutation', createOneCategory: { __typename?: 'Category', name: string } };
+
+export type DeleteManyPromptMutationVariables = Exact<{
+  where?: InputMaybe<PromptWhereInput>;
+}>;
+
+
+export type DeleteManyPromptMutation = { __typename?: 'Mutation', deleteManyPrompt: { __typename?: 'AffectedRowsOutput', count: number } };
+
+export type DeleteOnePromptMutationVariables = Exact<{
+  where: PromptWhereUniqueInput;
+}>;
+
+
+export type DeleteOnePromptMutation = { __typename?: 'Mutation', deleteOnePrompt?: { __typename?: 'Prompt', id: string } | null };
+
+export type UpdateManyPromptMutationVariables = Exact<{
+  data: PromptUpdateManyMutationInput;
+  where?: InputMaybe<PromptWhereInput>;
+}>;
+
+
+export type UpdateManyPromptMutation = { __typename?: 'Mutation', updateManyPrompt: { __typename?: 'AffectedRowsOutput', count: number } };
+
+export type PromptsAfterDeleteFromtasksQueryVariables = Exact<{
+  where?: InputMaybe<PromptWhereInput>;
+}>;
+
+
+export type PromptsAfterDeleteFromtasksQuery = { __typename?: 'Query', prompts: Array<{ __typename?: 'Prompt', id: string, description: string, name: string }> };
 
 export type TasksWithoutrelationalDataQueryVariables = Exact<{
   where?: InputMaybe<TaskWhereInput>;
@@ -2606,9 +5068,21 @@ export type TasksWithoutrelationalDataQueryVariables = Exact<{
 
 export type TasksWithoutrelationalDataQuery = { __typename?: 'Query', tasks: Array<{ __typename?: 'Task', tags: Array<string>, slug: string, name: string, imoji: string, id: string }> };
 
+export type TasksViewTableQueryVariables = Exact<{
+  where?: InputMaybe<TaskWhereInput>;
+  orderBy?: InputMaybe<Array<TaskOrderByWithRelationInput> | TaskOrderByWithRelationInput>;
+  cursor?: InputMaybe<TaskWhereUniqueInput>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  distinct?: InputMaybe<Array<TaskScalarFieldEnum> | TaskScalarFieldEnum>;
+}>;
+
+
+export type TasksViewTableQuery = { __typename?: 'Query', tasks: Array<{ __typename?: 'Task', createdAt: any, imoji: string, name: string, slug: string, tags: Array<string>, id: string, _count?: { __typename?: 'TaskCount', prompts: number, tips: number } | null, category?: { __typename?: 'Category', name: string, id: string } | null }> };
+
 export type AggregateTaskQueryVariables = Exact<{
   where?: InputMaybe<TaskWhereInput>;
-  tasksWhere2?: InputMaybe<TaskWhereInput>;
+  cursor?: InputMaybe<TaskWhereUniqueInput>;
 }>;
 
 
@@ -2620,6 +5094,64 @@ export type TaskQueryVariables = Exact<{
 
 
 export type TaskQuery = { __typename?: 'Query', task?: { __typename?: 'Task', slug: string, tags: Array<string>, description: string, createdAt: any, id: string, imoji: string, name: string, updatedAt: any, categoryId: string, prompts: Array<{ __typename?: 'Prompt', description: string, id: string, name: string }>, tips: Array<{ __typename?: 'Tip', id: string, description: string }>, category?: { __typename?: 'Category', name: string } | null } | null };
+
+export type CreateOneTaskMutationVariables = Exact<{
+  data: TaskCreateInput;
+}>;
+
+
+export type CreateOneTaskMutation = { __typename?: 'Mutation', createOneTask: { __typename?: 'Task', id: string } };
+
+export type DeleteOneTaskMutationVariables = Exact<{
+  where: TaskWhereUniqueInput;
+}>;
+
+
+export type DeleteOneTaskMutation = { __typename?: 'Mutation', deleteOneTask?: { __typename?: 'Task', id: string } | null };
+
+export type UpdateOneTaskMutationVariables = Exact<{
+  data: TaskUpdateInput;
+  where: TaskWhereUniqueInput;
+}>;
+
+
+export type UpdateOneTaskMutation = { __typename?: 'Mutation', updateOneTask?: { __typename?: 'Task', id: string } | null };
+
+export type UpdateManyTaskMutationVariables = Exact<{
+  data: TaskUpdateManyMutationInput;
+  where?: InputMaybe<TaskWhereInput>;
+}>;
+
+
+export type UpdateManyTaskMutation = { __typename?: 'Mutation', updateManyTask: { __typename?: 'AffectedRowsOutput', count: number } };
+
+export type DeleteManyTipMutationVariables = Exact<{
+  where?: InputMaybe<TipWhereInput>;
+}>;
+
+
+export type DeleteManyTipMutation = { __typename?: 'Mutation', deleteManyTip: { __typename?: 'AffectedRowsOutput', count: number } };
+
+export type DeleteOneTipMutationVariables = Exact<{
+  where: TipWhereUniqueInput;
+}>;
+
+
+export type DeleteOneTipMutation = { __typename?: 'Mutation', deleteOneTip?: { __typename?: 'Tip', id: string } | null };
+
+export type UpdateManyTipMutationVariables = Exact<{
+  data: TipUpdateManyMutationInput;
+}>;
+
+
+export type UpdateManyTipMutation = { __typename?: 'Mutation', updateManyTip: { __typename?: 'AffectedRowsOutput', count: number } };
+
+export type TipsAfterDeleteFromTaskQueryVariables = Exact<{
+  where?: InputMaybe<TipWhereInput>;
+}>;
+
+
+export type TipsAfterDeleteFromTaskQuery = { __typename?: 'Query', tips: Array<{ __typename?: 'Tip', id: string, description: string }> };
 
 
 export const CategoriesDocument = gql`
@@ -2658,6 +5190,372 @@ export function useCategoriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
 export type CategoriesQueryHookResult = ReturnType<typeof useCategoriesQuery>;
 export type CategoriesLazyQueryHookResult = ReturnType<typeof useCategoriesLazyQuery>;
 export type CategoriesQueryResult = Apollo.QueryResult<CategoriesQuery, CategoriesQueryVariables>;
+export const CategoriesWithoutRelationFieldDocument = gql`
+    query CategoriesWithoutRelationField($where: CategoryWhereInput, $orderBy: [CategoryOrderByWithRelationInput!], $cursor: CategoryWhereUniqueInput, $take: Int, $skip: Int, $distinct: [CategoryScalarFieldEnum!]) {
+  categories(
+    where: $where
+    orderBy: $orderBy
+    cursor: $cursor
+    take: $take
+    skip: $skip
+    distinct: $distinct
+  ) {
+    _count {
+      products
+      purchasedByUsers
+      tasks
+    }
+    createdAt
+    id
+    name
+  }
+}
+    `;
+
+/**
+ * __useCategoriesWithoutRelationFieldQuery__
+ *
+ * To run a query within a React component, call `useCategoriesWithoutRelationFieldQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCategoriesWithoutRelationFieldQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCategoriesWithoutRelationFieldQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *      orderBy: // value for 'orderBy'
+ *      cursor: // value for 'cursor'
+ *      take: // value for 'take'
+ *      skip: // value for 'skip'
+ *      distinct: // value for 'distinct'
+ *   },
+ * });
+ */
+export function useCategoriesWithoutRelationFieldQuery(baseOptions?: Apollo.QueryHookOptions<CategoriesWithoutRelationFieldQuery, CategoriesWithoutRelationFieldQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CategoriesWithoutRelationFieldQuery, CategoriesWithoutRelationFieldQueryVariables>(CategoriesWithoutRelationFieldDocument, options);
+      }
+export function useCategoriesWithoutRelationFieldLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CategoriesWithoutRelationFieldQuery, CategoriesWithoutRelationFieldQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CategoriesWithoutRelationFieldQuery, CategoriesWithoutRelationFieldQueryVariables>(CategoriesWithoutRelationFieldDocument, options);
+        }
+export type CategoriesWithoutRelationFieldQueryHookResult = ReturnType<typeof useCategoriesWithoutRelationFieldQuery>;
+export type CategoriesWithoutRelationFieldLazyQueryHookResult = ReturnType<typeof useCategoriesWithoutRelationFieldLazyQuery>;
+export type CategoriesWithoutRelationFieldQueryResult = Apollo.QueryResult<CategoriesWithoutRelationFieldQuery, CategoriesWithoutRelationFieldQueryVariables>;
+export const UpdateOneCategoryDocument = gql`
+    mutation UpdateOneCategory($data: CategoryUpdateInput!, $where: CategoryWhereUniqueInput!) {
+  updateOneCategory(data: $data, where: $where) {
+    id
+  }
+}
+    `;
+export type UpdateOneCategoryMutationFn = Apollo.MutationFunction<UpdateOneCategoryMutation, UpdateOneCategoryMutationVariables>;
+
+/**
+ * __useUpdateOneCategoryMutation__
+ *
+ * To run a mutation, you first call `useUpdateOneCategoryMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateOneCategoryMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateOneCategoryMutation, { data, loading, error }] = useUpdateOneCategoryMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useUpdateOneCategoryMutation(baseOptions?: Apollo.MutationHookOptions<UpdateOneCategoryMutation, UpdateOneCategoryMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateOneCategoryMutation, UpdateOneCategoryMutationVariables>(UpdateOneCategoryDocument, options);
+      }
+export type UpdateOneCategoryMutationHookResult = ReturnType<typeof useUpdateOneCategoryMutation>;
+export type UpdateOneCategoryMutationResult = Apollo.MutationResult<UpdateOneCategoryMutation>;
+export type UpdateOneCategoryMutationOptions = Apollo.BaseMutationOptions<UpdateOneCategoryMutation, UpdateOneCategoryMutationVariables>;
+export const DeleteOneCategoryDocument = gql`
+    mutation DeleteOneCategory($where: CategoryWhereUniqueInput!) {
+  deleteOneCategory(where: $where) {
+    id
+  }
+}
+    `;
+export type DeleteOneCategoryMutationFn = Apollo.MutationFunction<DeleteOneCategoryMutation, DeleteOneCategoryMutationVariables>;
+
+/**
+ * __useDeleteOneCategoryMutation__
+ *
+ * To run a mutation, you first call `useDeleteOneCategoryMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteOneCategoryMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteOneCategoryMutation, { data, loading, error }] = useDeleteOneCategoryMutation({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useDeleteOneCategoryMutation(baseOptions?: Apollo.MutationHookOptions<DeleteOneCategoryMutation, DeleteOneCategoryMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteOneCategoryMutation, DeleteOneCategoryMutationVariables>(DeleteOneCategoryDocument, options);
+      }
+export type DeleteOneCategoryMutationHookResult = ReturnType<typeof useDeleteOneCategoryMutation>;
+export type DeleteOneCategoryMutationResult = Apollo.MutationResult<DeleteOneCategoryMutation>;
+export type DeleteOneCategoryMutationOptions = Apollo.BaseMutationOptions<DeleteOneCategoryMutation, DeleteOneCategoryMutationVariables>;
+export const CategoryDataForUpdateDocument = gql`
+    query CategoryDataForUpdate($where: CategoryWhereUniqueInput!) {
+  category(where: $where) {
+    id
+    name
+  }
+}
+    `;
+
+/**
+ * __useCategoryDataForUpdateQuery__
+ *
+ * To run a query within a React component, call `useCategoryDataForUpdateQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCategoryDataForUpdateQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCategoryDataForUpdateQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useCategoryDataForUpdateQuery(baseOptions: Apollo.QueryHookOptions<CategoryDataForUpdateQuery, CategoryDataForUpdateQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CategoryDataForUpdateQuery, CategoryDataForUpdateQueryVariables>(CategoryDataForUpdateDocument, options);
+      }
+export function useCategoryDataForUpdateLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CategoryDataForUpdateQuery, CategoryDataForUpdateQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CategoryDataForUpdateQuery, CategoryDataForUpdateQueryVariables>(CategoryDataForUpdateDocument, options);
+        }
+export type CategoryDataForUpdateQueryHookResult = ReturnType<typeof useCategoryDataForUpdateQuery>;
+export type CategoryDataForUpdateLazyQueryHookResult = ReturnType<typeof useCategoryDataForUpdateLazyQuery>;
+export type CategoryDataForUpdateQueryResult = Apollo.QueryResult<CategoryDataForUpdateQuery, CategoryDataForUpdateQueryVariables>;
+export const AggregateCategoryDocument = gql`
+    query AggregateCategory($where: CategoryWhereInput, $orderBy: [CategoryOrderByWithRelationInput!], $cursor: CategoryWhereUniqueInput) {
+  aggregateCategory(where: $where, orderBy: $orderBy, cursor: $cursor) {
+    _count {
+      _all
+    }
+  }
+}
+    `;
+
+/**
+ * __useAggregateCategoryQuery__
+ *
+ * To run a query within a React component, call `useAggregateCategoryQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAggregateCategoryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAggregateCategoryQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *      orderBy: // value for 'orderBy'
+ *      cursor: // value for 'cursor'
+ *   },
+ * });
+ */
+export function useAggregateCategoryQuery(baseOptions?: Apollo.QueryHookOptions<AggregateCategoryQuery, AggregateCategoryQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AggregateCategoryQuery, AggregateCategoryQueryVariables>(AggregateCategoryDocument, options);
+      }
+export function useAggregateCategoryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AggregateCategoryQuery, AggregateCategoryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AggregateCategoryQuery, AggregateCategoryQueryVariables>(AggregateCategoryDocument, options);
+        }
+export type AggregateCategoryQueryHookResult = ReturnType<typeof useAggregateCategoryQuery>;
+export type AggregateCategoryLazyQueryHookResult = ReturnType<typeof useAggregateCategoryLazyQuery>;
+export type AggregateCategoryQueryResult = Apollo.QueryResult<AggregateCategoryQuery, AggregateCategoryQueryVariables>;
+export const CreateOneCategoryDocument = gql`
+    mutation CreateOneCategory($data: CategoryCreateInput!) {
+  createOneCategory(data: $data) {
+    name
+  }
+}
+    `;
+export type CreateOneCategoryMutationFn = Apollo.MutationFunction<CreateOneCategoryMutation, CreateOneCategoryMutationVariables>;
+
+/**
+ * __useCreateOneCategoryMutation__
+ *
+ * To run a mutation, you first call `useCreateOneCategoryMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateOneCategoryMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createOneCategoryMutation, { data, loading, error }] = useCreateOneCategoryMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useCreateOneCategoryMutation(baseOptions?: Apollo.MutationHookOptions<CreateOneCategoryMutation, CreateOneCategoryMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateOneCategoryMutation, CreateOneCategoryMutationVariables>(CreateOneCategoryDocument, options);
+      }
+export type CreateOneCategoryMutationHookResult = ReturnType<typeof useCreateOneCategoryMutation>;
+export type CreateOneCategoryMutationResult = Apollo.MutationResult<CreateOneCategoryMutation>;
+export type CreateOneCategoryMutationOptions = Apollo.BaseMutationOptions<CreateOneCategoryMutation, CreateOneCategoryMutationVariables>;
+export const DeleteManyPromptDocument = gql`
+    mutation DeleteManyPrompt($where: PromptWhereInput) {
+  deleteManyPrompt(where: $where) {
+    count
+  }
+}
+    `;
+export type DeleteManyPromptMutationFn = Apollo.MutationFunction<DeleteManyPromptMutation, DeleteManyPromptMutationVariables>;
+
+/**
+ * __useDeleteManyPromptMutation__
+ *
+ * To run a mutation, you first call `useDeleteManyPromptMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteManyPromptMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteManyPromptMutation, { data, loading, error }] = useDeleteManyPromptMutation({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useDeleteManyPromptMutation(baseOptions?: Apollo.MutationHookOptions<DeleteManyPromptMutation, DeleteManyPromptMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteManyPromptMutation, DeleteManyPromptMutationVariables>(DeleteManyPromptDocument, options);
+      }
+export type DeleteManyPromptMutationHookResult = ReturnType<typeof useDeleteManyPromptMutation>;
+export type DeleteManyPromptMutationResult = Apollo.MutationResult<DeleteManyPromptMutation>;
+export type DeleteManyPromptMutationOptions = Apollo.BaseMutationOptions<DeleteManyPromptMutation, DeleteManyPromptMutationVariables>;
+export const DeleteOnePromptDocument = gql`
+    mutation DeleteOnePrompt($where: PromptWhereUniqueInput!) {
+  deleteOnePrompt(where: $where) {
+    id
+  }
+}
+    `;
+export type DeleteOnePromptMutationFn = Apollo.MutationFunction<DeleteOnePromptMutation, DeleteOnePromptMutationVariables>;
+
+/**
+ * __useDeleteOnePromptMutation__
+ *
+ * To run a mutation, you first call `useDeleteOnePromptMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteOnePromptMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteOnePromptMutation, { data, loading, error }] = useDeleteOnePromptMutation({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useDeleteOnePromptMutation(baseOptions?: Apollo.MutationHookOptions<DeleteOnePromptMutation, DeleteOnePromptMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteOnePromptMutation, DeleteOnePromptMutationVariables>(DeleteOnePromptDocument, options);
+      }
+export type DeleteOnePromptMutationHookResult = ReturnType<typeof useDeleteOnePromptMutation>;
+export type DeleteOnePromptMutationResult = Apollo.MutationResult<DeleteOnePromptMutation>;
+export type DeleteOnePromptMutationOptions = Apollo.BaseMutationOptions<DeleteOnePromptMutation, DeleteOnePromptMutationVariables>;
+export const UpdateManyPromptDocument = gql`
+    mutation UpdateManyPrompt($data: PromptUpdateManyMutationInput!, $where: PromptWhereInput) {
+  updateManyPrompt(data: $data, where: $where) {
+    count
+  }
+}
+    `;
+export type UpdateManyPromptMutationFn = Apollo.MutationFunction<UpdateManyPromptMutation, UpdateManyPromptMutationVariables>;
+
+/**
+ * __useUpdateManyPromptMutation__
+ *
+ * To run a mutation, you first call `useUpdateManyPromptMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateManyPromptMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateManyPromptMutation, { data, loading, error }] = useUpdateManyPromptMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useUpdateManyPromptMutation(baseOptions?: Apollo.MutationHookOptions<UpdateManyPromptMutation, UpdateManyPromptMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateManyPromptMutation, UpdateManyPromptMutationVariables>(UpdateManyPromptDocument, options);
+      }
+export type UpdateManyPromptMutationHookResult = ReturnType<typeof useUpdateManyPromptMutation>;
+export type UpdateManyPromptMutationResult = Apollo.MutationResult<UpdateManyPromptMutation>;
+export type UpdateManyPromptMutationOptions = Apollo.BaseMutationOptions<UpdateManyPromptMutation, UpdateManyPromptMutationVariables>;
+export const PromptsAfterDeleteFromtasksDocument = gql`
+    query PromptsAfterDeleteFromtasks($where: PromptWhereInput) {
+  prompts(where: $where) {
+    id
+    description
+    name
+  }
+}
+    `;
+
+/**
+ * __usePromptsAfterDeleteFromtasksQuery__
+ *
+ * To run a query within a React component, call `usePromptsAfterDeleteFromtasksQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePromptsAfterDeleteFromtasksQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePromptsAfterDeleteFromtasksQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function usePromptsAfterDeleteFromtasksQuery(baseOptions?: Apollo.QueryHookOptions<PromptsAfterDeleteFromtasksQuery, PromptsAfterDeleteFromtasksQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PromptsAfterDeleteFromtasksQuery, PromptsAfterDeleteFromtasksQueryVariables>(PromptsAfterDeleteFromtasksDocument, options);
+      }
+export function usePromptsAfterDeleteFromtasksLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PromptsAfterDeleteFromtasksQuery, PromptsAfterDeleteFromtasksQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PromptsAfterDeleteFromtasksQuery, PromptsAfterDeleteFromtasksQueryVariables>(PromptsAfterDeleteFromtasksDocument, options);
+        }
+export type PromptsAfterDeleteFromtasksQueryHookResult = ReturnType<typeof usePromptsAfterDeleteFromtasksQuery>;
+export type PromptsAfterDeleteFromtasksLazyQueryHookResult = ReturnType<typeof usePromptsAfterDeleteFromtasksLazyQuery>;
+export type PromptsAfterDeleteFromtasksQueryResult = Apollo.QueryResult<PromptsAfterDeleteFromtasksQuery, PromptsAfterDeleteFromtasksQueryVariables>;
 export const TasksWithoutrelationalDataDocument = gql`
     query tasksWithoutrelationalData($where: TaskWhereInput, $orderBy: [TaskOrderByWithRelationInput!], $take: Int) {
   tasks(where: $where, orderBy: $orderBy, take: $take) {
@@ -2699,9 +5597,69 @@ export function useTasksWithoutrelationalDataLazyQuery(baseOptions?: Apollo.Lazy
 export type TasksWithoutrelationalDataQueryHookResult = ReturnType<typeof useTasksWithoutrelationalDataQuery>;
 export type TasksWithoutrelationalDataLazyQueryHookResult = ReturnType<typeof useTasksWithoutrelationalDataLazyQuery>;
 export type TasksWithoutrelationalDataQueryResult = Apollo.QueryResult<TasksWithoutrelationalDataQuery, TasksWithoutrelationalDataQueryVariables>;
+export const TasksViewTableDocument = gql`
+    query TasksViewTable($where: TaskWhereInput, $orderBy: [TaskOrderByWithRelationInput!], $cursor: TaskWhereUniqueInput, $take: Int, $skip: Int, $distinct: [TaskScalarFieldEnum!]) {
+  tasks(
+    where: $where
+    orderBy: $orderBy
+    cursor: $cursor
+    take: $take
+    skip: $skip
+    distinct: $distinct
+  ) {
+    _count {
+      prompts
+      tips
+    }
+    category {
+      name
+      id
+    }
+    createdAt
+    imoji
+    name
+    slug
+    tags
+    id
+  }
+}
+    `;
+
+/**
+ * __useTasksViewTableQuery__
+ *
+ * To run a query within a React component, call `useTasksViewTableQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTasksViewTableQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTasksViewTableQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *      orderBy: // value for 'orderBy'
+ *      cursor: // value for 'cursor'
+ *      take: // value for 'take'
+ *      skip: // value for 'skip'
+ *      distinct: // value for 'distinct'
+ *   },
+ * });
+ */
+export function useTasksViewTableQuery(baseOptions?: Apollo.QueryHookOptions<TasksViewTableQuery, TasksViewTableQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TasksViewTableQuery, TasksViewTableQueryVariables>(TasksViewTableDocument, options);
+      }
+export function useTasksViewTableLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TasksViewTableQuery, TasksViewTableQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TasksViewTableQuery, TasksViewTableQueryVariables>(TasksViewTableDocument, options);
+        }
+export type TasksViewTableQueryHookResult = ReturnType<typeof useTasksViewTableQuery>;
+export type TasksViewTableLazyQueryHookResult = ReturnType<typeof useTasksViewTableLazyQuery>;
+export type TasksViewTableQueryResult = Apollo.QueryResult<TasksViewTableQuery, TasksViewTableQueryVariables>;
 export const AggregateTaskDocument = gql`
-    query AggregateTask($where: TaskWhereInput, $tasksWhere2: TaskWhereInput) {
-  aggregateTask(where: $where) {
+    query AggregateTask($where: TaskWhereInput, $cursor: TaskWhereUniqueInput) {
+  aggregateTask(where: $where, cursor: $cursor) {
     _count {
       _all
     }
@@ -2722,7 +5680,7 @@ export const AggregateTaskDocument = gql`
  * const { data, loading, error } = useAggregateTaskQuery({
  *   variables: {
  *      where: // value for 'where'
- *      tasksWhere2: // value for 'tasksWhere2'
+ *      cursor: // value for 'cursor'
  *   },
  * });
  */
@@ -2792,3 +5750,272 @@ export function useTaskLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TaskQ
 export type TaskQueryHookResult = ReturnType<typeof useTaskQuery>;
 export type TaskLazyQueryHookResult = ReturnType<typeof useTaskLazyQuery>;
 export type TaskQueryResult = Apollo.QueryResult<TaskQuery, TaskQueryVariables>;
+export const CreateOneTaskDocument = gql`
+    mutation CreateOneTask($data: TaskCreateInput!) {
+  createOneTask(data: $data) {
+    id
+  }
+}
+    `;
+export type CreateOneTaskMutationFn = Apollo.MutationFunction<CreateOneTaskMutation, CreateOneTaskMutationVariables>;
+
+/**
+ * __useCreateOneTaskMutation__
+ *
+ * To run a mutation, you first call `useCreateOneTaskMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateOneTaskMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createOneTaskMutation, { data, loading, error }] = useCreateOneTaskMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useCreateOneTaskMutation(baseOptions?: Apollo.MutationHookOptions<CreateOneTaskMutation, CreateOneTaskMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateOneTaskMutation, CreateOneTaskMutationVariables>(CreateOneTaskDocument, options);
+      }
+export type CreateOneTaskMutationHookResult = ReturnType<typeof useCreateOneTaskMutation>;
+export type CreateOneTaskMutationResult = Apollo.MutationResult<CreateOneTaskMutation>;
+export type CreateOneTaskMutationOptions = Apollo.BaseMutationOptions<CreateOneTaskMutation, CreateOneTaskMutationVariables>;
+export const DeleteOneTaskDocument = gql`
+    mutation DeleteOneTask($where: TaskWhereUniqueInput!) {
+  deleteOneTask(where: $where) {
+    id
+  }
+}
+    `;
+export type DeleteOneTaskMutationFn = Apollo.MutationFunction<DeleteOneTaskMutation, DeleteOneTaskMutationVariables>;
+
+/**
+ * __useDeleteOneTaskMutation__
+ *
+ * To run a mutation, you first call `useDeleteOneTaskMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteOneTaskMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteOneTaskMutation, { data, loading, error }] = useDeleteOneTaskMutation({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useDeleteOneTaskMutation(baseOptions?: Apollo.MutationHookOptions<DeleteOneTaskMutation, DeleteOneTaskMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteOneTaskMutation, DeleteOneTaskMutationVariables>(DeleteOneTaskDocument, options);
+      }
+export type DeleteOneTaskMutationHookResult = ReturnType<typeof useDeleteOneTaskMutation>;
+export type DeleteOneTaskMutationResult = Apollo.MutationResult<DeleteOneTaskMutation>;
+export type DeleteOneTaskMutationOptions = Apollo.BaseMutationOptions<DeleteOneTaskMutation, DeleteOneTaskMutationVariables>;
+export const UpdateOneTaskDocument = gql`
+    mutation UpdateOneTask($data: TaskUpdateInput!, $where: TaskWhereUniqueInput!) {
+  updateOneTask(data: $data, where: $where) {
+    id
+  }
+}
+    `;
+export type UpdateOneTaskMutationFn = Apollo.MutationFunction<UpdateOneTaskMutation, UpdateOneTaskMutationVariables>;
+
+/**
+ * __useUpdateOneTaskMutation__
+ *
+ * To run a mutation, you first call `useUpdateOneTaskMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateOneTaskMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateOneTaskMutation, { data, loading, error }] = useUpdateOneTaskMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useUpdateOneTaskMutation(baseOptions?: Apollo.MutationHookOptions<UpdateOneTaskMutation, UpdateOneTaskMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateOneTaskMutation, UpdateOneTaskMutationVariables>(UpdateOneTaskDocument, options);
+      }
+export type UpdateOneTaskMutationHookResult = ReturnType<typeof useUpdateOneTaskMutation>;
+export type UpdateOneTaskMutationResult = Apollo.MutationResult<UpdateOneTaskMutation>;
+export type UpdateOneTaskMutationOptions = Apollo.BaseMutationOptions<UpdateOneTaskMutation, UpdateOneTaskMutationVariables>;
+export const UpdateManyTaskDocument = gql`
+    mutation UpdateManyTask($data: TaskUpdateManyMutationInput!, $where: TaskWhereInput) {
+  updateManyTask(data: $data, where: $where) {
+    count
+  }
+}
+    `;
+export type UpdateManyTaskMutationFn = Apollo.MutationFunction<UpdateManyTaskMutation, UpdateManyTaskMutationVariables>;
+
+/**
+ * __useUpdateManyTaskMutation__
+ *
+ * To run a mutation, you first call `useUpdateManyTaskMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateManyTaskMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateManyTaskMutation, { data, loading, error }] = useUpdateManyTaskMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useUpdateManyTaskMutation(baseOptions?: Apollo.MutationHookOptions<UpdateManyTaskMutation, UpdateManyTaskMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateManyTaskMutation, UpdateManyTaskMutationVariables>(UpdateManyTaskDocument, options);
+      }
+export type UpdateManyTaskMutationHookResult = ReturnType<typeof useUpdateManyTaskMutation>;
+export type UpdateManyTaskMutationResult = Apollo.MutationResult<UpdateManyTaskMutation>;
+export type UpdateManyTaskMutationOptions = Apollo.BaseMutationOptions<UpdateManyTaskMutation, UpdateManyTaskMutationVariables>;
+export const DeleteManyTipDocument = gql`
+    mutation DeleteManyTip($where: TipWhereInput) {
+  deleteManyTip(where: $where) {
+    count
+  }
+}
+    `;
+export type DeleteManyTipMutationFn = Apollo.MutationFunction<DeleteManyTipMutation, DeleteManyTipMutationVariables>;
+
+/**
+ * __useDeleteManyTipMutation__
+ *
+ * To run a mutation, you first call `useDeleteManyTipMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteManyTipMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteManyTipMutation, { data, loading, error }] = useDeleteManyTipMutation({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useDeleteManyTipMutation(baseOptions?: Apollo.MutationHookOptions<DeleteManyTipMutation, DeleteManyTipMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteManyTipMutation, DeleteManyTipMutationVariables>(DeleteManyTipDocument, options);
+      }
+export type DeleteManyTipMutationHookResult = ReturnType<typeof useDeleteManyTipMutation>;
+export type DeleteManyTipMutationResult = Apollo.MutationResult<DeleteManyTipMutation>;
+export type DeleteManyTipMutationOptions = Apollo.BaseMutationOptions<DeleteManyTipMutation, DeleteManyTipMutationVariables>;
+export const DeleteOneTipDocument = gql`
+    mutation DeleteOneTip($where: TipWhereUniqueInput!) {
+  deleteOneTip(where: $where) {
+    id
+  }
+}
+    `;
+export type DeleteOneTipMutationFn = Apollo.MutationFunction<DeleteOneTipMutation, DeleteOneTipMutationVariables>;
+
+/**
+ * __useDeleteOneTipMutation__
+ *
+ * To run a mutation, you first call `useDeleteOneTipMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteOneTipMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteOneTipMutation, { data, loading, error }] = useDeleteOneTipMutation({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useDeleteOneTipMutation(baseOptions?: Apollo.MutationHookOptions<DeleteOneTipMutation, DeleteOneTipMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteOneTipMutation, DeleteOneTipMutationVariables>(DeleteOneTipDocument, options);
+      }
+export type DeleteOneTipMutationHookResult = ReturnType<typeof useDeleteOneTipMutation>;
+export type DeleteOneTipMutationResult = Apollo.MutationResult<DeleteOneTipMutation>;
+export type DeleteOneTipMutationOptions = Apollo.BaseMutationOptions<DeleteOneTipMutation, DeleteOneTipMutationVariables>;
+export const UpdateManyTipDocument = gql`
+    mutation UpdateManyTip($data: TipUpdateManyMutationInput!) {
+  updateManyTip(data: $data) {
+    count
+  }
+}
+    `;
+export type UpdateManyTipMutationFn = Apollo.MutationFunction<UpdateManyTipMutation, UpdateManyTipMutationVariables>;
+
+/**
+ * __useUpdateManyTipMutation__
+ *
+ * To run a mutation, you first call `useUpdateManyTipMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateManyTipMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateManyTipMutation, { data, loading, error }] = useUpdateManyTipMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useUpdateManyTipMutation(baseOptions?: Apollo.MutationHookOptions<UpdateManyTipMutation, UpdateManyTipMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateManyTipMutation, UpdateManyTipMutationVariables>(UpdateManyTipDocument, options);
+      }
+export type UpdateManyTipMutationHookResult = ReturnType<typeof useUpdateManyTipMutation>;
+export type UpdateManyTipMutationResult = Apollo.MutationResult<UpdateManyTipMutation>;
+export type UpdateManyTipMutationOptions = Apollo.BaseMutationOptions<UpdateManyTipMutation, UpdateManyTipMutationVariables>;
+export const TipsAfterDeleteFromTaskDocument = gql`
+    query TipsAfterDeleteFromTask($where: TipWhereInput) {
+  tips(where: $where) {
+    id
+    description
+  }
+}
+    `;
+
+/**
+ * __useTipsAfterDeleteFromTaskQuery__
+ *
+ * To run a query within a React component, call `useTipsAfterDeleteFromTaskQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTipsAfterDeleteFromTaskQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTipsAfterDeleteFromTaskQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useTipsAfterDeleteFromTaskQuery(baseOptions?: Apollo.QueryHookOptions<TipsAfterDeleteFromTaskQuery, TipsAfterDeleteFromTaskQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TipsAfterDeleteFromTaskQuery, TipsAfterDeleteFromTaskQueryVariables>(TipsAfterDeleteFromTaskDocument, options);
+      }
+export function useTipsAfterDeleteFromTaskLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TipsAfterDeleteFromTaskQuery, TipsAfterDeleteFromTaskQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TipsAfterDeleteFromTaskQuery, TipsAfterDeleteFromTaskQueryVariables>(TipsAfterDeleteFromTaskDocument, options);
+        }
+export type TipsAfterDeleteFromTaskQueryHookResult = ReturnType<typeof useTipsAfterDeleteFromTaskQuery>;
+export type TipsAfterDeleteFromTaskLazyQueryHookResult = ReturnType<typeof useTipsAfterDeleteFromTaskLazyQuery>;
+export type TipsAfterDeleteFromTaskQueryResult = Apollo.QueryResult<TipsAfterDeleteFromTaskQuery, TipsAfterDeleteFromTaskQueryVariables>;

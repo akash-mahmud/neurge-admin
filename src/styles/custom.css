@@ -1,0 +1,9 @@
+
+.imojiPophover .ant-popover-inner {
+    background: transparent !important;
+    box-shadow: none !important;
+    }
+
+    .MuiDialog-root {
+        z-index: 10000; /* Set a higher z-index value than the Popconfirm */
+      }

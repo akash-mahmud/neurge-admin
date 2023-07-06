@@ -1,0 +1,25 @@
+mutation DeleteManyPrompt($where: PromptWhereInput) {
+  deleteManyPrompt(where: $where) {
+    count
+  }
+}
+
+mutation DeleteOnePrompt($where: PromptWhereUniqueInput!) {
+  deleteOnePrompt(where: $where) {
+    id
+  }
+}
+
+mutation UpdateManyPrompt($data: PromptUpdateManyMutationInput!, $where: PromptWhereInput) {
+  updateManyPrompt(data: $data, where: $where) {
+    count
+  }
+}
+
+query PromptsAfterDeleteFromtasks($where: PromptWhereInput) {
+  prompts(where: $where) {
+    id
+    description
+    name
+  }
+}
