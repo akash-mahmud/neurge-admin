@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@ant-design/icons':
+    specifier: ^5.1.4
+    version: 5.1.4(react-dom@18.2.0)(react@18.2.0)
   '@apollo/client':
     specifier: ^3.7.16
     version: 3.7.16(graphql@16.7.1)(react-dom@18.2.0)(react@18.2.0)
@@ -49,7 +52,7 @@ dependencies:
     version: 5.0.15(@emotion/react@11.10.6)(@emotion/styled@11.10.6)(@mui/material@5.11.10)(@mui/system@5.13.6)(date-fns@2.29.3)(react-dom@18.2.0)(react@18.2.0)
   '@next/font':
     specifier: latest
-    version: 13.4.8
+    version: 13.4.9
   '@reduxjs/toolkit':
     specifier: ^1.9.1
     version: 1.9.1(react-redux@8.0.5)(react@18.2.0)
@@ -3617,8 +3620,8 @@ packages:
       glob: 7.1.7
     dev: true
 
-  /@next/font@13.4.8:
-    resolution: {integrity: sha512-LQ/58mU8N0FDfNGbre1JeL9WAOup10TIy8Nr8P+gX+OKigLok21kxAj8Bi4pxNqfs31ePsdIpzr52WN1dZlPWg==}
+  /@next/font@13.4.9:
+    resolution: {integrity: sha512-aR0XEyd1cxqaKuelQFDGwUBYV0wyZfJTNiRoSk1XsECTyMhiSMmCOY7yOPMuPlw+6cctca0GyZXGGFb5EVhiRw==}
     dev: false
 
   /@next/swc-android-arm-eabi@13.1.6:

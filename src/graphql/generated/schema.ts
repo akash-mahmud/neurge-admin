@@ -4975,6 +4975,29 @@ export type DefaultResponsce = {
   message: Scalars['String']['output'];
 };
 
+export type AddonsForTableViewQueryVariables = Exact<{
+  where?: InputMaybe<AddonWhereInput>;
+  orderBy?: InputMaybe<Array<AddonOrderByWithRelationInput> | AddonOrderByWithRelationInput>;
+  cursor?: InputMaybe<AddonWhereUniqueInput>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  distinct?: InputMaybe<Array<AddonScalarFieldEnum> | AddonScalarFieldEnum>;
+}>;
+
+
+export type AddonsForTableViewQuery = { __typename?: 'Query', addons: Array<{ __typename?: 'Addon', name: string, imoji?: string | null, img: string, id: string, createdAt: any, purchaseUrl?: string | null, _count?: { __typename?: 'AddonCount', addonBlogCategory: number, blog: number, purchasedByUsers: number } | null }> };
+
+export type AggregateAddonQueryVariables = Exact<{
+  where?: InputMaybe<AddonWhereInput>;
+  orderBy?: InputMaybe<Array<AddonOrderByWithRelationInput> | AddonOrderByWithRelationInput>;
+  cursor?: InputMaybe<AddonWhereUniqueInput>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type AggregateAddonQuery = { __typename?: 'Query', aggregateAddon: { __typename?: 'AggregateAddon', _count?: { __typename?: 'AddonCountAggregate', _all: number } | null } };
+
 export type CategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -5029,6 +5052,58 @@ export type CreateOneCategoryMutationVariables = Exact<{
 
 
 export type CreateOneCategoryMutation = { __typename?: 'Mutation', createOneCategory: { __typename?: 'Category', name: string } };
+
+export type ProductsForTableViewQueryVariables = Exact<{
+  where?: InputMaybe<ProductWhereInput>;
+  orderBy?: InputMaybe<Array<ProductOrderByWithRelationInput> | ProductOrderByWithRelationInput>;
+  cursor?: InputMaybe<ProductWhereUniqueInput>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  distinct?: InputMaybe<Array<ProductScalarFieldEnum> | ProductScalarFieldEnum>;
+}>;
+
+
+export type ProductsForTableViewQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, image: string, moneyBackGuarantee: number, name: string, taskAutomateCount: number, topTierPromptCount: number, category?: { __typename?: 'Category', id: string, name: string } | null }> };
+
+export type AggregateProductQueryVariables = Exact<{
+  where?: InputMaybe<ProductWhereInput>;
+  orderBy?: InputMaybe<Array<ProductOrderByWithRelationInput> | ProductOrderByWithRelationInput>;
+  cursor?: InputMaybe<ProductWhereUniqueInput>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type AggregateProductQuery = { __typename?: 'Query', aggregateProduct: { __typename?: 'AggregateProduct', _count?: { __typename?: 'ProductCountAggregate', _all: number } | null } };
+
+export type CreateOneProductMutationVariables = Exact<{
+  data: ProductCreateInput;
+}>;
+
+
+export type CreateOneProductMutation = { __typename?: 'Mutation', createOneProduct: { __typename?: 'Product', id: string } };
+
+export type UpdateOneProductMutationVariables = Exact<{
+  data: ProductUpdateInput;
+  where: ProductWhereUniqueInput;
+}>;
+
+
+export type UpdateOneProductMutation = { __typename?: 'Mutation', updateOneProduct?: { __typename?: 'Product', id: string } | null };
+
+export type DeleteOneProductMutationVariables = Exact<{
+  where: ProductWhereUniqueInput;
+}>;
+
+
+export type DeleteOneProductMutation = { __typename?: 'Mutation', deleteOneProduct?: { __typename?: 'Product', id: string } | null };
+
+export type LoadProductForUpdateQueryVariables = Exact<{
+  where: ProductWhereUniqueInput;
+}>;
+
+
+export type LoadProductForUpdateQuery = { __typename?: 'Query', product?: { __typename?: 'Product', id: string, description: string, categoryId: string, image: string, moneyBackGuarantee: number, name: string, slug: string, taskAutomateCount: number, topTierPromptCount: number } | null };
 
 export type DeleteManyPromptMutationVariables = Exact<{
   where?: InputMaybe<PromptWhereInput>;
@@ -5154,6 +5229,110 @@ export type TipsAfterDeleteFromTaskQueryVariables = Exact<{
 export type TipsAfterDeleteFromTaskQuery = { __typename?: 'Query', tips: Array<{ __typename?: 'Tip', id: string, description: string }> };
 
 
+export const AddonsForTableViewDocument = gql`
+    query AddonsForTableView($where: AddonWhereInput, $orderBy: [AddonOrderByWithRelationInput!], $cursor: AddonWhereUniqueInput, $take: Int, $skip: Int, $distinct: [AddonScalarFieldEnum!]) {
+  addons(
+    where: $where
+    orderBy: $orderBy
+    cursor: $cursor
+    take: $take
+    skip: $skip
+    distinct: $distinct
+  ) {
+    _count {
+      addonBlogCategory
+      blog
+      purchasedByUsers
+    }
+    name
+    imoji
+    img
+    id
+    createdAt
+    purchaseUrl
+  }
+}
+    `;
+
+/**
+ * __useAddonsForTableViewQuery__
+ *
+ * To run a query within a React component, call `useAddonsForTableViewQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAddonsForTableViewQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAddonsForTableViewQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *      orderBy: // value for 'orderBy'
+ *      cursor: // value for 'cursor'
+ *      take: // value for 'take'
+ *      skip: // value for 'skip'
+ *      distinct: // value for 'distinct'
+ *   },
+ * });
+ */
+export function useAddonsForTableViewQuery(baseOptions?: Apollo.QueryHookOptions<AddonsForTableViewQuery, AddonsForTableViewQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AddonsForTableViewQuery, AddonsForTableViewQueryVariables>(AddonsForTableViewDocument, options);
+      }
+export function useAddonsForTableViewLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AddonsForTableViewQuery, AddonsForTableViewQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AddonsForTableViewQuery, AddonsForTableViewQueryVariables>(AddonsForTableViewDocument, options);
+        }
+export type AddonsForTableViewQueryHookResult = ReturnType<typeof useAddonsForTableViewQuery>;
+export type AddonsForTableViewLazyQueryHookResult = ReturnType<typeof useAddonsForTableViewLazyQuery>;
+export type AddonsForTableViewQueryResult = Apollo.QueryResult<AddonsForTableViewQuery, AddonsForTableViewQueryVariables>;
+export const AggregateAddonDocument = gql`
+    query AggregateAddon($where: AddonWhereInput, $orderBy: [AddonOrderByWithRelationInput!], $cursor: AddonWhereUniqueInput, $take: Int, $skip: Int) {
+  aggregateAddon(
+    where: $where
+    orderBy: $orderBy
+    cursor: $cursor
+    take: $take
+    skip: $skip
+  ) {
+    _count {
+      _all
+    }
+  }
+}
+    `;
+
+/**
+ * __useAggregateAddonQuery__
+ *
+ * To run a query within a React component, call `useAggregateAddonQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAggregateAddonQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAggregateAddonQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *      orderBy: // value for 'orderBy'
+ *      cursor: // value for 'cursor'
+ *      take: // value for 'take'
+ *      skip: // value for 'skip'
+ *   },
+ * });
+ */
+export function useAggregateAddonQuery(baseOptions?: Apollo.QueryHookOptions<AggregateAddonQuery, AggregateAddonQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AggregateAddonQuery, AggregateAddonQueryVariables>(AggregateAddonDocument, options);
+      }
+export function useAggregateAddonLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AggregateAddonQuery, AggregateAddonQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AggregateAddonQuery, AggregateAddonQueryVariables>(AggregateAddonDocument, options);
+        }
+export type AggregateAddonQueryHookResult = ReturnType<typeof useAggregateAddonQuery>;
+export type AggregateAddonLazyQueryHookResult = ReturnType<typeof useAggregateAddonLazyQuery>;
+export type AggregateAddonQueryResult = Apollo.QueryResult<AggregateAddonQuery, AggregateAddonQueryVariables>;
 export const CategoriesDocument = gql`
     query Categories {
   categories {
@@ -5419,6 +5598,252 @@ export function useCreateOneCategoryMutation(baseOptions?: Apollo.MutationHookOp
 export type CreateOneCategoryMutationHookResult = ReturnType<typeof useCreateOneCategoryMutation>;
 export type CreateOneCategoryMutationResult = Apollo.MutationResult<CreateOneCategoryMutation>;
 export type CreateOneCategoryMutationOptions = Apollo.BaseMutationOptions<CreateOneCategoryMutation, CreateOneCategoryMutationVariables>;
+export const ProductsForTableViewDocument = gql`
+    query ProductsForTableView($where: ProductWhereInput, $orderBy: [ProductOrderByWithRelationInput!], $cursor: ProductWhereUniqueInput, $take: Int, $skip: Int, $distinct: [ProductScalarFieldEnum!]) {
+  products(
+    where: $where
+    orderBy: $orderBy
+    cursor: $cursor
+    take: $take
+    skip: $skip
+    distinct: $distinct
+  ) {
+    category {
+      id
+      name
+    }
+    id
+    image
+    moneyBackGuarantee
+    name
+    taskAutomateCount
+    topTierPromptCount
+  }
+}
+    `;
+
+/**
+ * __useProductsForTableViewQuery__
+ *
+ * To run a query within a React component, call `useProductsForTableViewQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProductsForTableViewQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProductsForTableViewQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *      orderBy: // value for 'orderBy'
+ *      cursor: // value for 'cursor'
+ *      take: // value for 'take'
+ *      skip: // value for 'skip'
+ *      distinct: // value for 'distinct'
+ *   },
+ * });
+ */
+export function useProductsForTableViewQuery(baseOptions?: Apollo.QueryHookOptions<ProductsForTableViewQuery, ProductsForTableViewQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ProductsForTableViewQuery, ProductsForTableViewQueryVariables>(ProductsForTableViewDocument, options);
+      }
+export function useProductsForTableViewLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ProductsForTableViewQuery, ProductsForTableViewQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ProductsForTableViewQuery, ProductsForTableViewQueryVariables>(ProductsForTableViewDocument, options);
+        }
+export type ProductsForTableViewQueryHookResult = ReturnType<typeof useProductsForTableViewQuery>;
+export type ProductsForTableViewLazyQueryHookResult = ReturnType<typeof useProductsForTableViewLazyQuery>;
+export type ProductsForTableViewQueryResult = Apollo.QueryResult<ProductsForTableViewQuery, ProductsForTableViewQueryVariables>;
+export const AggregateProductDocument = gql`
+    query AggregateProduct($where: ProductWhereInput, $orderBy: [ProductOrderByWithRelationInput!], $cursor: ProductWhereUniqueInput, $take: Int, $skip: Int) {
+  aggregateProduct(
+    where: $where
+    orderBy: $orderBy
+    cursor: $cursor
+    take: $take
+    skip: $skip
+  ) {
+    _count {
+      _all
+    }
+  }
+}
+    `;
+
+/**
+ * __useAggregateProductQuery__
+ *
+ * To run a query within a React component, call `useAggregateProductQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAggregateProductQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAggregateProductQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *      orderBy: // value for 'orderBy'
+ *      cursor: // value for 'cursor'
+ *      take: // value for 'take'
+ *      skip: // value for 'skip'
+ *   },
+ * });
+ */
+export function useAggregateProductQuery(baseOptions?: Apollo.QueryHookOptions<AggregateProductQuery, AggregateProductQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AggregateProductQuery, AggregateProductQueryVariables>(AggregateProductDocument, options);
+      }
+export function useAggregateProductLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AggregateProductQuery, AggregateProductQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AggregateProductQuery, AggregateProductQueryVariables>(AggregateProductDocument, options);
+        }
+export type AggregateProductQueryHookResult = ReturnType<typeof useAggregateProductQuery>;
+export type AggregateProductLazyQueryHookResult = ReturnType<typeof useAggregateProductLazyQuery>;
+export type AggregateProductQueryResult = Apollo.QueryResult<AggregateProductQuery, AggregateProductQueryVariables>;
+export const CreateOneProductDocument = gql`
+    mutation CreateOneProduct($data: ProductCreateInput!) {
+  createOneProduct(data: $data) {
+    id
+  }
+}
+    `;
+export type CreateOneProductMutationFn = Apollo.MutationFunction<CreateOneProductMutation, CreateOneProductMutationVariables>;
+
+/**
+ * __useCreateOneProductMutation__
+ *
+ * To run a mutation, you first call `useCreateOneProductMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateOneProductMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createOneProductMutation, { data, loading, error }] = useCreateOneProductMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useCreateOneProductMutation(baseOptions?: Apollo.MutationHookOptions<CreateOneProductMutation, CreateOneProductMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateOneProductMutation, CreateOneProductMutationVariables>(CreateOneProductDocument, options);
+      }
+export type CreateOneProductMutationHookResult = ReturnType<typeof useCreateOneProductMutation>;
+export type CreateOneProductMutationResult = Apollo.MutationResult<CreateOneProductMutation>;
+export type CreateOneProductMutationOptions = Apollo.BaseMutationOptions<CreateOneProductMutation, CreateOneProductMutationVariables>;
+export const UpdateOneProductDocument = gql`
+    mutation UpdateOneProduct($data: ProductUpdateInput!, $where: ProductWhereUniqueInput!) {
+  updateOneProduct(data: $data, where: $where) {
+    id
+  }
+}
+    `;
+export type UpdateOneProductMutationFn = Apollo.MutationFunction<UpdateOneProductMutation, UpdateOneProductMutationVariables>;
+
+/**
+ * __useUpdateOneProductMutation__
+ *
+ * To run a mutation, you first call `useUpdateOneProductMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateOneProductMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateOneProductMutation, { data, loading, error }] = useUpdateOneProductMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useUpdateOneProductMutation(baseOptions?: Apollo.MutationHookOptions<UpdateOneProductMutation, UpdateOneProductMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateOneProductMutation, UpdateOneProductMutationVariables>(UpdateOneProductDocument, options);
+      }
+export type UpdateOneProductMutationHookResult = ReturnType<typeof useUpdateOneProductMutation>;
+export type UpdateOneProductMutationResult = Apollo.MutationResult<UpdateOneProductMutation>;
+export type UpdateOneProductMutationOptions = Apollo.BaseMutationOptions<UpdateOneProductMutation, UpdateOneProductMutationVariables>;
+export const DeleteOneProductDocument = gql`
+    mutation DeleteOneProduct($where: ProductWhereUniqueInput!) {
+  deleteOneProduct(where: $where) {
+    id
+  }
+}
+    `;
+export type DeleteOneProductMutationFn = Apollo.MutationFunction<DeleteOneProductMutation, DeleteOneProductMutationVariables>;
+
+/**
+ * __useDeleteOneProductMutation__
+ *
+ * To run a mutation, you first call `useDeleteOneProductMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteOneProductMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteOneProductMutation, { data, loading, error }] = useDeleteOneProductMutation({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useDeleteOneProductMutation(baseOptions?: Apollo.MutationHookOptions<DeleteOneProductMutation, DeleteOneProductMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteOneProductMutation, DeleteOneProductMutationVariables>(DeleteOneProductDocument, options);
+      }
+export type DeleteOneProductMutationHookResult = ReturnType<typeof useDeleteOneProductMutation>;
+export type DeleteOneProductMutationResult = Apollo.MutationResult<DeleteOneProductMutation>;
+export type DeleteOneProductMutationOptions = Apollo.BaseMutationOptions<DeleteOneProductMutation, DeleteOneProductMutationVariables>;
+export const LoadProductForUpdateDocument = gql`
+    query LoadProductForUpdate($where: ProductWhereUniqueInput!) {
+  product(where: $where) {
+    id
+    description
+    categoryId
+    image
+    moneyBackGuarantee
+    name
+    slug
+    taskAutomateCount
+    topTierPromptCount
+  }
+}
+    `;
+
+/**
+ * __useLoadProductForUpdateQuery__
+ *
+ * To run a query within a React component, call `useLoadProductForUpdateQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLoadProductForUpdateQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLoadProductForUpdateQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useLoadProductForUpdateQuery(baseOptions: Apollo.QueryHookOptions<LoadProductForUpdateQuery, LoadProductForUpdateQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<LoadProductForUpdateQuery, LoadProductForUpdateQueryVariables>(LoadProductForUpdateDocument, options);
+      }
+export function useLoadProductForUpdateLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<LoadProductForUpdateQuery, LoadProductForUpdateQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<LoadProductForUpdateQuery, LoadProductForUpdateQueryVariables>(LoadProductForUpdateDocument, options);
+        }
+export type LoadProductForUpdateQueryHookResult = ReturnType<typeof useLoadProductForUpdateQuery>;
+export type LoadProductForUpdateLazyQueryHookResult = ReturnType<typeof useLoadProductForUpdateLazyQuery>;
+export type LoadProductForUpdateQueryResult = Apollo.QueryResult<LoadProductForUpdateQuery, LoadProductForUpdateQueryVariables>;
 export const DeleteManyPromptDocument = gql`
     mutation DeleteManyPrompt($where: PromptWhereInput) {
   deleteManyPrompt(where: $where) {

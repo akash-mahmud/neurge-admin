@@ -1,0 +1,53 @@
+query ProductsForTableView($where: ProductWhereInput, $orderBy: [ProductOrderByWithRelationInput!], $cursor: ProductWhereUniqueInput, $take: Int, $skip: Int, $distinct: [ProductScalarFieldEnum!]) {
+  products(where: $where, orderBy: $orderBy, cursor: $cursor, take: $take, skip: $skip, distinct: $distinct) {
+    category {
+      id
+      name
+    }
+    id
+    image
+    moneyBackGuarantee
+    name
+    taskAutomateCount
+    topTierPromptCount
+  }
+}
+
+query AggregateProduct($where: ProductWhereInput, $orderBy: [ProductOrderByWithRelationInput!], $cursor: ProductWhereUniqueInput, $take: Int, $skip: Int) {
+  aggregateProduct(where: $where, orderBy: $orderBy, cursor: $cursor, take: $take, skip: $skip) {
+    _count {
+      _all
+    }
+  }
+}
+
+mutation CreateOneProduct($data: ProductCreateInput!) {
+  createOneProduct(data: $data) {
+    id
+  }
+}
+
+mutation UpdateOneProduct($data: ProductUpdateInput!, $where: ProductWhereUniqueInput!) {
+  updateOneProduct(data: $data, where: $where) {
+    id
+  }
+}
+
+mutation DeleteOneProduct($where: ProductWhereUniqueInput!) {
+  deleteOneProduct(where: $where) {
+    id
+  }
+}
+query LoadProductForUpdate($where: ProductWhereUniqueInput!) {
+  product(where: $where) {
+    id
+    description
+    categoryId
+    image
+    moneyBackGuarantee
+    name
+    slug
+    taskAutomateCount
+    topTierPromptCount
+  }
+}

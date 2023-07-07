@@ -99,20 +99,7 @@ const Menuitems: MenuitemsType[] = [
     title: 'Products',
     icon: IconShoppingCart,
     href: '/products',
-    children: [
-      {
-        id: uniqueId(),
-        title: 'Create',
-        icon: IconPoint,
-        href: '/product/create',
-      },
-      {
-        id: uniqueId(),
-        title: 'View',
-        icon: IconPoint,
-        href: '/products',
-      },
-    ]
+  
   },
   {
     id: uniqueId(),
@@ -120,17 +107,24 @@ const Menuitems: MenuitemsType[] = [
     icon: AddOutlined,
     href: '/addons',
     children: [
-      {
-        id: uniqueId(),
-        title: 'Create',
-        icon: IconPoint,
-        href: '/addon/create',
-      },
+   
       {
         id: uniqueId(),
         title: 'View',
         icon: IconPoint,
         href: '/addons',
+      },
+      {
+        id: uniqueId(),
+        title: 'Blog Caregory',
+        icon: IconPoint,
+        href: '/addon/create',
+      },
+      {
+        id: uniqueId(),
+        title: 'Blogs',
+        icon: IconPoint,
+        href: '/addon/create',
       },
     ]
   },

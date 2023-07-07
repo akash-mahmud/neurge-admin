@@ -1,0 +1,24 @@
+query AddonsForTableView($where: AddonWhereInput, $orderBy: [AddonOrderByWithRelationInput!], $cursor: AddonWhereUniqueInput, $take: Int, $skip: Int, $distinct: [AddonScalarFieldEnum!]) {
+  addons(where: $where, orderBy: $orderBy, cursor: $cursor, take: $take, skip: $skip, distinct: $distinct) {
+    _count {
+      addonBlogCategory
+      blog
+      purchasedByUsers
+    }
+    name
+    imoji
+    img
+    id
+    createdAt
+    purchaseUrl
+  }
+}
+
+query AggregateAddon($where: AddonWhereInput, $orderBy: [AddonOrderByWithRelationInput!], $cursor: AddonWhereUniqueInput, $take: Int, $skip: Int) {
+  aggregateAddon(where: $where, orderBy: $orderBy, cursor: $cursor, take: $take, skip: $skip) {
+    _count {
+      _all
+    }
+  }
+}
+
