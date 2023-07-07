@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import { createTheme } from '@mui/material/styles';
-import { useSelector } from '../store/Store';
+import { useSelector } from '../store';
 import { useEffect } from 'react';
-import { AppState } from '../store/Store';
+import { AppState } from '../store';
 import components from './Components';
 import typography from './Typography';
 import { shadows, darkshadows } from './Shadows';

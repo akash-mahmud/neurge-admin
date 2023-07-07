@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import { IconMinus, IconPlus, IconTrash } from "@tabler/icons-react";
-import { useSelector, useDispatch } from "../../../store/Store";
+import { useSelector, useDispatch } from "../../../store";
 import emptyCart from "public/images/products/empty-shopping-cart.svg";
 import {
   increment,

@@ -1,10 +1,10 @@
 import Menudata from "../Menudata";
 import { useRouter } from "next/router";
 import { Box, List, Theme, useMediaQuery } from "@mui/material";
-import { useSelector } from "../../../../../store/Store";
+import { useSelector } from "../../../../../store";
 import NavItem from "../NavItem/NavItem";
 import NavCollapse from "../NavCollapse/NavCollapse";
-import { AppState } from "../../../../../store/Store";
+import { AppState } from "../../../../../store";
 
 const NavListing = () => {
   const { pathname } = useRouter();

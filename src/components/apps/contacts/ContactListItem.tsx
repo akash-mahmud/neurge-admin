@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 
-import { useSelector } from '../../../store/Store';
+import { useSelector } from '../../../store';
 import {
   ListItemText,
   Box,

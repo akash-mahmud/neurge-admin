@@ -10,7 +10,7 @@ import {
   DialogContentText,
   Grid,
 } from '@mui/material';
-import { useSelector, useDispatch } from '../../../store/Store';
+import { useSelector, useDispatch } from '../../../store';
 import { addContact } from '../../../store/apps/contacts/ContactSlice';
 import user1 from 'public/images/profile/user-1.jpg';
 

@@ -1,6 +1,6 @@
 import axios from "../../../utils/axios";
 import { createSlice } from "@reduxjs/toolkit";
-import { AppDispatch } from "../../Store";
+import { AppDispatch } from "../..";
 
 interface StateType {
   blogposts: any[];

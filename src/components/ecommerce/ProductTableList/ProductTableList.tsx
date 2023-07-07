@@ -22,7 +22,7 @@ import {
   Paper,
 } from '@mui/material';
 import { visuallyHidden } from '@mui/utils';
-import { useSelector, useDispatch } from '../../../store/Store';
+import { useSelector, useDispatch } from '../../../store';
 import { fetchProducts } from '../../../store/apps/eCommerce/ECommerceSlice';
 import CustomCheckbox from '../../forms/theme-elements/CustomCheckbox';
 import CustomSwitch from '../../forms/theme-elements/CustomSwitch';

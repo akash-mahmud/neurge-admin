@@ -15,7 +15,7 @@ import {
 } from '@mui/material';
 import { EmailType } from '../../../types/apps/email';
 import { IconStar, IconAlertCircle, IconTrash } from '@tabler/icons-react';
-import { useSelector, useDispatch } from '../../../store/Store';
+import { useSelector, useDispatch } from '../../../store';
 import { starEmail, importantEmail, deleteEmail } from '../../../store/apps/email/EmailSlice';
 import emailIcon from 'public/images/breadcrumb/emailSv.png';
 import dynamic from "next/dynamic";
@@ -94,8 +94,8 @@ const EmailContent = () => {
               emailDetails.label === 'Promotional'
                 ? 'primary'
                 : emailDetails.label === 'Social'
-                ? 'error'
-                : 'success'
+                  ? 'error'
+                  : 'success'
             }
           />
         </Box>
@@ -124,7 +124,7 @@ const EmailContent = () => {
                     <Stack direction="row" gap={2} mt={2}>
                       <Avatar
                         variant="rounded"
-                        sx={{ width: '48px', height: '48px', bgcolor: (theme:any) => theme.palette.grey[100] }}
+                        sx={{ width: '48px', height: '48px', bgcolor: (theme: any) => theme.palette.grey[100] }}
                       >
                         <Avatar
                           src={attach.image}
@@ -183,7 +183,7 @@ const EmailContent = () => {
       <Box>
         <Typography variant="h4">Please Select a Mail</Typography>
         <br />
-        <Image src={emailIcon} alt={"emailIcon"} style={{width: '250px', height: '250px'}} />
+        <Image src={emailIcon} alt={"emailIcon"} style={{ width: '250px', height: '250px' }} />
       </Box>
     </Box>
   );

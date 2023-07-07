@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { useSelector } from "../../../../../store/Store";
+import { useSelector } from "../../../../../store";
 import { useRouter } from "next/router";
 
 // mui imports
@@ -19,7 +19,7 @@ import NavItem from "../NavItem";
 // plugins
 import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
 import { useTranslation } from "react-i18next";
-import { AppState } from "../../../../../store/Store";
+import { AppState } from "../../../../../store";
 
 type NavGroupProps = {
   [x: string]: any;
@@ -95,8 +95,8 @@ const NavCollapse = ({
       open && level < 2
         ? "white"
         : `inherit` && level > 1 && open
-        ? theme.palette.primary.main
-        : theme.palette.text.secondary,
+          ? theme.palette.primary.main
+          : theme.palette.text.secondary,
     borderRadius: `${customizer.borderRadius}px`,
   }));
 

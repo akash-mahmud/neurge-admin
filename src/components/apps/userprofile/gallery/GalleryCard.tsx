@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import React, { useEffect } from "react";
 import BlankCard from "../../../shared/BlankCard";
-import { useSelector, useDispatch } from "../../../../store/Store";
+import { useSelector, useDispatch } from "../../../../store";
 import { fetchPhotos } from "../../../../store/apps/userProfile/UserProfileSlice";
 import { IconDotsVertical, IconSearch } from "@tabler/icons-react";
 import { format } from "date-fns";

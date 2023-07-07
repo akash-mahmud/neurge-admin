@@ -10,7 +10,7 @@ import {
   Theme,
 } from '@mui/material';
 
-import { useSelector, useDispatch } from '../../../../store/Store';
+import { useSelector, useDispatch } from '../../../../store';
 import { toggleMobileSidebar } from '../../../../store/customizer/CustomizerSlice';
 import { IconMenu2 } from '@tabler/icons-react';
 import Notifications from '../../vertical/header/Notification';
@@ -20,7 +20,7 @@ import Search from '../../vertical/header/Search';
 import Language from '../../vertical/header/Language';
 import Navigation from '../../vertical/header/Navigation';
 import Logo from '../../shared/logo/Logo';
-import { AppState } from '../../../../store/Store';
+import { AppState } from '../../../../store';
 
 const Header = () => {
   const lgDown = useMediaQuery((theme: Theme) => theme.breakpoints.down('lg'));

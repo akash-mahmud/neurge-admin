@@ -15,7 +15,7 @@ import {
   Skeleton,
 } from "@mui/material";
 import Link from "next/link";
-import { useSelector, useDispatch } from "../../../store/Store";
+import { useSelector, useDispatch } from "../../../store";
 import {
   fetchProducts,
   addToCart,

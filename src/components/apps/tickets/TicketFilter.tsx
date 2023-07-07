@@ -1,5 +1,5 @@
 import { Box, Grid, Typography, styled } from '@mui/material';
-import { useDispatch, useSelector } from '../../../store/Store';
+import { useDispatch, useSelector } from '../../../store';
 import { TicketType } from '../../../types/apps/ticket';
 import { setVisibilityFilter } from '../../../store/apps/tickets/TicketSlice';
 

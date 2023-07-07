@@ -1,7 +1,7 @@
 // third-party
 import { format } from 'date-fns';
-import NextLink  from 'next/link';
-import { useDispatch } from '../../../store/Store';
+import NextLink from 'next/link';
+import { useDispatch } from '../../../store';
 import {
   CardContent,
   Stack,

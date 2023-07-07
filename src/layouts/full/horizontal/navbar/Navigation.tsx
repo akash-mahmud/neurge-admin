@@ -1,10 +1,10 @@
 import { useMediaQuery, Box, Drawer, Container, Theme } from '@mui/material';
 import NavListing from './NavListing/NavListing';
 import Logo from '../../shared/logo/Logo';
-import { useSelector, useDispatch } from '../../../../store/Store';
+import { useSelector, useDispatch } from '../../../../store';
 import { toggleMobileSidebar } from '../../../../store/customizer/CustomizerSlice';
 import SidebarItems from '../../vertical/sidebar/SidebarItems';
-import { AppState } from '../../../../store/Store';
+import { AppState } from '../../../../store';
 
 const Navigation = () => {
   const lgUp = useMediaQuery((theme: Theme) => theme.breakpoints.up('lg'));

@@ -1,5 +1,5 @@
 import { IconButton, Box, AppBar, useMediaQuery, Toolbar, styled, Stack } from '@mui/material';
-import { useSelector, useDispatch } from '../../../../store/Store';
+import { useSelector, useDispatch } from '../../../../store';
 import { toggleSidebar, toggleMobileSidebar } from '../../../../store/customizer/CustomizerSlice';
 import { IconMenu2 } from '@tabler/icons-react';
 import Notifications from './Notification';
@@ -7,7 +7,7 @@ import Profile from './Profile';
 import Cart from './Cart';
 import Search from './Search';
 import Language from './Language';
-import { AppState } from '../../../../store/Store';
+import { AppState } from '../../../../store';
 import Navigation from './Navigation';
 import MobileRightSidebar from './MobileRightSidebar';
 

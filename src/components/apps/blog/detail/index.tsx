@@ -31,7 +31,7 @@ import BlogComment from "./BlogComment";
 import { uniqueId } from "lodash";
 import { addComment } from "../../../../store/apps/blog/BlogSlice";
 import BlankCard from "../../../shared/BlankCard";
-import { AppState, useDispatch, useSelector } from "../../../../store/Store";
+import { AppState, useDispatch, useSelector } from "../../../../store";
 import type { BlogPostType, BlogType } from "../../../../types/apps/blog";
 
 const BlogDetail = () => {

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from '../../../store/Store';
+import { useDispatch, useSelector } from '../../../store';
 import { format } from 'date-fns';
 import {
   Box,

@@ -1,6 +1,6 @@
 import { Grid } from '@mui/material';
 import { useEffect } from 'react';
-import { useSelector, useDispatch } from '../../../../store/Store';
+import { useSelector, useDispatch } from '../../../../store';
 import { fetchPosts } from '../../../../store/apps/userProfile/UserProfileSlice';
 import PostItem from './PostItem';
 import { PostTextBox } from './PostTextBox';

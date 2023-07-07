@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useDispatch } from '../../../store/Store';
+import { useDispatch } from '../../../store';
 import {
   CardContent,
   Stack,

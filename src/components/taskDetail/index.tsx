@@ -17,7 +17,7 @@ import {
   ButtonGroup,
 } from "@mui/material";
 
-import { AppState, useSelector, useDispatch } from "../../store/Store";
+import { AppState, useSelector, useDispatch } from "../../store";
 import {
   fetchProducts,
   addToCart,
@@ -28,8 +28,8 @@ import { ProductType } from "../../types/apps/eCommerce";
 import { Task, TaskQueryResult } from "@/graphql/generated/schema";
 import { TaskQuery } from "@/graphql/generated/schema";
 
-const ProductDetail = ({task}:{
-  task:TaskQuery|undefined| null
+const ProductDetail = ({ task }: {
+  task: TaskQuery | undefined | null
 }) => {
   const theme = useTheme();
   const dispatch = useDispatch();
@@ -84,7 +84,7 @@ const ProductDetail = ({task}:{
           {/* Title and description */}
           {/* ------------------------------------------- */}
           <Typography fontWeight="600" variant="h4" mt={1}>
-          {task?.task?.imoji} {task?.task?.name}
+            {task?.task?.imoji} {task?.task?.name}
           </Typography>
           <Typography
             variant="subtitle2"
@@ -98,12 +98,12 @@ const ProductDetail = ({task}:{
           {/* Ratings */}
           {/* ------------------------------------------- */}
           <Stack direction={"row"} alignItems="center" gap="10px" mt={2} pb={3}>
-            
-            {task?.task?.tags.map((tag, index)=> 
-            <Chip key={index} label={tag} color={"warning"} size="small" />
+
+            {task?.task?.tags.map((tag, index) =>
+              <Chip key={index} label={tag} color={"warning"} size="small" />
 
             )}
-            
+
 
           </Stack>
           <Divider />

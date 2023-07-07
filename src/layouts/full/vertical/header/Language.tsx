@@ -1,11 +1,11 @@
 import React from 'react';
 import { Avatar, IconButton, Menu, MenuItem, Typography } from '@mui/material';
-import { useSelector, useDispatch } from '../../../../store/Store';
+import { useSelector, useDispatch } from '../../../../store';
 import { setLanguage } from '../../../../store/customizer/CustomizerSlice';
 import { Stack } from '@mui/system';
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
-import { AppState } from '../../../../store/Store';
+import { AppState } from '../../../../store';
 
 const Languages = [
   {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector, useDispatch } from '../../../store/Store';
+import { useSelector, useDispatch } from '../../../store';
 import {
   Box,
   Divider,
@@ -23,7 +23,7 @@ interface colorsType {
 }
 
 interface Props {
-  
+
   // toggleNoteSidebar: func,
 
   toggleNoteSidebar: (event: React.MouseEvent<HTMLElement>) => void,

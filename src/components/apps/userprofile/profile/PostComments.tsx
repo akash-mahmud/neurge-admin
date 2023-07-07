@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Stack, Avatar, Box, Typography, Tooltip, Fab, TextField, Button } from '@mui/material';
 import { IconArrowBackUp, IconCircle, IconThumbUp } from '@tabler/icons-react';
 
-import { useDispatch } from '../../../../store/Store';
+import { useDispatch } from '../../../../store';
 import uniqueId from 'lodash/uniqueId';
 import { addReply } from '../../../../store/apps/userProfile/UserProfileSlice';
 import {

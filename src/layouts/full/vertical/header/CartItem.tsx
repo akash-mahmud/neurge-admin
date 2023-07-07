@@ -8,13 +8,13 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import { IconMinus, IconPlus } from "@tabler/icons-react";
-import { useSelector, useDispatch } from "../../../../store/Store";
+import { useSelector, useDispatch } from "../../../../store";
 import emptyCart from "public/images/products/empty-shopping-cart.svg";
 import {
   increment,
   decrement,
 } from "../../../../store/apps/eCommerce/ECommerceSlice";
-import { AppState } from "../../../../store/Store";
+import { AppState } from "../../../../store";
 import Image from "next/image";
 
 const CartItems = () => {

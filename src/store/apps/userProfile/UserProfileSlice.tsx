@@ -1,7 +1,7 @@
 import axios from '../../../utils/axios';
 import { createSlice } from '@reduxjs/toolkit';
 import { map } from 'lodash';
-import { AppDispatch } from '../../Store';
+import { AppDispatch } from '../..';
 
 const API_URL = '/api/data/postData';
 

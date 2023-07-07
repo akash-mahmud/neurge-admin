@@ -1,6 +1,6 @@
 import axios from '../../../utils/axios';
 import { createSlice } from '@reduxjs/toolkit';
-import { AppDispatch } from '../../Store';
+import { AppDispatch } from '../..';
 import { uniqueId } from 'lodash';
 import { sub } from 'date-fns';
 
@@ -47,9 +47,9 @@ export const ChatSlice = createSlice({
       state.chats = state.chats.map((chat) =>
         chat.id === action.payload.id
           ? {
-              ...chat,
-              ...chat.messages.push(newMessage),
-            }
+            ...chat,
+            ...chat.messages.push(newMessage),
+          }
           : chat,
       );
     },

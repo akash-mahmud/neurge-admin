@@ -10,7 +10,7 @@ import {
   DialogContentText,
   Typography,
 } from '@mui/material';
-import { useSelector, useDispatch } from '../../../store/Store';
+import { useSelector, useDispatch } from '../../../store';
 import { IconCheck } from '@tabler/icons-react';
 
 interface Props {

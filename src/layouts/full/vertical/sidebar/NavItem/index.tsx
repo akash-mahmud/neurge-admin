@@ -12,9 +12,9 @@ import {
   Typography,
   ListItemButton,
 } from "@mui/material";
-import { useSelector } from "../../../../../store/Store";
+import { useSelector } from "../../../../../store";
 import { useTranslation } from "react-i18next";
-import { AppState } from "../../../../../store/Store";
+import { AppState } from "../../../../../store";
 
 type NavGroup = {
   [x: string]: any;

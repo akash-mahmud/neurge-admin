@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { List } from "@mui/material";
-import { useSelector, useDispatch } from "../../../store/Store";
+import { useSelector, useDispatch } from "../../../store";
 import {
   SelectContact,
   fetchContacts,

@@ -1,6 +1,6 @@
 import axios from '../../../utils/axios';
 import { createSlice } from '@reduxjs/toolkit';
-import { AppDispatch } from '../../Store';
+import { AppDispatch } from '../..';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 const API_URL = '/api/data/notes/NotesData';

@@ -1,4 +1,4 @@
-import { AppState, useSelector } from '@/store/Store';
+import { AppState, useSelector } from '@/store';
 import { Card } from '@mui/material';
 
 

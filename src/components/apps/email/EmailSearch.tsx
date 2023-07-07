@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector, useDispatch } from '../../../store/Store';
+import { useSelector, useDispatch } from '../../../store';
 import { Box, Fab, TextField, InputAdornment } from '@mui/material';
 import { SearchEmail } from '../../../store/apps/email/EmailSlice';
 import { IconMenu2, IconSearch } from '@tabler/icons-react';

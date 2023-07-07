@@ -8,7 +8,7 @@ import {
   Tooltip,
   Alert,
 } from "@mui/material";
-import { useSelector, useDispatch } from "../../../store/Store";
+import { useSelector, useDispatch } from "../../../store";
 import Scrollbar from "../../custom-scroll/Scrollbar";
 import {
   fetchNotes,

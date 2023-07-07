@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector, useDispatch, AppState } from '../../../store/Store';
+import { useSelector, useDispatch, AppState } from '../../../store';
 import { Box, Fab, TextField, InputAdornment } from '@mui/material';
 
 import { SearchContact } from '../../../store/apps/contacts/ContactSlice';

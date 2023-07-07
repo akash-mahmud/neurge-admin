@@ -3,7 +3,7 @@ import { TextField, InputAdornment } from '@mui/material';
 import { IconSearch } from '@tabler/icons-react';
 
 // redux
-import { useDispatch } from '../../../store/Store';
+import { useDispatch } from '../../../store';
 import { SearchProduct } from '../../../store/apps/eCommerce/ECommerceSlice';
 
 // ----------------------------------------------------------------------

@@ -19,7 +19,7 @@ import {
   IconPhone,
   IconVideo,
 } from "@tabler/icons-react";
-import { useSelector } from "../../../store/Store";
+import { useSelector } from "../../../store";
 
 import { ChatsType } from "../../../types/apps/chat";
 import { formatDistanceToNowStrict } from "date-fns";

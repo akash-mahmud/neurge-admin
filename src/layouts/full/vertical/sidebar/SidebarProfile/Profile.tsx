@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box, Avatar, Typography, IconButton, Tooltip, useMediaQuery } from '@mui/material';
-import { useSelector } from '../../../../../store/Store';
+import { useSelector } from '../../../../../store';
 import { IconPower } from '@tabler/icons-react';
-import { AppState } from '../../../../../store/Store';
+import { AppState } from '../../../../../store';
 import Link from 'next/link';
 
 export const Profile = () => {

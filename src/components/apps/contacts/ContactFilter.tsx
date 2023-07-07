@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "../../../store/Store";
+import { useDispatch, useSelector } from "../../../store";
 import {
   ListItemText,
   ListItemButton,

@@ -1,6 +1,6 @@
 import { useTheme } from '@mui/material/styles';
 import { Card, CardContent, Typography, Stack, Box } from '@mui/material';
-import { AppState, useSelector } from '@/store/Store';
+import { AppState, useSelector } from '@/store';
 
 
 type Props = {
@@ -30,7 +30,7 @@ const DashboardCard = ({
 
   const theme = useTheme();
   const borderColor = theme.palette.divider;
- 
+
   return (
     <Card
       sx={{ padding: 0, border: !customizer.isCardShadow ? `1px solid ${borderColor}` : 'none' }}

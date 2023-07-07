@@ -1,0 +1,16 @@
+mutation LoginAdmin($password: String!, $email: String!) {
+  loginAdmin(password: $password, email: $email) {
+    accessToken
+    isAuthenticated
+    message
+    success
+    user {
+      avater
+      email
+      id
+      name
+      role
+    }
+  }
+}
+

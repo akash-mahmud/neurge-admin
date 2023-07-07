@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Grid, Pagination } from '@mui/material';
 import BlogCard from './BlogCard';
 import { orderBy } from 'lodash';
-import { useSelector, useDispatch } from '../../../store/Store';
+import { useSelector, useDispatch } from '../../../store';
 import { fetchBlogPosts } from '../../../store/apps/blog/BlogSlice';
 import BlogFeaturedCard from './BlogFeaturedCard';
 import { BlogPostType } from '../../../types/apps/blog';

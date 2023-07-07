@@ -2,7 +2,7 @@ import { useTheme } from '@mui/material/styles';
 import { Card, CardContent, Typography, Box, Stack } from '@mui/material';
 
 import { IconGridDots } from '@tabler/icons-react';
-import { AppState, useSelector } from '@/store/Store';
+import { AppState, useSelector } from '@/store';
 
 type Props = {
   title: string;

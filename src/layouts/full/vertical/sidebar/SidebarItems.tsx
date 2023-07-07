@@ -1,11 +1,11 @@
 import Menuitems from './MenuItems';
 import { useRouter } from 'next/router';
 import { Box, List, useMediaQuery } from '@mui/material';
-import { useDispatch, useSelector } from '../../../../store/Store';
+import { useDispatch, useSelector } from '../../../../store';
 import NavItem from './NavItem';
 import NavCollapse from './NavCollapse';
 import NavGroup from './NavGroup/NavGroup';
-import { AppState } from '../../../../store/Store'
+import { AppState } from '../../../../store'
 import { toggleMobileSidebar } from '../../../../store/customizer/CustomizerSlice';
 
 

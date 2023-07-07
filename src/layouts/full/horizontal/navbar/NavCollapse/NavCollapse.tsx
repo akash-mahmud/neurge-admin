@@ -10,14 +10,14 @@ import {
   Box,
   ListItemButton,
 } from "@mui/material";
-import { useSelector } from "../../../../../store/Store";
+import { useSelector } from "../../../../../store";
 
 // custom imports
 import NavItem from "../NavItem/NavItem";
 
 // plugins
 import { IconChevronDown } from "@tabler/icons-react";
-import { AppState } from "../../../../../store/Store";
+import { AppState } from "../../../../../store";
 
 type NavGroupProps = {
   [x: string]: any;

@@ -1,8 +1,8 @@
 import { FC } from "react";
-import { useSelector } from "../../../../store/Store";
+import { useSelector } from "../../../../store";
 import Link from "next/link";
 import { styled } from "@mui/material";
-import { AppState } from "../../../../store/Store";
+import { AppState } from "../../../../store";
 import Image from "next/image";
 
 const Logo = () => {

@@ -1,6 +1,6 @@
 import { styled, Container, Box, useTheme } from "@mui/material";
-import { useSelector } from "../../store/Store";
-import { AppState } from "../../store/Store";
+import { useSelector } from "../../store";
+import { AppState } from "../../store";
 import Header from "./vertical/header/Header";
 import Sidebar from "./vertical/sidebar/Sidebar";
 import Customizer from "./shared/customizer/Customizer";

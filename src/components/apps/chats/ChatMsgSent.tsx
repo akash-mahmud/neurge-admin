@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector, useDispatch } from "../../../store/Store";
+import { useSelector, useDispatch } from "../../../store";
 import { IconButton, InputBase, Box, Popover } from "@mui/material";
 import EmojiPicker, {
   EmojiStyle,

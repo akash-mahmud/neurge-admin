@@ -10,8 +10,8 @@ import {
   ListItemText,
   useTheme,
 } from "@mui/material";
-import { useSelector } from "../../../../../store/Store";
-import { AppState } from "../../../../../store/Store";
+import { useSelector } from "../../../../../store";
+import { AppState } from "../../../../../store";
 
 type NavGroup = {
   [x: string]: any;

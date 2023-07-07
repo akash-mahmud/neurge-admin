@@ -1,11 +1,11 @@
 import { useMediaQuery, Box, Drawer, useTheme } from '@mui/material';
 import SidebarItems from './SidebarItems';
 import Logo from '../../shared/logo/Logo';
-import { useSelector, useDispatch } from '../../../../store/Store';
+import { useSelector, useDispatch } from '../../../../store';
 import { hoverSidebar, toggleMobileSidebar } from '../../../../store/customizer/CustomizerSlice';
 import Scrollbar from '../../../../components/custom-scroll/Scrollbar';
 import { Profile } from './SidebarProfile/Profile';
-import { AppState } from '../../../../store/Store';
+import { AppState } from '../../../../store';
 
 const Sidebar = () => {
   const lgUp = useMediaQuery((theme: any) => theme.breakpoints.up('lg'));
@@ -87,7 +87,7 @@ const Sidebar = () => {
 
   return (
     <Drawer
-    
+
       anchor="left"
       open={customizer.isMobileSidebar}
       onClose={() => dispatch(toggleMobileSidebar())}

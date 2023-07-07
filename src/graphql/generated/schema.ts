@@ -1817,6 +1817,7 @@ export type Mutation = {
   deleteOneTip?: Maybe<Tip>;
   deleteOneUser?: Maybe<User>;
   login?: Maybe<LoginResponsce>;
+  loginAdmin?: Maybe<LoginResponsce>;
   register?: Maybe<DefaultResponsce>;
   updateManyAddon: AffectedRowsOutput;
   updateManyAddonBlogCategory: AffectedRowsOutput;
@@ -2038,6 +2039,12 @@ export type MutationDeleteOneUserArgs = {
 
 
 export type MutationLoginArgs = {
+  email: Scalars['String']['input'];
+  password: Scalars['String']['input'];
+};
+
+
+export type MutationLoginAdminArgs = {
   email: Scalars['String']['input'];
   password: Scalars['String']['input'];
 };
@@ -5155,6 +5162,14 @@ export type AddonBlogCategoriesForSelectQueryVariables = Exact<{
 
 export type AddonBlogCategoriesForSelectQuery = { __typename?: 'Query', addonBlogCategories: Array<{ __typename?: 'AddonBlogCategory', id: string, name: string }> };
 
+export type LoginAdminMutationVariables = Exact<{
+  password: Scalars['String']['input'];
+  email: Scalars['String']['input'];
+}>;
+
+
+export type LoginAdminMutation = { __typename?: 'Mutation', loginAdmin?: { __typename?: 'LoginResponsce', accessToken: string, isAuthenticated: boolean, message: string, success: boolean, user: { __typename?: 'User', avater?: string | null, email: string, id: string, name: string, role: UserRole } } | null };
+
 export type CategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -6212,6 +6227,50 @@ export function useAddonBlogCategoriesForSelectLazyQuery(baseOptions?: Apollo.La
 export type AddonBlogCategoriesForSelectQueryHookResult = ReturnType<typeof useAddonBlogCategoriesForSelectQuery>;
 export type AddonBlogCategoriesForSelectLazyQueryHookResult = ReturnType<typeof useAddonBlogCategoriesForSelectLazyQuery>;
 export type AddonBlogCategoriesForSelectQueryResult = Apollo.QueryResult<AddonBlogCategoriesForSelectQuery, AddonBlogCategoriesForSelectQueryVariables>;
+export const LoginAdminDocument = gql`
+    mutation LoginAdmin($password: String!, $email: String!) {
+  loginAdmin(password: $password, email: $email) {
+    accessToken
+    isAuthenticated
+    message
+    success
+    user {
+      avater
+      email
+      id
+      name
+      role
+    }
+  }
+}
+    `;
+export type LoginAdminMutationFn = Apollo.MutationFunction<LoginAdminMutation, LoginAdminMutationVariables>;
+
+/**
+ * __useLoginAdminMutation__
+ *
+ * To run a mutation, you first call `useLoginAdminMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useLoginAdminMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [loginAdminMutation, { data, loading, error }] = useLoginAdminMutation({
+ *   variables: {
+ *      password: // value for 'password'
+ *      email: // value for 'email'
+ *   },
+ * });
+ */
+export function useLoginAdminMutation(baseOptions?: Apollo.MutationHookOptions<LoginAdminMutation, LoginAdminMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<LoginAdminMutation, LoginAdminMutationVariables>(LoginAdminDocument, options);
+      }
+export type LoginAdminMutationHookResult = ReturnType<typeof useLoginAdminMutation>;
+export type LoginAdminMutationResult = Apollo.MutationResult<LoginAdminMutation>;
+export type LoginAdminMutationOptions = Apollo.BaseMutationOptions<LoginAdminMutation, LoginAdminMutationVariables>;
 export const CategoriesDocument = gql`
     query Categories {
   categories {

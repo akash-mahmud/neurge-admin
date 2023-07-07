@@ -15,7 +15,7 @@ import {
   Menu,
   MenuItem,
 } from "@mui/material";
-import { useSelector, useDispatch } from "../../../store/Store";
+import { useSelector, useDispatch } from "../../../store";
 import Scrollbar from "../../custom-scroll/Scrollbar";
 import {
   SelectChat,
@@ -181,10 +181,10 @@ const ChatListing = () => {
                       chat.status === "online"
                         ? "success"
                         : chat.status === "busy"
-                        ? "error"
-                        : chat.status === "away"
-                        ? "warning"
-                        : "secondary"
+                          ? "error"
+                          : chat.status === "away"
+                            ? "warning"
+                            : "secondary"
                     }
                     variant="dot"
                     anchorOrigin={{
