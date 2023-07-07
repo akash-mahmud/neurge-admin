@@ -1,0 +1,53 @@
+mutation CreateOneAddonBlogCategory($data: AddonBlogCategoryCreateInput!) {
+  createOneAddonBlogCategory(data: $data) {
+    id
+  }
+}
+
+mutation UpdateOneAddonBlogCategory($data: AddonBlogCategoryUpdateInput!, $where: AddonBlogCategoryWhereUniqueInput!) {
+  updateOneAddonBlogCategory(data: $data, where: $where) {
+    id
+  }
+}
+
+
+
+query AddonBlogCategoryForUpdate($where: AddonBlogCategoryWhereUniqueInput!) {
+  addonBlogCategory(where: $where) {
+    name
+    addonId
+    id
+
+  }
+}
+
+
+query AddonBlogCategoriesForTableView($where: AddonBlogCategoryWhereInput, $orderBy: [AddonBlogCategoryOrderByWithRelationInput!], $cursor: AddonBlogCategoryWhereUniqueInput, $take: Int, $skip: Int, $distinct: [AddonBlogCategoryScalarFieldEnum!]) {
+  addonBlogCategories(where: $where, orderBy: $orderBy, cursor: $cursor, take: $take, skip: $skip, distinct: $distinct) {
+    _count {
+      blog
+    }
+    addon {
+      id
+      name
+    }
+    id
+    name
+    updatedAt
+    createdAt
+  }
+}
+
+query AggregateAddonBlogCategory($skip: Int, $take: Int, $cursor: AddonBlogCategoryWhereUniqueInput, $orderBy: [AddonBlogCategoryOrderByWithRelationInput!], $where: AddonBlogCategoryWhereInput) {
+  aggregateAddonBlogCategory(skip: $skip, take: $take, cursor: $cursor, orderBy: $orderBy, where: $where) {
+    _count {
+      _all
+    }
+  }
+}
+
+mutation DeleteOneAddonBlogCategory($where: AddonBlogCategoryWhereUniqueInput!) {
+  deleteOneAddonBlogCategory(where: $where) {
+    id
+  }
+}

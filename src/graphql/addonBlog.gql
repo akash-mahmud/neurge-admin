@@ -1,0 +1,53 @@
+query BlogsForTableView($where: BlogWhereInput, $orderBy: [BlogOrderByWithRelationInput!], $cursor: BlogWhereUniqueInput, $take: Int, $skip: Int, $distinct: [BlogScalarFieldEnum!]) {
+  blogs(where: $where, orderBy: $orderBy, cursor: $cursor, take: $take, skip: $skip, distinct: $distinct) {
+    addon {
+      name
+      id
+    }
+    addonBlogCategory {
+      name
+      id
+    }
+    createdAt
+    id
+    imoji
+    title
+  }
+}
+
+query BlogForUpdate($where: BlogWhereUniqueInput!) {
+  blog(where: $where) {
+    id
+    description
+    imoji
+    title
+    addonId
+    addonBlogCategoryId
+  }
+}
+
+mutation CreateOneBlog($data: BlogCreateInput!) {
+  createOneBlog(data: $data) {
+    id
+  }
+}
+
+mutation UpdateOneBlog($data: BlogUpdateInput!, $where: BlogWhereUniqueInput!) {
+  updateOneBlog(data: $data, where: $where) {
+    id
+  }
+}
+
+mutation DeleteOneBlog($where: BlogWhereUniqueInput!) {
+  deleteOneBlog(where: $where) {
+    id
+  }
+}
+
+query AggregateBlog($where: BlogWhereInput, $orderBy: [BlogOrderByWithRelationInput!], $cursor: BlogWhereUniqueInput, $take: Int, $skip: Int) {
+  aggregateBlog(where: $where, orderBy: $orderBy, cursor: $cursor, take: $take, skip: $skip) {
+    _count {
+      _all
+    }
+  }
+}

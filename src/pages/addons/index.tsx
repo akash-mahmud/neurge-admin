@@ -22,38 +22,35 @@ import {
   InputLabel,
   MenuItem
 } from '@mui/material';
-import { Button, Input, Modal, Pagination, Popconfirm, Upload } from 'antd';
+import { Button, Input, Modal, Pagination, Popconfirm, Popover, Upload } from 'antd';
 import slugify from 'slugify'
 import PageContainer from '../../../src/components/container/PageContainer';
-
+import { default as emojiData } from '@emoji-mart/data'
+import Picker from '@emoji-mart/react'
 import ParentCard from '../../../src/components/shared/ParentCard';
 import BlankCard from '../../../src/components/shared/BlankCard';
 import { IconEdit, IconSearch, IconTrash } from '@tabler/icons-react';
-import { CategoryCreateInput, CategoryUpdateInput, ProductCreateInput, ProductUpdateInput, SortOrder, useAggregateCategoryQuery, useAggregateProductQuery, useCategoriesWithoutRelationFieldQuery, useCategoryDataForUpdateLazyQuery, useCreateOneCategoryMutation, useCreateOneProductMutation, useDeleteOneCategoryMutation, useDeleteOneProductMutation, useLoadProductForUpdateLazyQuery, useProductsForTableViewQuery, useUpdateOneCategoryMutation, useUpdateOneProductMutation } from '@/graphql/generated/schema';
+import { AddonCreateInput, AddonUpdateInput, useAggregateAddonQuery, useDeleteOneAddonMutation, useAddonForupdateLazyQuery, SortOrder, useAddonsForTableViewQuery, useUpdateOneAddonMutation, useAggregateProductQuery, useCategoriesWithoutRelationFieldQuery, useCategoryDataForUpdateLazyQuery, useCreateOneCategoryMutation, useCreateOneProductMutation, useDeleteOneCategoryMutation, useDeleteOneProductMutation, useLoadProductForUpdateLazyQuery, useProductsForTableViewQuery, useUpdateOneCategoryMutation, useUpdateOneProductMutation } from '@/graphql/generated/schema';
 import CustomTextField from '@/components/forms/theme-elements/CustomTextField';
 import { useState } from 'react';
 
 const columns = [
   { id: 'pname', label: 'Name', minWidth: 170 },
   { id: 'image', label: 'image', minWidth: 100 },
+
   {
-    id: 'category',
-    label: 'category',
+    id: 'addonBlogCategory',
+    label: 'addonBlogCategory',
     minWidth: 170,
   },
   {
-    id: 'moneyBackGuarantee',
-    label: 'moneyBackGuarantee',
+    id: 'blog',
+    label: 'blog',
     minWidth: 170,
   },
   {
-    id: 'taskAutomateCount',
-    label: 'taskAutomateCount',
-    minWidth: 170,
-  },
-  {
-    id: 'topTierPromptCount',
-    label: 'topTierPromptCount',
+    id: 'purchasedByUsers',
+    label: 'purchasedByUsers',
     minWidth: 170,
   },
   {
@@ -68,6 +65,8 @@ import { PlusOutlined } from '@ant-design/icons';
 
 import type { UploadFile } from 'antd/es/upload/interface';
 import type { RcFile, UploadProps } from 'antd/es/upload';
+import { useCreateOneAddonMutation } from '@/graphql/generated/schema';
+import { EmojiEmotions } from '@mui/icons-material';
 
 const getBase64 = (file: RcFile): Promise<string> =>
   new Promise((resolve, reject) => {
@@ -81,7 +80,7 @@ const Index = () => {
   const [limit, setlimit] = useState(5)
   const [skip, setskip] = useState(0)
   const [order, setorder] = useState()
-  const { data, loading, error, refetch } = useProductsForTableViewQuery({
+  const { data, loading, error, refetch } = useAddonsForTableViewQuery({
     variables: {
       take: limit,
       skip: skip * limit,
@@ -90,30 +89,24 @@ const Index = () => {
       }]
     }
   })
-  const { data: total, refetch: refetchTotal } = useAggregateProductQuery()
+  const { data: total, refetch: refetchTotal } = useAggregateAddonQuery()
   const [open, setOpen] = useState(false);
-  const [input, setinput] = useState<ProductUpdateInput>({
+  const [input, setinput] = useState<AddonUpdateInput>({
   })
-  const [createInput, setcreateInput] = useState<ProductCreateInput>({
+  const [createInput, setcreateInput] = useState<AddonCreateInput>({
     name: '',
     description: '',
-    image: '',
-    category: {
-      connect: {
-        id: ''
-      }
-    },
-    moneyBackGuarantee: 0,
-    taskAutomateCount: 0,
-    topTierPromptCount: 0,
-    slug: ''
+    img: '',
+    imoji:'',
+    purchaseUrl:''
+
   })
-  const [LoadProduct,] = useLoadProductForUpdateLazyQuery({ fetchPolicy: 'network-only' })
+  const [LoadAddon,] = useAddonForupdateLazyQuery({ fetchPolicy: 'network-only' })
   const { data: categories } = useCategoriesWithoutRelationFieldQuery()
   const [productId, setproductId] = useState<string>()
   const handleClickOpen = async (id?: string) => {
     if (id) {
-      const { data } = await LoadProduct({
+      const { data } = await LoadAddon({
         variables: {
 
           where: {
@@ -122,43 +115,31 @@ const Index = () => {
         }
       })
       setproductId(id)
-      if (data?.product) {
+      if (data?.addon) {
         setinput({
           name: {
-            set: data.product.name 
+            set: data.addon.name 
           },
 
           description: {
-            set: data.product.description 
+            set: data.addon.description 
           },
-          image: {
-            set: data.product.image 
+          img: {
+            set: data.addon.img 
           },
-          moneyBackGuarantee: {
-            set: data.product.moneyBackGuarantee 
+          purchaseUrl: {
+            set: data.addon.purchaseUrl 
           },
-          topTierPromptCount: {
-            set: data.product.topTierPromptCount 
-          },
-          taskAutomateCount: {
-            set: data.product.taskAutomateCount 
-          },
-
-          slug: {
-            set: data.product.slug 
-          },
-          category: {
-            connect:{
-              id:data.product.categoryId
-            }
-          }
+         
+        imoji: {
+          set: data.addon.imoji
+        }
         })
 
 
       }
-      setPreviewImage(data?.product?.image as string)
-      setPreviewImage(data?.product?.image as string)
-      setFileList([data?.product?.image])
+      setPreviewImage(data?.addon?.img  as string)
+      setFileList([data?.addon?.img ])
     }
 
     setOpen(true);
@@ -169,11 +150,11 @@ const Index = () => {
     setOpen(false);
     setproductId(undefined)
   };
-  const [UpdateProduct] = useUpdateOneProductMutation()
-  const [CreateProduct] = useCreateOneProductMutation()
-  const [DeleteProduct] = useDeleteOneProductMutation()
+  const [UpdateAddon] = useUpdateOneAddonMutation()
+  const [CreteAddon] = useCreateOneAddonMutation()
+  const [DeleteAddon] = useDeleteOneAddonMutation()
   const deleteData = async (productId: string) => {
-    await DeleteProduct({
+    await DeleteAddon({
       variables: {
         where: {
           id: productId
@@ -184,7 +165,7 @@ const Index = () => {
     await refetch()
   }
   const update = async () => {
-    await UpdateProduct({
+    await UpdateAddon({
       variables: {
         data: input,
         where: {
@@ -200,7 +181,7 @@ const Index = () => {
 
   const create = async () => {
     if (createInput) {
-      await CreateProduct({
+      await CreteAddon({
         variables: {
           data: createInput,
 
@@ -257,9 +238,7 @@ const Index = () => {
                      name: {
                       set:e.target.value
                      },
-                     slug: {
-                      set: slugify(e.target.value, { lower: true })
-                     }
+                    
                    })
                  }} style={{
                    margin: '10px'
@@ -272,59 +251,64 @@ const Index = () => {
                  />
                </Box>
                <Box flexBasis={'calc(33.33% - 10px)'}>
-                 <CustomTextField value={input?.slug?.set} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                   setinput({
-                     ...input,
-                     slug: {
-                      set:slugify(e.target.value, { lower: true })
-                     }
-                   })
-                 }} style={{
-                   margin: '10px'
-                 }}
-                   autoFocus
-                   id="name"
-                   label="Slug"
-                   type="text"
-                   fullWidth
-                 />
-               </Box>
-               <Box flexBasis={'calc(33.33% - 10px)'}>
-                 <FormControl style={{
-                   margin: '10px'
-                 }} fullWidth>
-                   <InputLabel id="demo-simple-select-label">Category</InputLabel>
-                   <Select
-                     labelId="demo-simple-select-label"
-                     id="demo-simple-select"
-                     value={input.category?.connect?.id}
-                     label="Category"
-                     onChange={(event) => {
-                       setinput({
-                         ...input,
-                         category: {
-                           connect: {
-                             id: event.target.value
-                           }
-                         }
-                       })
-                     }}
-                   >
-                     {
-                       categories?.categories?.map((category) => (
-                         <MenuItem value={category.id}>{category.name}</MenuItem>
-                       ))
-                     }
+                    <TextField
 
-                   </Select>
-                 </FormControl>
-               </Box>
+                      onChange={(event) => {
+                        setinput({
+                          ...input,
+                          imoji: {
+                            set:event.target.value 
+                          }
+                        })
+                      }}
+                      value={input?.imoji?.set}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="start" style={{
+                            cursor: 'pointer'
+
+                          }}
+                          >
+                            <Popover overlayClassName='imojiPophover' placement="right" zIndex={9999999999999} content={
+                              <Picker data={emojiData} onEmojiSelect={(data: {
+                                id: string,
+                                keywords: string[]
+                                name
+                                : string
+                                native
+                                : string
+                                shortcodes
+                                : string
+                                unified: string
+                              }) => {
+                                setinput({
+                                  ...input,
+                                  imoji: {
+                                    set:data.native
+                                  }
+                                })
+
+                              }} />
+
+                            } trigger="click">
+                              <EmojiEmotions />
+                            </Popover>
+                          </InputAdornment>
+                        ),
+
+                      }}
+                      placeholder="Imoji"
+                      fullWidth
+
+                    />
+                  </Box>
+
                <Box flexBasis={'calc(33.33% - 10px)'}>
-                 <CustomTextField value={input?.moneyBackGuarantee?.set} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                 <CustomTextField value={input?.purchaseUrl?.set} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                    setinput({
                      ...input,
-                     moneyBackGuarantee: {
-                      set:parseInt(e.target.value)
+                     purchaseUrl: {
+                      set:e.target.value
                      }
                    })
                  }} style={{
@@ -337,42 +321,7 @@ const Index = () => {
                    fullWidth
                  />
                </Box>
-               <Box flexBasis={'calc(33.33% - 10px)'}>
-                 <CustomTextField value={input?.taskAutomateCount?.set} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                   setinput({
-                     ...input,
-                     taskAutomateCount: {
-                      set:parseInt(e.target.value)
-                     }
-                   })
-                 }} style={{
-                   margin: '10px'
-                 }}
-                   autoFocus
-                   id="name"
-                   label="taskAutomateCount"
-                   type="number"
-                   fullWidth
-                 />
-               </Box>
-               <Box flexBasis={'calc(33.33% - 10px)'}>
-                 <CustomTextField value={input?.topTierPromptCount?.set} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                   setinput({
-                     ...input,
-                     topTierPromptCount: {
-                      set:parseInt(e.target.value)
-                     }
-                   })
-                 }} style={{
-                   margin: '10px'
-                 }}
-                   autoFocus
-                   id="name"
-                   label="topTierPromptCount"
-                   type="number"
-                   fullWidth
-                 />
-               </Box>
+             
 
 
 
@@ -429,7 +378,7 @@ const Index = () => {
                     setcreateInput({
                       ...createInput,
                       name: e.target.value,
-                      slug: slugify(e.target.value, { lower: true })
+                     
                     })
                   }} style={{
                     margin: '10px'
@@ -441,100 +390,72 @@ const Index = () => {
                     fullWidth
                   />
                 </Box>
+               
                 <Box flexBasis={'calc(33.33% - 10px)'}>
-                  <CustomTextField value={createInput?.slug} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    setcreateInput({
-                      ...createInput,
-                      slug: slugify(e.target.value, { lower: true })
-                    })
-                  }} style={{
-                    margin: '10px'
-                  }}
-                    autoFocus
-                    id="name"
-                    label="Slug"
-                    type="text"
-                    fullWidth
-                  />
-                </Box>
-                <Box flexBasis={'calc(33.33% - 10px)'}>
-                  <FormControl style={{
-                    margin: '10px'
-                  }} fullWidth>
-                    <InputLabel id="demo-simple-select-label">Category</InputLabel>
-                    <Select
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
-                      value={createInput.category?.connect?.id}
-                      label="Category"
+                    <TextField
+
                       onChange={(event) => {
                         setcreateInput({
                           ...createInput,
-                          category: {
-                            connect: {
-                              id: event.target.value
-                            }
-                          }
+                          imoji:event.target.value
                         })
                       }}
-                    >
-                      {
-                        categories?.categories?.map((category) => (
-                          <MenuItem value={category.id}>{category.name}</MenuItem>
-                        ))
-                      }
+                      value={createInput.imoji}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="start" style={{
+                            cursor: 'pointer'
 
-                    </Select>
-                  </FormControl>
-                </Box>
+                          }}
+                          >
+                            <Popover overlayClassName='imojiPophover' placement="right" zIndex={9999999999999} content={
+                              <Picker data={emojiData} onEmojiSelect={(data: {
+                                id: string,
+                                keywords: string[]
+                                name
+                                : string
+                                native
+                                : string
+                                shortcodes
+                                : string
+                                unified: string
+                              }) => {
+                                setcreateInput({
+                                  ...createInput,
+                                  imoji: data.native
+                                })
+
+                              }} />
+
+                            } trigger="click">
+                              <EmojiEmotions />
+                            </Popover>
+                          </InputAdornment>
+                        ),
+
+                      }}
+                      placeholder="Imoji"
+                      fullWidth
+
+                    />
+                  </Box>
                 <Box flexBasis={'calc(33.33% - 10px)'}>
-                  <CustomTextField value={createInput?.moneyBackGuarantee} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  <CustomTextField value={createInput?.purchaseUrl} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     setcreateInput({
                       ...createInput,
-                      moneyBackGuarantee: parseInt(e.target.value)
+                      purchaseUrl: e.target.value
                     })
                   }} style={{
                     margin: '10px'
                   }}
                     autoFocus
                     id="name"
-                    label="moneyBackGuarantee"
-                    type="number"
+                    label="Purchase url"
+                    type="url"
                     fullWidth
                   />
                 </Box>
-                <Box flexBasis={'calc(33.33% - 10px)'}>
-                  <CustomTextField value={createInput?.taskAutomateCount} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    setcreateInput({
-                      ...createInput,
-                      taskAutomateCount: parseInt(e.target.value)
-                    })
-                  }} style={{
-                    margin: '10px'
-                  }}
-                    autoFocus
-                    id="name"
-                    label="taskAutomateCount"
-                    type="number"
-                    fullWidth
-                  />
-                </Box>
-                <Box flexBasis={'calc(33.33% - 10px)'}>
-                  <CustomTextField value={createInput?.topTierPromptCount} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    setcreateInput({
-                      ...createInput,
-                      topTierPromptCount: parseInt(e.target.value)
-                    })
-                  }} style={{
-                    margin: '10px'
-                  }}
-                    autoFocus
-                    id="name"
-                    label="topTierPromptCount"
-                    type="number"
-                    fullWidth
-                  />
-                </Box>
+              
 
 
 
@@ -544,7 +465,7 @@ const Index = () => {
 
                   <Box>
 
-                    <Input.TextArea spellCheck={false} value={createInput?.description} onChange={(e) => {
+                    <Input.TextArea spellCheck={false} value={createInput?.description as string} onChange={(e) => {
                       setcreateInput({
                         ...createInput,
                         description: e.target.value
@@ -636,53 +557,47 @@ const Index = () => {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {data?.products.map((product) => {
+                    {data?.addons.map((addon) => {
                       return (
-                        <TableRow hover key={product.id}>
+                        <TableRow hover key={addon.id}>
                           <TableCell>
-                            {product.name}
+                          {addon.imoji}  {addon.name}
                           </TableCell>
                           <TableCell>
                             <Typography
                               variant="subtitle2" fontWeight="500">
-                              <Avatar src={product.image} />
+                              <Avatar src={addon.img} />
                             </Typography>
 
 
                           </TableCell>
+                         
                           <TableCell>
                             <Typography color="textSecondary" variant="subtitle2">
-                              {product.category?.name}
-
-                            </Typography>
-
-                          </TableCell>
-                          <TableCell>
-                            <Typography color="textSecondary" variant="subtitle2">
-                              {product.moneyBackGuarantee}
+                              {addon._count?.addonBlogCategory}
 
                             </Typography>
                           </TableCell>
                           <TableCell>
                             <Typography color="textSecondary" variant="subtitle2">
-                              {product.taskAutomateCount}
+                              {addon._count?.blog}
 
                             </Typography>
                           </TableCell>
                           <TableCell>
                             <Typography color="textSecondary" variant="subtitle2">
-                              {product.topTierPromptCount}
+                              {addon._count?.purchasedByUsers}
 
                             </Typography>
                           </TableCell>
                           <TableCell>
-                            <Popconfirm onConfirm={() => deleteData(product.id)} title="Are you sure?">
+                            <Popconfirm onConfirm={() => deleteData(addon.id)} title="Are you sure?">
 
                               <IconButton>
                                 <IconTrash width={18} />
                               </IconButton>
                             </Popconfirm>
-                            <IconButton onClick={() => handleClickOpen(product.id)}>
+                            <IconButton onClick={() => handleClickOpen(addon.id)}>
                               <IconEdit width={18} />
                             </IconButton>
 
@@ -701,7 +616,7 @@ const Index = () => {
                 <Pagination current={skip + 1} onChange={(pageNumber) => {
                   setskip(pageNumber - 1)
 
-                }} total={total?.aggregateProduct._count?._all} pageSize={limit} />
+                }} total={total?.aggregateAddon._count?._all} pageSize={limit} />
               </Box>
 
             </BlankCard>

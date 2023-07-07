@@ -4998,6 +4998,151 @@ export type AggregateAddonQueryVariables = Exact<{
 
 export type AggregateAddonQuery = { __typename?: 'Query', aggregateAddon: { __typename?: 'AggregateAddon', _count?: { __typename?: 'AddonCountAggregate', _all: number } | null } };
 
+export type CreateOneAddonMutationVariables = Exact<{
+  data: AddonCreateInput;
+}>;
+
+
+export type CreateOneAddonMutation = { __typename?: 'Mutation', createOneAddon: { __typename?: 'Addon', id: string } };
+
+export type DeleteOneAddonMutationVariables = Exact<{
+  where: AddonWhereUniqueInput;
+}>;
+
+
+export type DeleteOneAddonMutation = { __typename?: 'Mutation', deleteOneAddon?: { __typename?: 'Addon', id: string } | null };
+
+export type AddonForupdateQueryVariables = Exact<{
+  where: AddonWhereUniqueInput;
+}>;
+
+
+export type AddonForupdateQuery = { __typename?: 'Query', addon?: { __typename?: 'Addon', id: string, description?: string | null, img: string, imoji?: string | null, name: string, purchaseUrl?: string | null } | null };
+
+export type UpdateOneAddonMutationVariables = Exact<{
+  data: AddonUpdateInput;
+  where: AddonWhereUniqueInput;
+}>;
+
+
+export type UpdateOneAddonMutation = { __typename?: 'Mutation', updateOneAddon?: { __typename?: 'Addon', id: string } | null };
+
+export type AddonForSelectQueryVariables = Exact<{
+  where?: InputMaybe<AddonWhereInput>;
+  orderBy?: InputMaybe<Array<AddonOrderByWithRelationInput> | AddonOrderByWithRelationInput>;
+  cursor?: InputMaybe<AddonWhereUniqueInput>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  distinct?: InputMaybe<Array<AddonScalarFieldEnum> | AddonScalarFieldEnum>;
+}>;
+
+
+export type AddonForSelectQuery = { __typename?: 'Query', addons: Array<{ __typename?: 'Addon', id: string, name: string }> };
+
+export type BlogsForTableViewQueryVariables = Exact<{
+  where?: InputMaybe<BlogWhereInput>;
+  orderBy?: InputMaybe<Array<BlogOrderByWithRelationInput> | BlogOrderByWithRelationInput>;
+  cursor?: InputMaybe<BlogWhereUniqueInput>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  distinct?: InputMaybe<Array<BlogScalarFieldEnum> | BlogScalarFieldEnum>;
+}>;
+
+
+export type BlogsForTableViewQuery = { __typename?: 'Query', blogs: Array<{ __typename?: 'Blog', createdAt: any, id: string, imoji: string, title: string, addon?: { __typename?: 'Addon', name: string, id: string } | null, addonBlogCategory?: { __typename?: 'AddonBlogCategory', name: string, id: string } | null }> };
+
+export type BlogForUpdateQueryVariables = Exact<{
+  where: BlogWhereUniqueInput;
+}>;
+
+
+export type BlogForUpdateQuery = { __typename?: 'Query', blog?: { __typename?: 'Blog', id: string, description: string, imoji: string, title: string, addonId: string, addonBlogCategoryId?: string | null } | null };
+
+export type CreateOneBlogMutationVariables = Exact<{
+  data: BlogCreateInput;
+}>;
+
+
+export type CreateOneBlogMutation = { __typename?: 'Mutation', createOneBlog: { __typename?: 'Blog', id: string } };
+
+export type UpdateOneBlogMutationVariables = Exact<{
+  data: BlogUpdateInput;
+  where: BlogWhereUniqueInput;
+}>;
+
+
+export type UpdateOneBlogMutation = { __typename?: 'Mutation', updateOneBlog?: { __typename?: 'Blog', id: string } | null };
+
+export type DeleteOneBlogMutationVariables = Exact<{
+  where: BlogWhereUniqueInput;
+}>;
+
+
+export type DeleteOneBlogMutation = { __typename?: 'Mutation', deleteOneBlog?: { __typename?: 'Blog', id: string } | null };
+
+export type AggregateBlogQueryVariables = Exact<{
+  where?: InputMaybe<BlogWhereInput>;
+  orderBy?: InputMaybe<Array<BlogOrderByWithRelationInput> | BlogOrderByWithRelationInput>;
+  cursor?: InputMaybe<BlogWhereUniqueInput>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type AggregateBlogQuery = { __typename?: 'Query', aggregateBlog: { __typename?: 'AggregateBlog', _count?: { __typename?: 'BlogCountAggregate', _all: number } | null } };
+
+export type CreateOneAddonBlogCategoryMutationVariables = Exact<{
+  data: AddonBlogCategoryCreateInput;
+}>;
+
+
+export type CreateOneAddonBlogCategoryMutation = { __typename?: 'Mutation', createOneAddonBlogCategory: { __typename?: 'AddonBlogCategory', id: string } };
+
+export type UpdateOneAddonBlogCategoryMutationVariables = Exact<{
+  data: AddonBlogCategoryUpdateInput;
+  where: AddonBlogCategoryWhereUniqueInput;
+}>;
+
+
+export type UpdateOneAddonBlogCategoryMutation = { __typename?: 'Mutation', updateOneAddonBlogCategory?: { __typename?: 'AddonBlogCategory', id: string } | null };
+
+export type AddonBlogCategoryForUpdateQueryVariables = Exact<{
+  where: AddonBlogCategoryWhereUniqueInput;
+}>;
+
+
+export type AddonBlogCategoryForUpdateQuery = { __typename?: 'Query', addonBlogCategory?: { __typename?: 'AddonBlogCategory', name: string, addonId: string, id: string } | null };
+
+export type AddonBlogCategoriesForTableViewQueryVariables = Exact<{
+  where?: InputMaybe<AddonBlogCategoryWhereInput>;
+  orderBy?: InputMaybe<Array<AddonBlogCategoryOrderByWithRelationInput> | AddonBlogCategoryOrderByWithRelationInput>;
+  cursor?: InputMaybe<AddonBlogCategoryWhereUniqueInput>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  distinct?: InputMaybe<Array<AddonBlogCategoryScalarFieldEnum> | AddonBlogCategoryScalarFieldEnum>;
+}>;
+
+
+export type AddonBlogCategoriesForTableViewQuery = { __typename?: 'Query', addonBlogCategories: Array<{ __typename?: 'AddonBlogCategory', id: string, name: string, updatedAt: any, createdAt: any, _count?: { __typename?: 'AddonBlogCategoryCount', blog: number } | null, addon?: { __typename?: 'Addon', id: string, name: string } | null }> };
+
+export type AggregateAddonBlogCategoryQueryVariables = Exact<{
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  cursor?: InputMaybe<AddonBlogCategoryWhereUniqueInput>;
+  orderBy?: InputMaybe<Array<AddonBlogCategoryOrderByWithRelationInput> | AddonBlogCategoryOrderByWithRelationInput>;
+  where?: InputMaybe<AddonBlogCategoryWhereInput>;
+}>;
+
+
+export type AggregateAddonBlogCategoryQuery = { __typename?: 'Query', aggregateAddonBlogCategory: { __typename?: 'AggregateAddonBlogCategory', _count?: { __typename?: 'AddonBlogCategoryCountAggregate', _all: number } | null } };
+
+export type DeleteOneAddonBlogCategoryMutationVariables = Exact<{
+  where: AddonBlogCategoryWhereUniqueInput;
+}>;
+
+
+export type DeleteOneAddonBlogCategoryMutation = { __typename?: 'Mutation', deleteOneAddonBlogCategory?: { __typename?: 'AddonBlogCategory', id: string } | null };
+
 export type CategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -5333,6 +5478,680 @@ export function useAggregateAddonLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
 export type AggregateAddonQueryHookResult = ReturnType<typeof useAggregateAddonQuery>;
 export type AggregateAddonLazyQueryHookResult = ReturnType<typeof useAggregateAddonLazyQuery>;
 export type AggregateAddonQueryResult = Apollo.QueryResult<AggregateAddonQuery, AggregateAddonQueryVariables>;
+export const CreateOneAddonDocument = gql`
+    mutation CreateOneAddon($data: AddonCreateInput!) {
+  createOneAddon(data: $data) {
+    id
+  }
+}
+    `;
+export type CreateOneAddonMutationFn = Apollo.MutationFunction<CreateOneAddonMutation, CreateOneAddonMutationVariables>;
+
+/**
+ * __useCreateOneAddonMutation__
+ *
+ * To run a mutation, you first call `useCreateOneAddonMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateOneAddonMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createOneAddonMutation, { data, loading, error }] = useCreateOneAddonMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useCreateOneAddonMutation(baseOptions?: Apollo.MutationHookOptions<CreateOneAddonMutation, CreateOneAddonMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateOneAddonMutation, CreateOneAddonMutationVariables>(CreateOneAddonDocument, options);
+      }
+export type CreateOneAddonMutationHookResult = ReturnType<typeof useCreateOneAddonMutation>;
+export type CreateOneAddonMutationResult = Apollo.MutationResult<CreateOneAddonMutation>;
+export type CreateOneAddonMutationOptions = Apollo.BaseMutationOptions<CreateOneAddonMutation, CreateOneAddonMutationVariables>;
+export const DeleteOneAddonDocument = gql`
+    mutation DeleteOneAddon($where: AddonWhereUniqueInput!) {
+  deleteOneAddon(where: $where) {
+    id
+  }
+}
+    `;
+export type DeleteOneAddonMutationFn = Apollo.MutationFunction<DeleteOneAddonMutation, DeleteOneAddonMutationVariables>;
+
+/**
+ * __useDeleteOneAddonMutation__
+ *
+ * To run a mutation, you first call `useDeleteOneAddonMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteOneAddonMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteOneAddonMutation, { data, loading, error }] = useDeleteOneAddonMutation({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useDeleteOneAddonMutation(baseOptions?: Apollo.MutationHookOptions<DeleteOneAddonMutation, DeleteOneAddonMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteOneAddonMutation, DeleteOneAddonMutationVariables>(DeleteOneAddonDocument, options);
+      }
+export type DeleteOneAddonMutationHookResult = ReturnType<typeof useDeleteOneAddonMutation>;
+export type DeleteOneAddonMutationResult = Apollo.MutationResult<DeleteOneAddonMutation>;
+export type DeleteOneAddonMutationOptions = Apollo.BaseMutationOptions<DeleteOneAddonMutation, DeleteOneAddonMutationVariables>;
+export const AddonForupdateDocument = gql`
+    query AddonForupdate($where: AddonWhereUniqueInput!) {
+  addon(where: $where) {
+    id
+    description
+    img
+    imoji
+    name
+    purchaseUrl
+  }
+}
+    `;
+
+/**
+ * __useAddonForupdateQuery__
+ *
+ * To run a query within a React component, call `useAddonForupdateQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAddonForupdateQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAddonForupdateQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useAddonForupdateQuery(baseOptions: Apollo.QueryHookOptions<AddonForupdateQuery, AddonForupdateQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AddonForupdateQuery, AddonForupdateQueryVariables>(AddonForupdateDocument, options);
+      }
+export function useAddonForupdateLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AddonForupdateQuery, AddonForupdateQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AddonForupdateQuery, AddonForupdateQueryVariables>(AddonForupdateDocument, options);
+        }
+export type AddonForupdateQueryHookResult = ReturnType<typeof useAddonForupdateQuery>;
+export type AddonForupdateLazyQueryHookResult = ReturnType<typeof useAddonForupdateLazyQuery>;
+export type AddonForupdateQueryResult = Apollo.QueryResult<AddonForupdateQuery, AddonForupdateQueryVariables>;
+export const UpdateOneAddonDocument = gql`
+    mutation UpdateOneAddon($data: AddonUpdateInput!, $where: AddonWhereUniqueInput!) {
+  updateOneAddon(data: $data, where: $where) {
+    id
+  }
+}
+    `;
+export type UpdateOneAddonMutationFn = Apollo.MutationFunction<UpdateOneAddonMutation, UpdateOneAddonMutationVariables>;
+
+/**
+ * __useUpdateOneAddonMutation__
+ *
+ * To run a mutation, you first call `useUpdateOneAddonMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateOneAddonMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateOneAddonMutation, { data, loading, error }] = useUpdateOneAddonMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useUpdateOneAddonMutation(baseOptions?: Apollo.MutationHookOptions<UpdateOneAddonMutation, UpdateOneAddonMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateOneAddonMutation, UpdateOneAddonMutationVariables>(UpdateOneAddonDocument, options);
+      }
+export type UpdateOneAddonMutationHookResult = ReturnType<typeof useUpdateOneAddonMutation>;
+export type UpdateOneAddonMutationResult = Apollo.MutationResult<UpdateOneAddonMutation>;
+export type UpdateOneAddonMutationOptions = Apollo.BaseMutationOptions<UpdateOneAddonMutation, UpdateOneAddonMutationVariables>;
+export const AddonForSelectDocument = gql`
+    query AddonForSelect($where: AddonWhereInput, $orderBy: [AddonOrderByWithRelationInput!], $cursor: AddonWhereUniqueInput, $take: Int, $skip: Int, $distinct: [AddonScalarFieldEnum!]) {
+  addons(
+    where: $where
+    orderBy: $orderBy
+    cursor: $cursor
+    take: $take
+    skip: $skip
+    distinct: $distinct
+  ) {
+    id
+    name
+  }
+}
+    `;
+
+/**
+ * __useAddonForSelectQuery__
+ *
+ * To run a query within a React component, call `useAddonForSelectQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAddonForSelectQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAddonForSelectQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *      orderBy: // value for 'orderBy'
+ *      cursor: // value for 'cursor'
+ *      take: // value for 'take'
+ *      skip: // value for 'skip'
+ *      distinct: // value for 'distinct'
+ *   },
+ * });
+ */
+export function useAddonForSelectQuery(baseOptions?: Apollo.QueryHookOptions<AddonForSelectQuery, AddonForSelectQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AddonForSelectQuery, AddonForSelectQueryVariables>(AddonForSelectDocument, options);
+      }
+export function useAddonForSelectLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AddonForSelectQuery, AddonForSelectQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AddonForSelectQuery, AddonForSelectQueryVariables>(AddonForSelectDocument, options);
+        }
+export type AddonForSelectQueryHookResult = ReturnType<typeof useAddonForSelectQuery>;
+export type AddonForSelectLazyQueryHookResult = ReturnType<typeof useAddonForSelectLazyQuery>;
+export type AddonForSelectQueryResult = Apollo.QueryResult<AddonForSelectQuery, AddonForSelectQueryVariables>;
+export const BlogsForTableViewDocument = gql`
+    query BlogsForTableView($where: BlogWhereInput, $orderBy: [BlogOrderByWithRelationInput!], $cursor: BlogWhereUniqueInput, $take: Int, $skip: Int, $distinct: [BlogScalarFieldEnum!]) {
+  blogs(
+    where: $where
+    orderBy: $orderBy
+    cursor: $cursor
+    take: $take
+    skip: $skip
+    distinct: $distinct
+  ) {
+    addon {
+      name
+      id
+    }
+    addonBlogCategory {
+      name
+      id
+    }
+    createdAt
+    id
+    imoji
+    title
+  }
+}
+    `;
+
+/**
+ * __useBlogsForTableViewQuery__
+ *
+ * To run a query within a React component, call `useBlogsForTableViewQuery` and pass it any options that fit your needs.
+ * When your component renders, `useBlogsForTableViewQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useBlogsForTableViewQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *      orderBy: // value for 'orderBy'
+ *      cursor: // value for 'cursor'
+ *      take: // value for 'take'
+ *      skip: // value for 'skip'
+ *      distinct: // value for 'distinct'
+ *   },
+ * });
+ */
+export function useBlogsForTableViewQuery(baseOptions?: Apollo.QueryHookOptions<BlogsForTableViewQuery, BlogsForTableViewQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<BlogsForTableViewQuery, BlogsForTableViewQueryVariables>(BlogsForTableViewDocument, options);
+      }
+export function useBlogsForTableViewLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<BlogsForTableViewQuery, BlogsForTableViewQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<BlogsForTableViewQuery, BlogsForTableViewQueryVariables>(BlogsForTableViewDocument, options);
+        }
+export type BlogsForTableViewQueryHookResult = ReturnType<typeof useBlogsForTableViewQuery>;
+export type BlogsForTableViewLazyQueryHookResult = ReturnType<typeof useBlogsForTableViewLazyQuery>;
+export type BlogsForTableViewQueryResult = Apollo.QueryResult<BlogsForTableViewQuery, BlogsForTableViewQueryVariables>;
+export const BlogForUpdateDocument = gql`
+    query BlogForUpdate($where: BlogWhereUniqueInput!) {
+  blog(where: $where) {
+    id
+    description
+    imoji
+    title
+    addonId
+    addonBlogCategoryId
+  }
+}
+    `;
+
+/**
+ * __useBlogForUpdateQuery__
+ *
+ * To run a query within a React component, call `useBlogForUpdateQuery` and pass it any options that fit your needs.
+ * When your component renders, `useBlogForUpdateQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useBlogForUpdateQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useBlogForUpdateQuery(baseOptions: Apollo.QueryHookOptions<BlogForUpdateQuery, BlogForUpdateQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<BlogForUpdateQuery, BlogForUpdateQueryVariables>(BlogForUpdateDocument, options);
+      }
+export function useBlogForUpdateLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<BlogForUpdateQuery, BlogForUpdateQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<BlogForUpdateQuery, BlogForUpdateQueryVariables>(BlogForUpdateDocument, options);
+        }
+export type BlogForUpdateQueryHookResult = ReturnType<typeof useBlogForUpdateQuery>;
+export type BlogForUpdateLazyQueryHookResult = ReturnType<typeof useBlogForUpdateLazyQuery>;
+export type BlogForUpdateQueryResult = Apollo.QueryResult<BlogForUpdateQuery, BlogForUpdateQueryVariables>;
+export const CreateOneBlogDocument = gql`
+    mutation CreateOneBlog($data: BlogCreateInput!) {
+  createOneBlog(data: $data) {
+    id
+  }
+}
+    `;
+export type CreateOneBlogMutationFn = Apollo.MutationFunction<CreateOneBlogMutation, CreateOneBlogMutationVariables>;
+
+/**
+ * __useCreateOneBlogMutation__
+ *
+ * To run a mutation, you first call `useCreateOneBlogMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateOneBlogMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createOneBlogMutation, { data, loading, error }] = useCreateOneBlogMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useCreateOneBlogMutation(baseOptions?: Apollo.MutationHookOptions<CreateOneBlogMutation, CreateOneBlogMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateOneBlogMutation, CreateOneBlogMutationVariables>(CreateOneBlogDocument, options);
+      }
+export type CreateOneBlogMutationHookResult = ReturnType<typeof useCreateOneBlogMutation>;
+export type CreateOneBlogMutationResult = Apollo.MutationResult<CreateOneBlogMutation>;
+export type CreateOneBlogMutationOptions = Apollo.BaseMutationOptions<CreateOneBlogMutation, CreateOneBlogMutationVariables>;
+export const UpdateOneBlogDocument = gql`
+    mutation UpdateOneBlog($data: BlogUpdateInput!, $where: BlogWhereUniqueInput!) {
+  updateOneBlog(data: $data, where: $where) {
+    id
+  }
+}
+    `;
+export type UpdateOneBlogMutationFn = Apollo.MutationFunction<UpdateOneBlogMutation, UpdateOneBlogMutationVariables>;
+
+/**
+ * __useUpdateOneBlogMutation__
+ *
+ * To run a mutation, you first call `useUpdateOneBlogMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateOneBlogMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateOneBlogMutation, { data, loading, error }] = useUpdateOneBlogMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useUpdateOneBlogMutation(baseOptions?: Apollo.MutationHookOptions<UpdateOneBlogMutation, UpdateOneBlogMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateOneBlogMutation, UpdateOneBlogMutationVariables>(UpdateOneBlogDocument, options);
+      }
+export type UpdateOneBlogMutationHookResult = ReturnType<typeof useUpdateOneBlogMutation>;
+export type UpdateOneBlogMutationResult = Apollo.MutationResult<UpdateOneBlogMutation>;
+export type UpdateOneBlogMutationOptions = Apollo.BaseMutationOptions<UpdateOneBlogMutation, UpdateOneBlogMutationVariables>;
+export const DeleteOneBlogDocument = gql`
+    mutation DeleteOneBlog($where: BlogWhereUniqueInput!) {
+  deleteOneBlog(where: $where) {
+    id
+  }
+}
+    `;
+export type DeleteOneBlogMutationFn = Apollo.MutationFunction<DeleteOneBlogMutation, DeleteOneBlogMutationVariables>;
+
+/**
+ * __useDeleteOneBlogMutation__
+ *
+ * To run a mutation, you first call `useDeleteOneBlogMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteOneBlogMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteOneBlogMutation, { data, loading, error }] = useDeleteOneBlogMutation({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useDeleteOneBlogMutation(baseOptions?: Apollo.MutationHookOptions<DeleteOneBlogMutation, DeleteOneBlogMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteOneBlogMutation, DeleteOneBlogMutationVariables>(DeleteOneBlogDocument, options);
+      }
+export type DeleteOneBlogMutationHookResult = ReturnType<typeof useDeleteOneBlogMutation>;
+export type DeleteOneBlogMutationResult = Apollo.MutationResult<DeleteOneBlogMutation>;
+export type DeleteOneBlogMutationOptions = Apollo.BaseMutationOptions<DeleteOneBlogMutation, DeleteOneBlogMutationVariables>;
+export const AggregateBlogDocument = gql`
+    query AggregateBlog($where: BlogWhereInput, $orderBy: [BlogOrderByWithRelationInput!], $cursor: BlogWhereUniqueInput, $take: Int, $skip: Int) {
+  aggregateBlog(
+    where: $where
+    orderBy: $orderBy
+    cursor: $cursor
+    take: $take
+    skip: $skip
+  ) {
+    _count {
+      _all
+    }
+  }
+}
+    `;
+
+/**
+ * __useAggregateBlogQuery__
+ *
+ * To run a query within a React component, call `useAggregateBlogQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAggregateBlogQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAggregateBlogQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *      orderBy: // value for 'orderBy'
+ *      cursor: // value for 'cursor'
+ *      take: // value for 'take'
+ *      skip: // value for 'skip'
+ *   },
+ * });
+ */
+export function useAggregateBlogQuery(baseOptions?: Apollo.QueryHookOptions<AggregateBlogQuery, AggregateBlogQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AggregateBlogQuery, AggregateBlogQueryVariables>(AggregateBlogDocument, options);
+      }
+export function useAggregateBlogLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AggregateBlogQuery, AggregateBlogQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AggregateBlogQuery, AggregateBlogQueryVariables>(AggregateBlogDocument, options);
+        }
+export type AggregateBlogQueryHookResult = ReturnType<typeof useAggregateBlogQuery>;
+export type AggregateBlogLazyQueryHookResult = ReturnType<typeof useAggregateBlogLazyQuery>;
+export type AggregateBlogQueryResult = Apollo.QueryResult<AggregateBlogQuery, AggregateBlogQueryVariables>;
+export const CreateOneAddonBlogCategoryDocument = gql`
+    mutation CreateOneAddonBlogCategory($data: AddonBlogCategoryCreateInput!) {
+  createOneAddonBlogCategory(data: $data) {
+    id
+  }
+}
+    `;
+export type CreateOneAddonBlogCategoryMutationFn = Apollo.MutationFunction<CreateOneAddonBlogCategoryMutation, CreateOneAddonBlogCategoryMutationVariables>;
+
+/**
+ * __useCreateOneAddonBlogCategoryMutation__
+ *
+ * To run a mutation, you first call `useCreateOneAddonBlogCategoryMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateOneAddonBlogCategoryMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createOneAddonBlogCategoryMutation, { data, loading, error }] = useCreateOneAddonBlogCategoryMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useCreateOneAddonBlogCategoryMutation(baseOptions?: Apollo.MutationHookOptions<CreateOneAddonBlogCategoryMutation, CreateOneAddonBlogCategoryMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateOneAddonBlogCategoryMutation, CreateOneAddonBlogCategoryMutationVariables>(CreateOneAddonBlogCategoryDocument, options);
+      }
+export type CreateOneAddonBlogCategoryMutationHookResult = ReturnType<typeof useCreateOneAddonBlogCategoryMutation>;
+export type CreateOneAddonBlogCategoryMutationResult = Apollo.MutationResult<CreateOneAddonBlogCategoryMutation>;
+export type CreateOneAddonBlogCategoryMutationOptions = Apollo.BaseMutationOptions<CreateOneAddonBlogCategoryMutation, CreateOneAddonBlogCategoryMutationVariables>;
+export const UpdateOneAddonBlogCategoryDocument = gql`
+    mutation UpdateOneAddonBlogCategory($data: AddonBlogCategoryUpdateInput!, $where: AddonBlogCategoryWhereUniqueInput!) {
+  updateOneAddonBlogCategory(data: $data, where: $where) {
+    id
+  }
+}
+    `;
+export type UpdateOneAddonBlogCategoryMutationFn = Apollo.MutationFunction<UpdateOneAddonBlogCategoryMutation, UpdateOneAddonBlogCategoryMutationVariables>;
+
+/**
+ * __useUpdateOneAddonBlogCategoryMutation__
+ *
+ * To run a mutation, you first call `useUpdateOneAddonBlogCategoryMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateOneAddonBlogCategoryMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateOneAddonBlogCategoryMutation, { data, loading, error }] = useUpdateOneAddonBlogCategoryMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useUpdateOneAddonBlogCategoryMutation(baseOptions?: Apollo.MutationHookOptions<UpdateOneAddonBlogCategoryMutation, UpdateOneAddonBlogCategoryMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateOneAddonBlogCategoryMutation, UpdateOneAddonBlogCategoryMutationVariables>(UpdateOneAddonBlogCategoryDocument, options);
+      }
+export type UpdateOneAddonBlogCategoryMutationHookResult = ReturnType<typeof useUpdateOneAddonBlogCategoryMutation>;
+export type UpdateOneAddonBlogCategoryMutationResult = Apollo.MutationResult<UpdateOneAddonBlogCategoryMutation>;
+export type UpdateOneAddonBlogCategoryMutationOptions = Apollo.BaseMutationOptions<UpdateOneAddonBlogCategoryMutation, UpdateOneAddonBlogCategoryMutationVariables>;
+export const AddonBlogCategoryForUpdateDocument = gql`
+    query AddonBlogCategoryForUpdate($where: AddonBlogCategoryWhereUniqueInput!) {
+  addonBlogCategory(where: $where) {
+    name
+    addonId
+    id
+  }
+}
+    `;
+
+/**
+ * __useAddonBlogCategoryForUpdateQuery__
+ *
+ * To run a query within a React component, call `useAddonBlogCategoryForUpdateQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAddonBlogCategoryForUpdateQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAddonBlogCategoryForUpdateQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useAddonBlogCategoryForUpdateQuery(baseOptions: Apollo.QueryHookOptions<AddonBlogCategoryForUpdateQuery, AddonBlogCategoryForUpdateQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AddonBlogCategoryForUpdateQuery, AddonBlogCategoryForUpdateQueryVariables>(AddonBlogCategoryForUpdateDocument, options);
+      }
+export function useAddonBlogCategoryForUpdateLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AddonBlogCategoryForUpdateQuery, AddonBlogCategoryForUpdateQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AddonBlogCategoryForUpdateQuery, AddonBlogCategoryForUpdateQueryVariables>(AddonBlogCategoryForUpdateDocument, options);
+        }
+export type AddonBlogCategoryForUpdateQueryHookResult = ReturnType<typeof useAddonBlogCategoryForUpdateQuery>;
+export type AddonBlogCategoryForUpdateLazyQueryHookResult = ReturnType<typeof useAddonBlogCategoryForUpdateLazyQuery>;
+export type AddonBlogCategoryForUpdateQueryResult = Apollo.QueryResult<AddonBlogCategoryForUpdateQuery, AddonBlogCategoryForUpdateQueryVariables>;
+export const AddonBlogCategoriesForTableViewDocument = gql`
+    query AddonBlogCategoriesForTableView($where: AddonBlogCategoryWhereInput, $orderBy: [AddonBlogCategoryOrderByWithRelationInput!], $cursor: AddonBlogCategoryWhereUniqueInput, $take: Int, $skip: Int, $distinct: [AddonBlogCategoryScalarFieldEnum!]) {
+  addonBlogCategories(
+    where: $where
+    orderBy: $orderBy
+    cursor: $cursor
+    take: $take
+    skip: $skip
+    distinct: $distinct
+  ) {
+    _count {
+      blog
+    }
+    addon {
+      id
+      name
+    }
+    id
+    name
+    updatedAt
+    createdAt
+  }
+}
+    `;
+
+/**
+ * __useAddonBlogCategoriesForTableViewQuery__
+ *
+ * To run a query within a React component, call `useAddonBlogCategoriesForTableViewQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAddonBlogCategoriesForTableViewQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAddonBlogCategoriesForTableViewQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *      orderBy: // value for 'orderBy'
+ *      cursor: // value for 'cursor'
+ *      take: // value for 'take'
+ *      skip: // value for 'skip'
+ *      distinct: // value for 'distinct'
+ *   },
+ * });
+ */
+export function useAddonBlogCategoriesForTableViewQuery(baseOptions?: Apollo.QueryHookOptions<AddonBlogCategoriesForTableViewQuery, AddonBlogCategoriesForTableViewQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AddonBlogCategoriesForTableViewQuery, AddonBlogCategoriesForTableViewQueryVariables>(AddonBlogCategoriesForTableViewDocument, options);
+      }
+export function useAddonBlogCategoriesForTableViewLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AddonBlogCategoriesForTableViewQuery, AddonBlogCategoriesForTableViewQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AddonBlogCategoriesForTableViewQuery, AddonBlogCategoriesForTableViewQueryVariables>(AddonBlogCategoriesForTableViewDocument, options);
+        }
+export type AddonBlogCategoriesForTableViewQueryHookResult = ReturnType<typeof useAddonBlogCategoriesForTableViewQuery>;
+export type AddonBlogCategoriesForTableViewLazyQueryHookResult = ReturnType<typeof useAddonBlogCategoriesForTableViewLazyQuery>;
+export type AddonBlogCategoriesForTableViewQueryResult = Apollo.QueryResult<AddonBlogCategoriesForTableViewQuery, AddonBlogCategoriesForTableViewQueryVariables>;
+export const AggregateAddonBlogCategoryDocument = gql`
+    query AggregateAddonBlogCategory($skip: Int, $take: Int, $cursor: AddonBlogCategoryWhereUniqueInput, $orderBy: [AddonBlogCategoryOrderByWithRelationInput!], $where: AddonBlogCategoryWhereInput) {
+  aggregateAddonBlogCategory(
+    skip: $skip
+    take: $take
+    cursor: $cursor
+    orderBy: $orderBy
+    where: $where
+  ) {
+    _count {
+      _all
+    }
+  }
+}
+    `;
+
+/**
+ * __useAggregateAddonBlogCategoryQuery__
+ *
+ * To run a query within a React component, call `useAggregateAddonBlogCategoryQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAggregateAddonBlogCategoryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAggregateAddonBlogCategoryQuery({
+ *   variables: {
+ *      skip: // value for 'skip'
+ *      take: // value for 'take'
+ *      cursor: // value for 'cursor'
+ *      orderBy: // value for 'orderBy'
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useAggregateAddonBlogCategoryQuery(baseOptions?: Apollo.QueryHookOptions<AggregateAddonBlogCategoryQuery, AggregateAddonBlogCategoryQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AggregateAddonBlogCategoryQuery, AggregateAddonBlogCategoryQueryVariables>(AggregateAddonBlogCategoryDocument, options);
+      }
+export function useAggregateAddonBlogCategoryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AggregateAddonBlogCategoryQuery, AggregateAddonBlogCategoryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AggregateAddonBlogCategoryQuery, AggregateAddonBlogCategoryQueryVariables>(AggregateAddonBlogCategoryDocument, options);
+        }
+export type AggregateAddonBlogCategoryQueryHookResult = ReturnType<typeof useAggregateAddonBlogCategoryQuery>;
+export type AggregateAddonBlogCategoryLazyQueryHookResult = ReturnType<typeof useAggregateAddonBlogCategoryLazyQuery>;
+export type AggregateAddonBlogCategoryQueryResult = Apollo.QueryResult<AggregateAddonBlogCategoryQuery, AggregateAddonBlogCategoryQueryVariables>;
+export const DeleteOneAddonBlogCategoryDocument = gql`
+    mutation DeleteOneAddonBlogCategory($where: AddonBlogCategoryWhereUniqueInput!) {
+  deleteOneAddonBlogCategory(where: $where) {
+    id
+  }
+}
+    `;
+export type DeleteOneAddonBlogCategoryMutationFn = Apollo.MutationFunction<DeleteOneAddonBlogCategoryMutation, DeleteOneAddonBlogCategoryMutationVariables>;
+
+/**
+ * __useDeleteOneAddonBlogCategoryMutation__
+ *
+ * To run a mutation, you first call `useDeleteOneAddonBlogCategoryMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteOneAddonBlogCategoryMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteOneAddonBlogCategoryMutation, { data, loading, error }] = useDeleteOneAddonBlogCategoryMutation({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useDeleteOneAddonBlogCategoryMutation(baseOptions?: Apollo.MutationHookOptions<DeleteOneAddonBlogCategoryMutation, DeleteOneAddonBlogCategoryMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteOneAddonBlogCategoryMutation, DeleteOneAddonBlogCategoryMutationVariables>(DeleteOneAddonBlogCategoryDocument, options);
+      }
+export type DeleteOneAddonBlogCategoryMutationHookResult = ReturnType<typeof useDeleteOneAddonBlogCategoryMutation>;
+export type DeleteOneAddonBlogCategoryMutationResult = Apollo.MutationResult<DeleteOneAddonBlogCategoryMutation>;
+export type DeleteOneAddonBlogCategoryMutationOptions = Apollo.BaseMutationOptions<DeleteOneAddonBlogCategoryMutation, DeleteOneAddonBlogCategoryMutationVariables>;
 export const CategoriesDocument = gql`
     query Categories {
   categories {

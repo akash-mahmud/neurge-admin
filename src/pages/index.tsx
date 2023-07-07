@@ -34,7 +34,6 @@ import { useState } from 'react';
 import PageContainer from '@/components/container/PageContainer';
 import BlankCard from '@/components/shared/BlankCard';
 import ParentCard from '@/components/shared/ParentCard';
-import EmojiPicker from 'emoji-picker-react';
 import { EmojiEmotions } from '@mui/icons-material';
 import CreateTag from '@/components/task/tags/Create';
 import { uniqueId } from 'lodash';

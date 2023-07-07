@@ -22,3 +22,41 @@ query AggregateAddon($where: AddonWhereInput, $orderBy: [AddonOrderByWithRelatio
   }
 }
 
+
+mutation CreateOneAddon($data: AddonCreateInput!) {
+  createOneAddon(data: $data) {
+    id
+  }
+}
+
+
+mutation DeleteOneAddon($where: AddonWhereUniqueInput!) {
+  deleteOneAddon(where: $where) {
+    id
+  }
+}
+query AddonForupdate($where: AddonWhereUniqueInput!) {
+  addon(where: $where) {
+    id
+    description
+    img
+    imoji
+    name
+    purchaseUrl
+  }
+}
+
+mutation UpdateOneAddon($data: AddonUpdateInput!, $where: AddonWhereUniqueInput!) {
+  updateOneAddon(data: $data, where: $where) {
+    id
+  }
+}
+
+
+
+query AddonForSelect($where: AddonWhereInput, $orderBy: [AddonOrderByWithRelationInput!], $cursor: AddonWhereUniqueInput, $take: Int, $skip: Int, $distinct: [AddonScalarFieldEnum!]) {
+  addons(where: $where, orderBy: $orderBy, cursor: $cursor, take: $take, skip: $skip, distinct: $distinct) {
+    id
+    name
+  }
+}
