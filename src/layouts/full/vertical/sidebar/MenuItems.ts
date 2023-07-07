@@ -65,6 +65,7 @@ import {
   IconAppWindow
 } from '@tabler/icons-react';
 import { AddOutlined } from '@mui/icons-material';
+import { UserOutlined } from '@ant-design/icons';
 
 const Menuitems: MenuitemsType[] = [
   {
@@ -127,6 +128,19 @@ const Menuitems: MenuitemsType[] = [
         href: '/blog',
       },
     ]
+  },
+  {
+    navlabel: true,
+    subheader: 'Users',
+  },
+
+
+  {
+    id: uniqueId(),
+    title: 'Clients',
+    icon: UserOutlined,
+    href: '/client',
+   
   },
 
 

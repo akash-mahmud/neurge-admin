@@ -1771,11 +1771,11 @@ export type IntWithAggregatesFilter = {
 
 export type LoginResponsce = {
   __typename?: 'LoginResponsce';
-  accessToken: Scalars['String']['output'];
+  accessToken?: Maybe<Scalars['String']['output']>;
   isAuthenticated: Scalars['Boolean']['output'];
   message: Scalars['String']['output'];
   success: Scalars['Boolean']['output'];
-  user: User;
+  user?: Maybe<User>;
 };
 
 export type Mutation = {
@@ -1819,6 +1819,7 @@ export type Mutation = {
   login?: Maybe<LoginResponsce>;
   loginAdmin?: Maybe<LoginResponsce>;
   register?: Maybe<DefaultResponsce>;
+  registerByAdmin?: Maybe<DefaultResponsce>;
   updateManyAddon: AffectedRowsOutput;
   updateManyAddonBlogCategory: AffectedRowsOutput;
   updateManyBlog: AffectedRowsOutput;
@@ -1846,6 +1847,7 @@ export type Mutation = {
   upsertOneTask: Task;
   upsertOneTip: Tip;
   upsertOneUser: User;
+  userUpdateByAdmin?: Maybe<DefaultResponsce>;
 };
 
 
@@ -2055,6 +2057,11 @@ export type MutationRegisterArgs = {
 };
 
 
+export type MutationRegisterByAdminArgs = {
+  data: UserCreateInput;
+};
+
+
 export type MutationUpdateManyAddonArgs = {
   data: AddonUpdateManyMutationInput;
   where?: InputMaybe<AddonWhereInput>;
@@ -2222,6 +2229,15 @@ export type MutationUpsertOneTipArgs = {
 export type MutationUpsertOneUserArgs = {
   create: UserCreateInput;
   update: UserUpdateInput;
+  where: UserWhereUniqueInput;
+};
+
+
+export type MutationUserUpdateByAdminArgs = {
+  data: UserUpdateInput;
+  newPass?: InputMaybe<Scalars['String']['input']>;
+  oldPassword?: InputMaybe<Scalars['String']['input']>;
+  updatePass?: InputMaybe<Scalars['Boolean']['input']>;
   where: UserWhereUniqueInput;
 };
 
@@ -5168,7 +5184,7 @@ export type LoginAdminMutationVariables = Exact<{
 }>;
 
 
-export type LoginAdminMutation = { __typename?: 'Mutation', loginAdmin?: { __typename?: 'LoginResponsce', accessToken: string, isAuthenticated: boolean, message: string, success: boolean, user: { __typename?: 'User', avater?: string | null, email: string, id: string, name: string, role: UserRole } } | null };
+export type LoginAdminMutation = { __typename?: 'Mutation', loginAdmin?: { __typename?: 'LoginResponsce', accessToken?: string | null, isAuthenticated: boolean, message: string, success: boolean, user?: { __typename?: 'User', avater?: string | null, email: string, id: string, name: string, role: UserRole } | null } | null };
 
 export type CategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -5399,6 +5415,61 @@ export type TipsAfterDeleteFromTaskQueryVariables = Exact<{
 
 
 export type TipsAfterDeleteFromTaskQuery = { __typename?: 'Query', tips: Array<{ __typename?: 'Tip', id: string, description: string }> };
+
+export type UsersDataForTableViewQueryVariables = Exact<{
+  where?: InputMaybe<UserWhereInput>;
+  orderBy?: InputMaybe<Array<UserOrderByWithRelationInput> | UserOrderByWithRelationInput>;
+  cursor?: InputMaybe<UserWhereUniqueInput>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  distinct?: InputMaybe<Array<UserScalarFieldEnum> | UserScalarFieldEnum>;
+}>;
+
+
+export type UsersDataForTableViewQuery = { __typename?: 'Query', users: Array<{ __typename?: 'User', avater?: string | null, createdAt: any, email: string, id: string, name: string, nurgePlus: boolean, role: UserRole, _count?: { __typename?: 'UserCount', purchasedAddons: number, purchasedCategories: number } | null }> };
+
+export type UserQueryVariables = Exact<{
+  where: UserWhereUniqueInput;
+}>;
+
+
+export type UserQuery = { __typename?: 'Query', user?: { __typename?: 'User', avater?: string | null, email: string, name: string, nurgePlus: boolean, id: string, purchasedAddons: Array<{ __typename?: 'Addon', id: string, name: string }>, purchasedCategories: Array<{ __typename?: 'Category', id: string, name: string }> } | null };
+
+export type DeleteOneUserMutationVariables = Exact<{
+  where: UserWhereUniqueInput;
+}>;
+
+
+export type DeleteOneUserMutation = { __typename?: 'Mutation', deleteOneUser?: { __typename?: 'User', id: string } | null };
+
+export type AggregateUserQueryVariables = Exact<{
+  where?: InputMaybe<UserWhereInput>;
+  orderBy?: InputMaybe<Array<UserOrderByWithRelationInput> | UserOrderByWithRelationInput>;
+  cursor?: InputMaybe<UserWhereUniqueInput>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type AggregateUserQuery = { __typename?: 'Query', aggregateUser: { __typename?: 'AggregateUser', _count?: { __typename?: 'UserCountAggregate', _all: number } | null } };
+
+export type RegisterByAdminMutationVariables = Exact<{
+  data: UserCreateInput;
+}>;
+
+
+export type RegisterByAdminMutation = { __typename?: 'Mutation', registerByAdmin?: { __typename?: 'defaultResponsce', message: string } | null };
+
+export type UserUpdateByAdminMutationVariables = Exact<{
+  data: UserUpdateInput;
+  where: UserWhereUniqueInput;
+  newPass?: InputMaybe<Scalars['String']['input']>;
+  updatePass?: InputMaybe<Scalars['Boolean']['input']>;
+  oldPassword?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type UserUpdateByAdminMutation = { __typename?: 'Mutation', userUpdateByAdmin?: { __typename?: 'defaultResponsce', message: string } | null };
 
 
 export const AddonsForTableViewDocument = gql`
@@ -7382,3 +7453,263 @@ export function useTipsAfterDeleteFromTaskLazyQuery(baseOptions?: Apollo.LazyQue
 export type TipsAfterDeleteFromTaskQueryHookResult = ReturnType<typeof useTipsAfterDeleteFromTaskQuery>;
 export type TipsAfterDeleteFromTaskLazyQueryHookResult = ReturnType<typeof useTipsAfterDeleteFromTaskLazyQuery>;
 export type TipsAfterDeleteFromTaskQueryResult = Apollo.QueryResult<TipsAfterDeleteFromTaskQuery, TipsAfterDeleteFromTaskQueryVariables>;
+export const UsersDataForTableViewDocument = gql`
+    query UsersDataForTableView($where: UserWhereInput, $orderBy: [UserOrderByWithRelationInput!], $cursor: UserWhereUniqueInput, $take: Int, $skip: Int, $distinct: [UserScalarFieldEnum!]) {
+  users(
+    where: $where
+    orderBy: $orderBy
+    cursor: $cursor
+    take: $take
+    skip: $skip
+    distinct: $distinct
+  ) {
+    _count {
+      purchasedAddons
+      purchasedCategories
+    }
+    avater
+    createdAt
+    email
+    id
+    name
+    nurgePlus
+    role
+  }
+}
+    `;
+
+/**
+ * __useUsersDataForTableViewQuery__
+ *
+ * To run a query within a React component, call `useUsersDataForTableViewQuery` and pass it any options that fit your needs.
+ * When your component renders, `useUsersDataForTableViewQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useUsersDataForTableViewQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *      orderBy: // value for 'orderBy'
+ *      cursor: // value for 'cursor'
+ *      take: // value for 'take'
+ *      skip: // value for 'skip'
+ *      distinct: // value for 'distinct'
+ *   },
+ * });
+ */
+export function useUsersDataForTableViewQuery(baseOptions?: Apollo.QueryHookOptions<UsersDataForTableViewQuery, UsersDataForTableViewQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<UsersDataForTableViewQuery, UsersDataForTableViewQueryVariables>(UsersDataForTableViewDocument, options);
+      }
+export function useUsersDataForTableViewLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<UsersDataForTableViewQuery, UsersDataForTableViewQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<UsersDataForTableViewQuery, UsersDataForTableViewQueryVariables>(UsersDataForTableViewDocument, options);
+        }
+export type UsersDataForTableViewQueryHookResult = ReturnType<typeof useUsersDataForTableViewQuery>;
+export type UsersDataForTableViewLazyQueryHookResult = ReturnType<typeof useUsersDataForTableViewLazyQuery>;
+export type UsersDataForTableViewQueryResult = Apollo.QueryResult<UsersDataForTableViewQuery, UsersDataForTableViewQueryVariables>;
+export const UserDocument = gql`
+    query User($where: UserWhereUniqueInput!) {
+  user(where: $where) {
+    avater
+    email
+    name
+    nurgePlus
+    purchasedAddons {
+      id
+      name
+    }
+    purchasedCategories {
+      id
+      name
+    }
+    id
+  }
+}
+    `;
+
+/**
+ * __useUserQuery__
+ *
+ * To run a query within a React component, call `useUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useUserQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useUserQuery(baseOptions: Apollo.QueryHookOptions<UserQuery, UserQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<UserQuery, UserQueryVariables>(UserDocument, options);
+      }
+export function useUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<UserQuery, UserQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<UserQuery, UserQueryVariables>(UserDocument, options);
+        }
+export type UserQueryHookResult = ReturnType<typeof useUserQuery>;
+export type UserLazyQueryHookResult = ReturnType<typeof useUserLazyQuery>;
+export type UserQueryResult = Apollo.QueryResult<UserQuery, UserQueryVariables>;
+export const DeleteOneUserDocument = gql`
+    mutation DeleteOneUser($where: UserWhereUniqueInput!) {
+  deleteOneUser(where: $where) {
+    id
+  }
+}
+    `;
+export type DeleteOneUserMutationFn = Apollo.MutationFunction<DeleteOneUserMutation, DeleteOneUserMutationVariables>;
+
+/**
+ * __useDeleteOneUserMutation__
+ *
+ * To run a mutation, you first call `useDeleteOneUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteOneUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteOneUserMutation, { data, loading, error }] = useDeleteOneUserMutation({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useDeleteOneUserMutation(baseOptions?: Apollo.MutationHookOptions<DeleteOneUserMutation, DeleteOneUserMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteOneUserMutation, DeleteOneUserMutationVariables>(DeleteOneUserDocument, options);
+      }
+export type DeleteOneUserMutationHookResult = ReturnType<typeof useDeleteOneUserMutation>;
+export type DeleteOneUserMutationResult = Apollo.MutationResult<DeleteOneUserMutation>;
+export type DeleteOneUserMutationOptions = Apollo.BaseMutationOptions<DeleteOneUserMutation, DeleteOneUserMutationVariables>;
+export const AggregateUserDocument = gql`
+    query AggregateUser($where: UserWhereInput, $orderBy: [UserOrderByWithRelationInput!], $cursor: UserWhereUniqueInput, $take: Int, $skip: Int) {
+  aggregateUser(
+    where: $where
+    orderBy: $orderBy
+    cursor: $cursor
+    take: $take
+    skip: $skip
+  ) {
+    _count {
+      _all
+    }
+  }
+}
+    `;
+
+/**
+ * __useAggregateUserQuery__
+ *
+ * To run a query within a React component, call `useAggregateUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAggregateUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAggregateUserQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *      orderBy: // value for 'orderBy'
+ *      cursor: // value for 'cursor'
+ *      take: // value for 'take'
+ *      skip: // value for 'skip'
+ *   },
+ * });
+ */
+export function useAggregateUserQuery(baseOptions?: Apollo.QueryHookOptions<AggregateUserQuery, AggregateUserQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AggregateUserQuery, AggregateUserQueryVariables>(AggregateUserDocument, options);
+      }
+export function useAggregateUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AggregateUserQuery, AggregateUserQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AggregateUserQuery, AggregateUserQueryVariables>(AggregateUserDocument, options);
+        }
+export type AggregateUserQueryHookResult = ReturnType<typeof useAggregateUserQuery>;
+export type AggregateUserLazyQueryHookResult = ReturnType<typeof useAggregateUserLazyQuery>;
+export type AggregateUserQueryResult = Apollo.QueryResult<AggregateUserQuery, AggregateUserQueryVariables>;
+export const RegisterByAdminDocument = gql`
+    mutation RegisterByAdmin($data: UserCreateInput!) {
+  registerByAdmin(data: $data) {
+    message
+  }
+}
+    `;
+export type RegisterByAdminMutationFn = Apollo.MutationFunction<RegisterByAdminMutation, RegisterByAdminMutationVariables>;
+
+/**
+ * __useRegisterByAdminMutation__
+ *
+ * To run a mutation, you first call `useRegisterByAdminMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRegisterByAdminMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [registerByAdminMutation, { data, loading, error }] = useRegisterByAdminMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useRegisterByAdminMutation(baseOptions?: Apollo.MutationHookOptions<RegisterByAdminMutation, RegisterByAdminMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<RegisterByAdminMutation, RegisterByAdminMutationVariables>(RegisterByAdminDocument, options);
+      }
+export type RegisterByAdminMutationHookResult = ReturnType<typeof useRegisterByAdminMutation>;
+export type RegisterByAdminMutationResult = Apollo.MutationResult<RegisterByAdminMutation>;
+export type RegisterByAdminMutationOptions = Apollo.BaseMutationOptions<RegisterByAdminMutation, RegisterByAdminMutationVariables>;
+export const UserUpdateByAdminDocument = gql`
+    mutation UserUpdateByAdmin($data: UserUpdateInput!, $where: UserWhereUniqueInput!, $newPass: String, $updatePass: Boolean, $oldPassword: String) {
+  userUpdateByAdmin(
+    data: $data
+    where: $where
+    newPass: $newPass
+    updatePass: $updatePass
+    oldPassword: $oldPassword
+  ) {
+    message
+  }
+}
+    `;
+export type UserUpdateByAdminMutationFn = Apollo.MutationFunction<UserUpdateByAdminMutation, UserUpdateByAdminMutationVariables>;
+
+/**
+ * __useUserUpdateByAdminMutation__
+ *
+ * To run a mutation, you first call `useUserUpdateByAdminMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUserUpdateByAdminMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [userUpdateByAdminMutation, { data, loading, error }] = useUserUpdateByAdminMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *      where: // value for 'where'
+ *      newPass: // value for 'newPass'
+ *      updatePass: // value for 'updatePass'
+ *      oldPassword: // value for 'oldPassword'
+ *   },
+ * });
+ */
+export function useUserUpdateByAdminMutation(baseOptions?: Apollo.MutationHookOptions<UserUpdateByAdminMutation, UserUpdateByAdminMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UserUpdateByAdminMutation, UserUpdateByAdminMutationVariables>(UserUpdateByAdminDocument, options);
+      }
+export type UserUpdateByAdminMutationHookResult = ReturnType<typeof useUserUpdateByAdminMutation>;
+export type UserUpdateByAdminMutationResult = Apollo.MutationResult<UserUpdateByAdminMutation>;
+export type UserUpdateByAdminMutationOptions = Apollo.BaseMutationOptions<UserUpdateByAdminMutation, UserUpdateByAdminMutationVariables>;

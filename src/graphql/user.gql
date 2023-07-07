@@ -1,0 +1,59 @@
+query UsersDataForTableView($where: UserWhereInput, $orderBy: [UserOrderByWithRelationInput!], $cursor: UserWhereUniqueInput, $take: Int, $skip: Int, $distinct: [UserScalarFieldEnum!]) {
+  users(where: $where, orderBy: $orderBy, cursor: $cursor, take: $take, skip: $skip, distinct: $distinct) {
+    _count {
+      purchasedAddons
+      purchasedCategories
+    }
+    avater
+    createdAt
+    email
+    id
+    name
+    nurgePlus
+    role
+  }
+}
+
+query User($where: UserWhereUniqueInput!) {
+  user(where: $where) {
+    avater
+    email
+    name
+    nurgePlus
+    purchasedAddons {
+      id
+      name
+    }
+    purchasedCategories {
+      id
+      name
+    }
+    id
+  }
+}
+
+mutation DeleteOneUser($where: UserWhereUniqueInput!) {
+  deleteOneUser(where: $where) {
+    id
+  }
+}
+
+query AggregateUser($where: UserWhereInput, $orderBy: [UserOrderByWithRelationInput!], $cursor: UserWhereUniqueInput, $take: Int, $skip: Int) {
+  aggregateUser(where: $where, orderBy: $orderBy, cursor: $cursor, take: $take, skip: $skip) {
+    _count {
+      _all
+    }
+  }
+}
+
+mutation RegisterByAdmin($data: UserCreateInput!) {
+  registerByAdmin(data: $data) {
+    message
+  }
+}
+
+mutation UserUpdateByAdmin($data: UserUpdateInput!, $where: UserWhereUniqueInput!, $newPass: String, $updatePass: Boolean, $oldPassword: String) {
+  userUpdateByAdmin(data: $data, where: $where, newPass: $newPass, updatePass: $updatePass, oldPassword: $oldPassword) {
+    message
+  }
+}
