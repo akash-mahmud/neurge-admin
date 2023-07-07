@@ -51,3 +51,11 @@ mutation DeleteOneAddonBlogCategory($where: AddonBlogCategoryWhereUniqueInput!) 
     id
   }
 }
+
+
+query AddonBlogCategoriesForSelect($where: AddonBlogCategoryWhereInput, $orderBy: [AddonBlogCategoryOrderByWithRelationInput!], $cursor: AddonBlogCategoryWhereUniqueInput, $take: Int, $skip: Int, $distinct: [AddonBlogCategoryScalarFieldEnum!]) {
+  addonBlogCategories(where: $where, orderBy: $orderBy, cursor: $cursor, take: $take, skip: $skip, distinct: $distinct) {
+    id
+    name
+  }
+}

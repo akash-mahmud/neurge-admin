@@ -5143,6 +5143,18 @@ export type DeleteOneAddonBlogCategoryMutationVariables = Exact<{
 
 export type DeleteOneAddonBlogCategoryMutation = { __typename?: 'Mutation', deleteOneAddonBlogCategory?: { __typename?: 'AddonBlogCategory', id: string } | null };
 
+export type AddonBlogCategoriesForSelectQueryVariables = Exact<{
+  where?: InputMaybe<AddonBlogCategoryWhereInput>;
+  orderBy?: InputMaybe<Array<AddonBlogCategoryOrderByWithRelationInput> | AddonBlogCategoryOrderByWithRelationInput>;
+  cursor?: InputMaybe<AddonBlogCategoryWhereUniqueInput>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  distinct?: InputMaybe<Array<AddonBlogCategoryScalarFieldEnum> | AddonBlogCategoryScalarFieldEnum>;
+}>;
+
+
+export type AddonBlogCategoriesForSelectQuery = { __typename?: 'Query', addonBlogCategories: Array<{ __typename?: 'AddonBlogCategory', id: string, name: string }> };
+
 export type CategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -6152,6 +6164,54 @@ export function useDeleteOneAddonBlogCategoryMutation(baseOptions?: Apollo.Mutat
 export type DeleteOneAddonBlogCategoryMutationHookResult = ReturnType<typeof useDeleteOneAddonBlogCategoryMutation>;
 export type DeleteOneAddonBlogCategoryMutationResult = Apollo.MutationResult<DeleteOneAddonBlogCategoryMutation>;
 export type DeleteOneAddonBlogCategoryMutationOptions = Apollo.BaseMutationOptions<DeleteOneAddonBlogCategoryMutation, DeleteOneAddonBlogCategoryMutationVariables>;
+export const AddonBlogCategoriesForSelectDocument = gql`
+    query AddonBlogCategoriesForSelect($where: AddonBlogCategoryWhereInput, $orderBy: [AddonBlogCategoryOrderByWithRelationInput!], $cursor: AddonBlogCategoryWhereUniqueInput, $take: Int, $skip: Int, $distinct: [AddonBlogCategoryScalarFieldEnum!]) {
+  addonBlogCategories(
+    where: $where
+    orderBy: $orderBy
+    cursor: $cursor
+    take: $take
+    skip: $skip
+    distinct: $distinct
+  ) {
+    id
+    name
+  }
+}
+    `;
+
+/**
+ * __useAddonBlogCategoriesForSelectQuery__
+ *
+ * To run a query within a React component, call `useAddonBlogCategoriesForSelectQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAddonBlogCategoriesForSelectQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAddonBlogCategoriesForSelectQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *      orderBy: // value for 'orderBy'
+ *      cursor: // value for 'cursor'
+ *      take: // value for 'take'
+ *      skip: // value for 'skip'
+ *      distinct: // value for 'distinct'
+ *   },
+ * });
+ */
+export function useAddonBlogCategoriesForSelectQuery(baseOptions?: Apollo.QueryHookOptions<AddonBlogCategoriesForSelectQuery, AddonBlogCategoriesForSelectQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AddonBlogCategoriesForSelectQuery, AddonBlogCategoriesForSelectQueryVariables>(AddonBlogCategoriesForSelectDocument, options);
+      }
+export function useAddonBlogCategoriesForSelectLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AddonBlogCategoriesForSelectQuery, AddonBlogCategoriesForSelectQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AddonBlogCategoriesForSelectQuery, AddonBlogCategoriesForSelectQueryVariables>(AddonBlogCategoriesForSelectDocument, options);
+        }
+export type AddonBlogCategoriesForSelectQueryHookResult = ReturnType<typeof useAddonBlogCategoriesForSelectQuery>;
+export type AddonBlogCategoriesForSelectLazyQueryHookResult = ReturnType<typeof useAddonBlogCategoriesForSelectLazyQuery>;
+export type AddonBlogCategoriesForSelectQueryResult = Apollo.QueryResult<AddonBlogCategoriesForSelectQuery, AddonBlogCategoriesForSelectQueryVariables>;
 export const CategoriesDocument = gql`
     query Categories {
   categories {

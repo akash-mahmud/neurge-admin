@@ -124,7 +124,7 @@ const Menuitems: MenuitemsType[] = [
         id: uniqueId(),
         title: 'Blogs',
         icon: IconPoint,
-        href: '/addon/create',
+        href: '/blog',
       },
     ]
   },
