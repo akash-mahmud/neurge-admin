@@ -1,5 +1,6 @@
 import {  ApolloClient, InMemoryCache } from '@apollo/client';
-import { HttpLink } from '@apollo/client/link/http';
+import { createUploadLink } from 'apollo-upload-client';
+import fetch from 'cross-fetch';
 
 let token =''
 if (typeof window !== 'undefined')  {
@@ -18,15 +19,26 @@ if (typeof window !== 'undefined')  {
 
 };
 
+/**
+ * @param httpLink  from @apollo/client should be replace with
+ * @param createUploadLink from apollo-upload-client in every place where we are using httpLink
+ */
+
+
+const uploadLink = createUploadLink({
+  uri: 'http://localhost:8000/graphql',
+  headers: {
+    Authorization: token,
+    'Apollo-Require-Preflight': 'true'
+
+  },
+  fetch,
+
+});
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  link: new HttpLink({
-    uri: 'http://localhost:8000/graphql',
-    headers: {
-      Authorization: token,
-    },
-  }),
+  link: uploadLink
 
 });
 

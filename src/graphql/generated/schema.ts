@@ -16,6 +16,7 @@ export type Scalars = {
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
   DateTime: { input: any; output: any; }
+  Upload: { input: any; output: any; }
 };
 
 export type Addon = {
@@ -1838,6 +1839,7 @@ export type Mutation = {
   updateOneTask?: Maybe<Task>;
   updateOneTip?: Maybe<Tip>;
   updateOneUser?: Maybe<User>;
+  uploadFile?: Maybe<FileUploadResponsce>;
   upsertOneAddon: Addon;
   upsertOneAddonBlogCategory: AddonBlogCategory;
   upsertOneBlog: Blog;
@@ -2167,6 +2169,11 @@ export type MutationUpdateOneTipArgs = {
 export type MutationUpdateOneUserArgs = {
   data: UserUpdateInput;
   where: UserWhereUniqueInput;
+};
+
+
+export type MutationUploadFileArgs = {
+  file: Scalars['Upload']['input'];
 };
 
 
@@ -4998,6 +5005,13 @@ export type DefaultResponsce = {
   message: Scalars['String']['output'];
 };
 
+export type FileUploadResponsce = {
+  __typename?: 'fileUploadResponsce';
+  file: Scalars['String']['output'];
+  message: Scalars['String']['output'];
+  success: Scalars['Boolean']['output'];
+};
+
 export type AddonsForTableViewQueryVariables = Exact<{
   where?: InputMaybe<AddonWhereInput>;
   orderBy?: InputMaybe<Array<AddonOrderByWithRelationInput> | AddonOrderByWithRelationInput>;
@@ -5240,6 +5254,13 @@ export type CreateOneCategoryMutationVariables = Exact<{
 
 
 export type CreateOneCategoryMutation = { __typename?: 'Mutation', createOneCategory: { __typename?: 'Category', name: string } };
+
+export type UploadFileMutationVariables = Exact<{
+  file: Scalars['Upload']['input'];
+}>;
+
+
+export type UploadFileMutation = { __typename?: 'Mutation', uploadFile?: { __typename?: 'fileUploadResponsce', message: string, success: boolean, file: string } | null };
 
 export type ProductsForTableViewQueryVariables = Exact<{
   where?: InputMaybe<ProductWhereInput>;
@@ -6607,6 +6628,41 @@ export function useCreateOneCategoryMutation(baseOptions?: Apollo.MutationHookOp
 export type CreateOneCategoryMutationHookResult = ReturnType<typeof useCreateOneCategoryMutation>;
 export type CreateOneCategoryMutationResult = Apollo.MutationResult<CreateOneCategoryMutation>;
 export type CreateOneCategoryMutationOptions = Apollo.BaseMutationOptions<CreateOneCategoryMutation, CreateOneCategoryMutationVariables>;
+export const UploadFileDocument = gql`
+    mutation UploadFile($file: Upload!) {
+  uploadFile(file: $file) {
+    message
+    success
+    file
+  }
+}
+    `;
+export type UploadFileMutationFn = Apollo.MutationFunction<UploadFileMutation, UploadFileMutationVariables>;
+
+/**
+ * __useUploadFileMutation__
+ *
+ * To run a mutation, you first call `useUploadFileMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUploadFileMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [uploadFileMutation, { data, loading, error }] = useUploadFileMutation({
+ *   variables: {
+ *      file: // value for 'file'
+ *   },
+ * });
+ */
+export function useUploadFileMutation(baseOptions?: Apollo.MutationHookOptions<UploadFileMutation, UploadFileMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UploadFileMutation, UploadFileMutationVariables>(UploadFileDocument, options);
+      }
+export type UploadFileMutationHookResult = ReturnType<typeof useUploadFileMutation>;
+export type UploadFileMutationResult = Apollo.MutationResult<UploadFileMutation>;
+export type UploadFileMutationOptions = Apollo.BaseMutationOptions<UploadFileMutation, UploadFileMutationVariables>;
 export const ProductsForTableViewDocument = gql`
     query ProductsForTableView($where: ProductWhereInput, $orderBy: [ProductOrderByWithRelationInput!], $cursor: ProductWhereUniqueInput, $take: Int, $skip: Int, $distinct: [ProductScalarFieldEnum!]) {
   products(

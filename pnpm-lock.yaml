@@ -52,7 +52,7 @@ dependencies:
     version: 5.0.15(@emotion/react@11.10.6)(@emotion/styled@11.10.6)(@mui/material@5.11.10)(@mui/system@5.13.6)(date-fns@2.29.3)(react-dom@18.2.0)(react@18.2.0)
   '@next/font':
     specifier: latest
-    version: 13.4.9
+    version: 13.4.10
   '@reduxjs/toolkit':
     specifier: ^1.9.1
     version: 1.9.1(react-redux@8.0.5)(react@18.2.0)
@@ -89,6 +89,9 @@ dependencies:
   apexcharts:
     specifier: 3.36.3
     version: 3.36.3
+  apollo-upload-client:
+    specifier: ^17.0.0
+    version: 17.0.0(@apollo/client@3.7.16)(graphql@16.7.1)
   axios:
     specifier: ^1.2.5
     version: 1.2.5
@@ -98,6 +101,9 @@ dependencies:
   chance:
     specifier: ^1.1.9
     version: 1.1.9
+  cross-fetch:
+    specifier: ^4.0.0
+    version: 4.0.0
   date-fns:
     specifier: ^2.29.3
     version: 2.29.3
@@ -381,7 +387,7 @@ packages:
     resolution: {integrity: sha512-xhlTqH0m31mnsG0tIP4ETgfSB6gXDaYYsUWTrlUV93fFQPI9dd8hE0Ot6MHLCtqgB32hwJAC3YZMWlXZw7AleA==}
     engines: {node: '>=14'}
     dependencies:
-      node-fetch: 2.6.11
+      node-fetch: 2.6.12
     transitivePeerDependencies:
       - encoding
     dev: true
@@ -3623,8 +3629,8 @@ packages:
       glob: 7.1.7
     dev: true
 
-  /@next/font@13.4.9:
-    resolution: {integrity: sha512-aR0XEyd1cxqaKuelQFDGwUBYV0wyZfJTNiRoSk1XsECTyMhiSMmCOY7yOPMuPlw+6cctca0GyZXGGFb5EVhiRw==}
+  /@next/font@13.4.10:
+    resolution: {integrity: sha512-BqV71ikHIFh+PZLpCR0nMZnlg/3Hcuw9qIUN42I4iCpneDHHiViUtanUeE113gy0Wm9oePTGX5OeKnPbSNnnHA==}
     dev: false
 
   /@next/swc-android-arm-eabi@13.1.6:
@@ -4055,7 +4061,7 @@ packages:
       chalk: 4.1.2
       find-up: 5.0.0
       mime: 2.6.0
-      node-fetch: 2.6.11
+      node-fetch: 2.6.12
       open: 6.4.0
       ora: 5.4.1
       semver: 6.3.0
@@ -5202,6 +5208,18 @@ packages:
       svg.select.js: 3.0.1
     dev: false
 
+  /apollo-upload-client@17.0.0(@apollo/client@3.7.16)(graphql@16.7.1):
+    resolution: {integrity: sha512-pue33bWVbdlXAGFPkgz53TTmxVMrKeQr0mdRcftNY+PoHIdbGZD0hoaXHvO6OePJAkFz7OiCFUf98p1G/9+Ykw==}
+    engines: {node: ^12.22.0 || ^14.17.0 || >= 16.0.0}
+    peerDependencies:
+      '@apollo/client': ^3.0.0
+      graphql: 14 - 16
+    dependencies:
+      '@apollo/client': 3.7.16(graphql@16.7.1)(react-dom@18.2.0)(react@18.2.0)
+      extract-files: 11.0.0
+      graphql: 16.7.1
+    dev: false
+
   /appdirsjs@1.2.7:
     resolution: {integrity: sha512-Quji6+8kLBC3NnBeo14nPDq0+2jUs5s3/xEye+udFHumHhRk4M7aAMXp/PBJqkKYGuuyR9M/6Dq7d2AViiGmhw==}
     dev: false
@@ -6017,9 +6035,17 @@ packages:
   /cross-fetch@3.1.6:
     resolution: {integrity: sha512-riRvo06crlE8HiqOwIpQhxwdOk4fOeR7FVM/wXoxchFEqMNUjvbs3bfo4OTgMEMHzppd4DxFBDbyySj8Cv781g==}
     dependencies:
-      node-fetch: 2.6.11
+      node-fetch: 2.6.12
     transitivePeerDependencies:
       - encoding
+
+  /cross-fetch@4.0.0:
+    resolution: {integrity: sha512-e4a5N8lVvuLgAWgnCrLr2PP0YyDOTHa9H/Rj54dirp61qXnNq46m82bRhNqIA5VccJtWBvPTFRV3TtvHUKPB1g==}
+    dependencies:
+      node-fetch: 2.6.12
+    transitivePeerDependencies:
+      - encoding
+    dev: false
 
   /cross-spawn@7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
@@ -6835,7 +6861,6 @@ packages:
   /extract-files@11.0.0:
     resolution: {integrity: sha512-FuoE1qtbJ4bBVvv94CC7s0oTnKUGvQs+Rjf1L2SJFfS+HTVVjhPFtehPdQ0JiGPqVNfSSZvL5yzHHQq2Z4WNhQ==}
     engines: {node: ^12.20 || >= 14.13}
-    dev: true
 
   /extracted-loader@1.0.4:
     resolution: {integrity: sha512-G8A0hT/WCWIjesZm7BwbWdST5dQ08GNnCpTrJT/k/FYzuiJwlV1gyWjnuoizOzAR4jpEYXG2J++JyEKN/EB26Q==}
@@ -8771,7 +8796,7 @@ packages:
     dependencies:
       connect: 3.7.0
       debug: 2.6.9
-      node-fetch: 2.6.11
+      node-fetch: 2.6.12
       ws: 7.5.9
       yargs: 17.7.2
     transitivePeerDependencies:
@@ -8985,7 +9010,7 @@ packages:
       metro-transform-plugins: 0.76.5
       metro-transform-worker: 0.76.5
       mime-types: 2.1.35
-      node-fetch: 2.6.11
+      node-fetch: 2.6.12
       nullthrows: 1.1.1
       rimraf: 3.0.2
       serialize-error: 2.1.0
@@ -9471,8 +9496,8 @@ packages:
       minimatch: 3.1.2
     dev: false
 
-  /node-fetch@2.6.11:
-    resolution: {integrity: sha512-4I6pdBY1EthSqDmJkiNk3JIT8cswwR9nfeW/cPdUagJYEQG7R95WRH74wpz7ma8Gh/9dI9FP+OU+0E4FvtA55w==}
+  /node-fetch@2.6.12:
+    resolution: {integrity: sha512-C/fGU2E8ToujUivIO0H+tpQ6HWo4eEmchoPIoXtxCrVghxdKq+QOHqEZW7tuP3KlV3bC8FRMO5nMCC7Zm1VP6g==}
     engines: {node: 4.x || >=6.0.0}
     peerDependencies:
       encoding: ^0.1.0

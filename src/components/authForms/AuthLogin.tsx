@@ -40,7 +40,7 @@ const AuthLogin = ({ title, subtitle, subtext }: loginType) => {
     try {
       const result = await dispatch(login(input))
       console.log(result);
-      
+      // @ts-ignore
       if(result?.payload?.loginAdmin?.isAuthenticated){
         notification.success({
           message: 'Logged in'
