@@ -13,6 +13,9 @@ import * as dropdownData from './data';
 
 import { IconMail } from '@tabler/icons-react';
 import { Stack } from '@mui/system';
+import { logout } from '@/store/slices/auth/authSlice';
+import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from '@/store';
 
 
 const Profile = () => {
@@ -23,7 +26,15 @@ const Profile = () => {
   const handleClose2 = () => {
     setAnchorEl2(null);
   };
+  const dispatch = useDispatch()
+  const router = useRouter()
+  const {user} = useSelector((state ) => state.auth)
+  
+   const logoutUser = () => {
+    dispatch(logout())
+     router.push('/login')
 
+  }
   return (
     <Box>
       <IconButton
@@ -40,7 +51,7 @@ const Profile = () => {
         onClick={handleClick2}
       >
         <Avatar
-          src={"/images/profile/user-1.jpg"}
+          src={user?.avater? user?.avater:"/images/profile/user-1.jpg"}
           alt={'ProfileImg'}
           sx={{
             width: 35,
@@ -71,10 +82,10 @@ const Profile = () => {
         <Avatar src={"/images/profile/user-1.jpg"} alt={"ProfileImg"} sx={{ width: 95, height: 95 }} />
           <Box>
             <Typography variant="subtitle2" color="textPrimary" fontWeight={600}>
-              Mathew Anderson
+              {user?.name}
             </Typography>
             <Typography variant="subtitle2" color="textSecondary">
-              Designer
+              {user?.role}
             </Typography>
             <Typography
               variant="subtitle2"
@@ -84,13 +95,13 @@ const Profile = () => {
               gap={1}
             >
               <IconMail width={15} height={15} />
-              info@modernize.com
+              {user?.email}
             </Typography>
           </Box>
         </Stack>
         <Divider />
-        {dropdownData.profile.map((profile) => (
-          <Box key={profile.title}>
+        {/* {dropdownData.profile.map((profile) => (
+          <Box  key={profile.title}>
             <Box sx={{ py: 2, px: 0 }} className="hover-text-primary">
               <Link href={profile.href}>
                 <Stack direction="row" spacing={2}>
@@ -140,23 +151,10 @@ const Profile = () => {
               </Link>
             </Box>
           </Box>
-        ))}
+        ))} */}
         <Box mt={2}>
-          <Box bgcolor="primary.light" p={3} mb={3} overflow="hidden" position="relative">
-            <Box display="flex" justifyContent="space-between">
-              <Box>
-                <Typography variant="h5" mb={2}>
-                  Unlimited <br />
-                  Access
-                </Typography>
-                <Button variant="contained" color="primary">
-                  Upgrade
-                </Button>
-              </Box>
-              <img src={"/images/backgrounds/unlimited-bg.png"} alt="unlimited" className="signup-bg"></img>
-            </Box>
-          </Box>
-          <Button href="/auth/login" variant="outlined" color="primary" component={Link} fullWidth>
+          
+          <Button variant="outlined" color="primary" onClick={logoutUser} fullWidth>
             Logout
           </Button>
         </Box>

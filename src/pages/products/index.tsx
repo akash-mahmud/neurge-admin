@@ -22,14 +22,14 @@ import {
   InputLabel,
   MenuItem
 } from '@mui/material';
-import { Button, Input, Modal, Pagination, Popconfirm, Spin, Upload } from 'antd';
+import { Button, Input, Modal, Pagination, Popconfirm, Spin, } from 'antd';
 import slugify from 'slugify'
 import PageContainer from '../../../src/components/container/PageContainer';
 
 import ParentCard from '../../../src/components/shared/ParentCard';
 import BlankCard from '../../../src/components/shared/BlankCard';
 import { IconEdit, IconSearch, IconTrash } from '@tabler/icons-react';
-import { CategoryCreateInput, CategoryUpdateInput, ProductCreateInput, ProductUpdateInput, SortOrder, useAggregateCategoryQuery, useAggregateProductQuery, useCategoriesWithoutRelationFieldQuery, useCategoryDataForUpdateLazyQuery, useCreateOneCategoryMutation, useCreateOneProductMutation, useDeleteOneCategoryMutation, useDeleteOneProductMutation, useLoadProductForUpdateLazyQuery, useProductsForTableViewQuery, useUpdateOneCategoryMutation, useUpdateOneProductMutation, useUploadFileMutation } from '@/graphql/generated/schema';
+import {  ProductCreateInput, ProductUpdateInput, SortOrder, useAggregateProductQuery, useCategoriesWithoutRelationFieldQuery, useCreateOneProductMutation,  useDeleteOneProductMutation, useLoadProductForUpdateLazyQuery, useProductsForTableViewQuery,  useUpdateOneProductMutation, useUploadFileMutation } from '@/graphql/generated/schema';
 import CustomTextField from '@/components/forms/theme-elements/CustomTextField';
 import { useState } from 'react';
 
@@ -66,23 +66,19 @@ const columns = [
 
 import { PlusOutlined } from '@ant-design/icons';
 
-import type { UploadChangeParam, UploadFile } from 'antd/es/upload/interface';
-import type { RcFile, UploadProps } from 'antd/es/upload';
+import type { RcFile, UploadChangeParam, UploadFile } from 'antd/es/upload/interface';
 import { getImage } from '@/utils/getimage';
+import UploadSingleImage from '@/components/common/UploadSingleImage';
 import { uniqueId } from 'lodash';
 
-const getBase64 = (file: RcFile): Promise<string> =>
-  new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result as string);
-    reader.onerror = (error) => reject(error);
-  });
+
 
 const Index = () => {
   const [limit, setlimit] = useState(5)
   const [skip, setskip] = useState(0)
   const [order, setorder] = useState()
+  const [fileList, setFileList] = useState<any[]>([])
+
   const { data, loading, error, refetch } = useProductsForTableViewQuery({
     variables: {
       take: limit,
@@ -92,7 +88,7 @@ const Index = () => {
       }]
     }
   })
-  const { data: total, refetch: refetchTotal } = useAggregateProductQuery()
+  const { data: total, refetch: refetchTotal , loading:productAgregetaedataLoading } = useAggregateProductQuery()
   const [open, setOpen] = useState(false);
   const [input, setinput] = useState<ProductUpdateInput>({
   })
@@ -110,9 +106,9 @@ const Index = () => {
     topTierPromptCount: 0,
     slug: ''
   })
-  const [LoadProduct,] = useLoadProductForUpdateLazyQuery({ fetchPolicy: 'network-only' })
-  const { data: categories } = useCategoriesWithoutRelationFieldQuery()
-  const [uploadedImage, setuploadedImage] = useState<any>()
+  const [LoadProduct,{loading:singleProductLoading}] = useLoadProductForUpdateLazyQuery({ fetchPolicy: 'network-only' })
+  const { data: categories , loading:categoryLoading } = useCategoriesWithoutRelationFieldQuery()
+  const [uploadedImage, setuploadedImage] = useState<Array<string>>([])
   const [productId, setproductId] = useState<string>()
   const handleClickOpen = async (id?: string) => {
     if (id) {
@@ -157,9 +153,15 @@ const Index = () => {
           }
         })
 
-
+        setFileList([{
+          uid: uniqueId(),
+          name:data.product.image ,
+          status: 'done',
+          url: getImage(data.product.image ),
+        }])
+    
       }
-      setuploadedImage(data?.product?.image)
+      setuploadedImage([data?.product?.image as string])
 
     }
 
@@ -168,13 +170,30 @@ const Index = () => {
   };
 
   const handleClose = () => {
+  
     setOpen(false);
-    setuploadedImage(undefined)
+    setFileList([])
     setproductId(undefined)
+    setinput({
+    })
+    setcreateInput({
+      name: '',
+      description: '',
+      image: '',
+      category: {
+        connect: {
+          id: ''
+        }
+      },
+      moneyBackGuarantee: 0,
+      taskAutomateCount: 0,
+      topTierPromptCount: 0,
+      slug: ''
+    })
   };
-  const [UpdateProduct] = useUpdateOneProductMutation()
-  const [CreateProduct] = useCreateOneProductMutation()
-  const [DeleteProduct] = useDeleteOneProductMutation()
+  const [UpdateProduct , {loading:productUpdateLoading}] = useUpdateOneProductMutation()
+  const [CreateProduct , {loading: createProductLoading}] = useCreateOneProductMutation()
+  const [DeleteProduct , {loading: DeleteProductLoading}] = useDeleteOneProductMutation()
   const deleteData = async (productId: string) => {
     await DeleteProduct({
       variables: {
@@ -189,7 +208,7 @@ const Index = () => {
   const update = async () => {
     await UpdateProduct({
       variables: {
-        data: {...input , image: {set:uploadedImage}},
+        data: {...input},
         where: {
           id: productId
         }
@@ -205,7 +224,7 @@ const Index = () => {
     if (createInput) {
       await CreateProduct({
         variables: {
-          data: {...createInput , image: uploadedImage as string},
+          data: {...createInput },
 
         }
       })
@@ -227,21 +246,7 @@ const Index = () => {
     setPreviewOpen(true);
   };
 const [FileUpload, {loading:ImageUploading}] = useUploadFileMutation()
-  const handleChange = async(info: UploadChangeParam<UploadFile<any>>) =>{
-    if (info.file.status!=='removed') {
-   
-  
-        const {data} = await FileUpload({
-          variables:{
-            file:info.file
-          }
-        })
 
-      setuploadedImage(data?.uploadFile?.file)
-    }
-
-  
-  }
   const handleChangeUpdateImage = async(info: UploadChangeParam<UploadFile<any>>) =>{
     if (info.file.status!=='removed') {
    
@@ -251,8 +256,10 @@ const [FileUpload, {loading:ImageUploading}] = useUploadFileMutation()
             file:info.file
           }
         })
+        if (data?.uploadFile?.file ) {
+          setuploadedImage([data?.uploadFile?.file])
 
-      setuploadedImage(data?.uploadFile?.file)
+        }
 
     }
 
@@ -264,7 +271,49 @@ const [FileUpload, {loading:ImageUploading}] = useUploadFileMutation()
       <div style={{ marginTop: 8 }}>Upload</div>
     </Box>
   );
-  
+
+
+  const handleBeforeUpload = async (file:RcFile): Promise<void> => {
+    
+
+  const {data} =  await FileUpload({
+      variables: {
+        file
+      },
+    });
+    setFileList([{
+      uid: uniqueId(),
+      name:data?.uploadFile?.file as string ,
+      status: 'done',
+      url: getImage(data?.uploadFile?.file as string ),
+    }])
+setcreateInput({
+  ...createInput , 
+  image:data?.uploadFile?.file as string
+})
+console.log(createInput);
+
+  };
+  const handleBeforeUploadUpdate = async (file:RcFile): Promise<void> => {
+    
+
+    const {data} =  await FileUpload({
+        variables: {
+          file
+        },
+      });
+      setFileList([{
+        uid: uniqueId(),
+        name:data?.uploadFile?.file as string ,
+        status: 'done',
+        url: getImage(data?.uploadFile?.file as string ),
+      }])
+  setinput({
+    ...input , 
+    image:{set:data?.uploadFile?.file as string}
+  })
+
+    };
   return (
     <>
       <Grid item xs={12} lg={4} sm={6} display="flex" alignItems="stretch">
@@ -272,10 +321,12 @@ const [FileUpload, {loading:ImageUploading}] = useUploadFileMutation()
         <Dialog open={open} onClose={handleClose} fullWidth maxWidth={'md'} style={{
           zIndex: 1
         }} hideBackdrop disableEnforceFocus>
-          <DialogTitle>{productId ? 'Update' : 'Create'} Category</DialogTitle>
+          <DialogTitle>{productId ? 'Update' : 'Create'} Product</DialogTitle>
           <DialogContent>
             {
-              productId ?   <> 
+              productId ?   <>
+              <Spin spinning={singleProductLoading || productUpdateLoading || ImageUploading}>
+
               <Box mt={2} display={'flex'} justifyContent={'space-around'} alignItems={'center'} flexWrap={"wrap"}>
                <Box flexBasis={'calc(33.33% - 10px)'}>
                  <CustomTextField value={input?.name?.set} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -428,33 +479,27 @@ const [FileUpload, {loading:ImageUploading}] = useUploadFileMutation()
                  </Box>
                  <Box mt={2}>
 
-                   <Upload multiple={false} maxCount={1}
-                     listType="picture-card"
-                  
-                     onPreview={handlePreview}
-                  
-                    fileList={[uploadedImage].map((url) => ({
-                      uid: uniqueId(),
-                      name:'Example',
-                      status: 'done',
-                      url: getImage(url? url:''),
-                    }))}
-                    onChange={(info) => handleChangeUpdateImage(info)}
-                    onRemove={()=> {
-                      setuploadedImage(undefined)
-
-                    }}
-                   >
-                     {[uploadedImage].length >= 8 ? null : uploadButton}
-                   </Upload>
+               
+                   <UploadSingleImage filelist={fileList} handlePreview={handlePreview} handleRemove={()=> {
+                        setFileList([])
+setinput({
+  ...input, image: {
+    set:''
+  }
+})
+                      }}                        beforeUpload={handleBeforeUploadUpdate} 
+                      uploadButton={uploadButton}
+                      />
                  </Box>
                  <Modal open={previewOpen} title={previewTitle} footer={null} onCancel={handleCancel}>
                    <img alt="example" style={{ width: '100%' }} src={previewImage} />
                  </Modal>
                </Box>
+              </Spin>
+
              </> :
                <> 
-               <Spin spinning={ImageUploading}>
+               <Spin spinning={ImageUploading ||  createProductLoading}>
 
                <Box mt={2} display={'flex'} justifyContent={'space-around'} alignItems={'center'} flexWrap={"wrap"}>
                 <Box flexBasis={'calc(33.33% - 10px)'}>
@@ -594,54 +639,20 @@ const [FileUpload, {loading:ImageUploading}] = useUploadFileMutation()
                   </Box>
                   <Box mt={2}>
 
-                    <Upload multiple={false} maxCount={1}
-                    // action={(async(file: RcFile):Promise<string > => {
-                    //   // delete file.uid
-                    //   const data = await FileUpload({
-                    //     variables: {
-                    //       file: file
-                    //     }
-                    //   })
-                    //   console.log(data);
-                      
-                    //   // return '' 
-                    // } )}
-                    beforeUpload={() => false}
-                    listType="picture-card"
-                      fileList={[uploadedImage].map((url) => ({
-                        uid: uniqueId(),
-                        name:url,
-                        status: 'done',
-                        url: getImage(url),
-                      }))}
-                      onPreview={handlePreview}
-                      onChange={(info) => handleChange(info)}
-                      onRemove={()=> {
-                        setuploadedImage(undefined)
-                      }}
-                      >
-                      {[uploadedImage].length >= 8 ? null : uploadButton}
-                    </Upload>
-                  </Box>
-                  {/* <input type="file" onChange={async(event) => {
-                    try {
-                      const file =  event.target.files?.item(0)
-                      console.log(file)
-                      if (file) {
-                        
-                        await FileUpload({
-                          variables:{
-                            file
-                          }
+                 
+                    <UploadSingleImage filelist={fileList} handlePreview={handlePreview} handleRemove={()=> {
+                        setuploadedImage([])
+                        setcreateInput({
+                          ...createInput,
+                          image: ''
                         })
-                      }
-                    } catch (error) {
-                      console.log(error.message);
+                      }}                       beforeUpload={handleBeforeUpload}
+                      uploadButton={uploadButton}
+                      />
                       
-                    }
-
-
-                  }}/> */}
+                  
+                  </Box>
+              
                   <Modal open={previewOpen} title={previewTitle} footer={null} onCancel={handleCancel}>
                     <img alt="example" style={{ width: '100%' }} src={previewImage} />
                   </Modal>
@@ -657,7 +668,9 @@ const [FileUpload, {loading:ImageUploading}] = useUploadFileMutation()
             <Button onClick={productId ? update : create}>{productId ? 'Update' : 'Create'}</Button>
           </DialogActions>
         </Dialog>
+
       </Grid>
+<Spin spinning={loading || categoryLoading ||productAgregetaedataLoading}>
 
       <PageContainer>
 
@@ -685,6 +698,10 @@ const [FileUpload, {loading:ImageUploading}] = useUploadFileMutation()
                 Add
               </Button>
             </Box>
+
+
+            <Spin spinning={DeleteProductLoading || productAgregetaedataLoading || loading}>
+
             <BlankCard>
 
               <TableContainer
@@ -777,10 +794,12 @@ const [FileUpload, {loading:ImageUploading}] = useUploadFileMutation()
               </Box>
 
             </BlankCard>
+            </Spin>
           </>
 
         </ParentCard>
       </PageContainer>
+</Spin>
     </>
 
   );

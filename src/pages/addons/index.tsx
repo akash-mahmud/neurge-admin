@@ -22,7 +22,7 @@ import {
   InputLabel,
   MenuItem
 } from '@mui/material';
-import { Button, Input, Modal, Pagination, Popconfirm, Popover, Upload } from 'antd';
+import { Button, Input, Modal, Pagination, Popconfirm, Popover, Spin, Upload } from 'antd';
 import slugify from 'slugify'
 import PageContainer from '../../../src/components/container/PageContainer';
 import { default as emojiData } from '@emoji-mart/data'
@@ -30,7 +30,7 @@ import Picker from '@emoji-mart/react'
 import ParentCard from '../../../src/components/shared/ParentCard';
 import BlankCard from '../../../src/components/shared/BlankCard';
 import { IconEdit, IconSearch, IconTrash } from '@tabler/icons-react';
-import { AddonCreateInput, AddonUpdateInput, useAggregateAddonQuery, useDeleteOneAddonMutation, useAddonForupdateLazyQuery, SortOrder, useAddonsForTableViewQuery, useUpdateOneAddonMutation, useAggregateProductQuery, useCategoriesWithoutRelationFieldQuery, useCategoryDataForUpdateLazyQuery, useCreateOneCategoryMutation, useCreateOneProductMutation, useDeleteOneCategoryMutation, useDeleteOneProductMutation, useLoadProductForUpdateLazyQuery, useProductsForTableViewQuery, useUpdateOneCategoryMutation, useUpdateOneProductMutation } from '@/graphql/generated/schema';
+import { AddonCreateInput, AddonUpdateInput, useAggregateAddonQuery, useDeleteOneAddonMutation, useAddonForupdateLazyQuery, SortOrder, useAddonsForTableViewQuery, useUpdateOneAddonMutation, useAggregateProductQuery, useCategoriesWithoutRelationFieldQuery, useCategoryDataForUpdateLazyQuery, useCreateOneCategoryMutation, useCreateOneProductMutation, useDeleteOneCategoryMutation, useDeleteOneProductMutation, useLoadProductForUpdateLazyQuery, useProductsForTableViewQuery, useUpdateOneCategoryMutation, useUpdateOneProductMutation, useUploadFileMutation } from '@/graphql/generated/schema';
 import CustomTextField from '@/components/forms/theme-elements/CustomTextField';
 import { useState } from 'react';
 
@@ -67,6 +67,9 @@ import type { UploadFile } from 'antd/es/upload/interface';
 import type { RcFile, UploadProps } from 'antd/es/upload';
 import { useCreateOneAddonMutation } from '@/graphql/generated/schema';
 import { EmojiEmotions } from '@mui/icons-material';
+import { getImage } from '@/utils/getimage';
+import { uniqueId } from 'lodash';
+import UploadSingleImage from '@/components/common/UploadSingleImage';
 
 const getBase64 = (file: RcFile): Promise<string> =>
   new Promise((resolve, reject) => {
@@ -137,9 +140,13 @@ const Index = () => {
         })
 
 
+        setFileList([{
+          uid: uniqueId(),
+          name:data.addon.img ,
+          status: 'done',
+          url: getImage(data.addon.img ),
+        }])
       }
-      setPreviewImage(data?.addon?.img  as string)
-      setFileList([data?.addon?.img ])
     }
 
     setOpen(true);
@@ -148,11 +155,12 @@ const Index = () => {
 
   const handleClose = () => {
     setOpen(false);
+    setFileList([])
     setproductId(undefined)
   };
-  const [UpdateAddon] = useUpdateOneAddonMutation()
-  const [CreteAddon] = useCreateOneAddonMutation()
-  const [DeleteAddon] = useDeleteOneAddonMutation()
+  const [UpdateAddon , {loading:loadingUpdate}] = useUpdateOneAddonMutation()
+  const [CreteAddon  , {loading:loadingcreate}] = useCreateOneAddonMutation()
+  const [DeleteAddon ,  {loading:loadingDelete}] = useDeleteOneAddonMutation()
   const deleteData = async (productId: string) => {
     await DeleteAddon({
       variables: {
@@ -219,8 +227,53 @@ const Index = () => {
       <div style={{ marginTop: 8 }}>Upload</div>
     </Box>
   );
+  const [FileUpload , {loading:loadingUpload}] = useUploadFileMutation()
+
+
+  const handleBeforeUpload = async (file:RcFile): Promise<void> => {
+    
+
+  const {data} =  await FileUpload({
+      variables: {
+        file
+      },
+    });
+    setFileList([{
+      uid: uniqueId(),
+      name:data?.uploadFile?.file as string ,
+      status: 'done',
+      url: getImage(data?.uploadFile?.file as string ),
+    }])
+setcreateInput({
+  ...createInput , 
+  img:data?.uploadFile?.file as string
+})
+  };
+  const handleBeforeUploadUpdate = async (file:RcFile): Promise<void> => {
+    
+
+    const {data} =  await FileUpload({
+        variables: {
+          file
+        },
+      });
+      setFileList([{
+        uid: uniqueId(),
+        name:data?.uploadFile?.file as string ,
+        status: 'done',
+        url: getImage(data?.uploadFile?.file as string ),
+      }])
+  setinput({
+    ...input , 
+    img:{set:data?.uploadFile?.file as string}
+  })
+
+    };
+  
   return (
     <>
+    <Spin spinning={loading || loadingDelete}>
+
       <Grid item xs={12} lg={4} sm={6} display="flex" alignItems="stretch">
 
         <Dialog open={open} onClose={handleClose} fullWidth maxWidth={'md'} style={{
@@ -228,7 +281,8 @@ const Index = () => {
         }} hideBackdrop disableEnforceFocus>
           <DialogTitle>{productId ? 'Update' : 'Create'} Category</DialogTitle>
           <DialogContent>
-            {
+          <Spin spinning={loadingUpdate|| loadingUpload || loadingcreate}>
+          {
               productId ?   <> 
               <Box mt={2} display={'flex'} justifyContent={'space-around'} alignItems={'center'} flexWrap={"wrap"}>
                <Box flexBasis={'calc(33.33% - 10px)'}>
@@ -316,7 +370,7 @@ const Index = () => {
                  }}
                    autoFocus
                    id="name"
-                   label="moneyBackGuarantee"
+                   label="purchase url"
                    type="number"
                    fullWidth
                  />
@@ -350,21 +404,19 @@ const Index = () => {
                  </Box>
                  <Box mt={2}>
 
-                   <Upload multiple={false} maxCount={1}
-                     action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                     listType="picture-card"
-                    //  fileList={fileList}
-                    fileList={fileList.map((url, index) => ({
-                      uid: index.toString(),
-                      name: `image-${index}`,
-                      status: 'done',
-                      url: url,
-                    }))}
-                     onPreview={handlePreview}
-                     onChange={handleChange}
-                   >
-                     {fileList.length >= 8 ? null : uploadButton}
-                   </Upload>
+<UploadSingleImage uploadButton={uploadButton}  filelist={fileList}
+  handlePreview={handlePreview} beforeUpload={handleBeforeUploadUpdate} handleRemove={() => {
+  setFileList([])
+ setinput({
+  ...input , 
+  img:{
+    set: ''
+  }
+ })
+}}
+
+/>
+                
                  </Box>
                  <Modal open={previewOpen} title={previewTitle} footer={null} onCancel={handleCancel}>
                    <img alt="example" style={{ width: '100%' }} src={previewImage} />
@@ -483,7 +535,15 @@ const Index = () => {
                   <Box mt={2}>
 
                     <Upload multiple={false} maxCount={1}
-                      action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+
+                    beforeUpload={(args) => handleBeforeUpload(args)}
+                    onRemove={() => {
+                      setFileList([])
+                     setcreateInput({
+                      ...createInput , 
+                      img:''
+                     })
+                    }}
                       listType="picture-card"
                       fileList={fileList}
                       onPreview={handlePreview}
@@ -499,6 +559,8 @@ const Index = () => {
               </>
 
             }
+          </Spin>
+           
 
           </DialogContent>
           <DialogActions>
@@ -566,7 +628,7 @@ const Index = () => {
                           <TableCell>
                             <Typography
                               variant="subtitle2" fontWeight="500">
-                              <Avatar src={addon.img} />
+                              <Avatar src={getImage(addon.img)} />
                             </Typography>
 
 
@@ -624,6 +686,7 @@ const Index = () => {
 
         </ParentCard>
       </PageContainer>
+    </Spin>
     </>
 
   );

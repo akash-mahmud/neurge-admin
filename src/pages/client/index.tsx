@@ -25,14 +25,14 @@ import {
     Chip,
     Tab
 } from '@mui/material';
-import { Button, Divider, Pagination, Popconfirm, Upload, UploadFile, UploadProps } from 'antd';
+import { Button, Divider, Pagination, Popconfirm, Spin, Upload, UploadFile, UploadProps } from 'antd';
 
 import PageContainer from '../../../src/components/container/PageContainer';
 
 import ParentCard from '../../../src/components/shared/ParentCard';
 import BlankCard from '../../../src/components/shared/BlankCard';
 import { IconEdit, IconHeart, IconPhone, IconSearch, IconTrash, IconUser } from '@tabler/icons-react';
-import { CategoryCreateInput, CategoryUpdateInput, SortOrder, useAggregateCategoryQuery, useAddonBlogCategoriesForTableViewQuery, useCategoryDataForUpdateLazyQuery, useCreateOneCategoryMutation, useDeleteOneCategoryMutation, useUpdateOneCategoryMutation, AddonBlogCategoryCreateInput, useAddonForSelectQuery, useCreateOneAddonBlogCategoryMutation, useAggregateAddonBlogCategoryQuery, useDeleteOneAddonBlogCategoryMutation, AddonBlogCategoryUpdateInput, useAddonBlogCategoryForUpdateLazyQuery, useUpdateOneAddonBlogCategoryMutation, useUsersDataForTableViewQuery, UserRole, useAggregateUserQuery, UserCreateInput, useCategoriesWithoutRelationFieldQuery, useRegisterByAdminMutation, useUserLazyQuery, MutationUpdateOneUserArgs } from '@/graphql/generated/schema';
+import { CategoryCreateInput, CategoryUpdateInput, SortOrder, useAggregateCategoryQuery, useAddonBlogCategoriesForTableViewQuery, useCategoryDataForUpdateLazyQuery, useCreateOneCategoryMutation, useDeleteOneCategoryMutation, useUpdateOneCategoryMutation, AddonBlogCategoryCreateInput, useAddonForSelectQuery, useCreateOneAddonBlogCategoryMutation, useAggregateAddonBlogCategoryQuery, useDeleteOneAddonBlogCategoryMutation, AddonBlogCategoryUpdateInput, useAddonBlogCategoryForUpdateLazyQuery, useUpdateOneAddonBlogCategoryMutation, useUsersDataForTableViewQuery, UserRole, useAggregateUserQuery, UserCreateInput, useCategoriesWithoutRelationFieldQuery, useRegisterByAdminMutation, useUserLazyQuery, MutationUpdateOneUserArgs, useUploadFileMutation, useDeleteOneUserMutation } from '@/graphql/generated/schema';
 import CustomTextField from '@/components/forms/theme-elements/CustomTextField';
 import { useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
@@ -40,6 +40,9 @@ import CustomCheckbox from '@/components/forms/theme-elements/CustomCheckbox';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { UserUpdateInput } from '@/graphql/generated/schema';
 import { useUserUpdateByAdminMutation } from '@/graphql/generated/schema';
+import { RcFile } from 'antd/es/upload';
+import { uniqueId } from 'lodash';
+import { getImage } from '@/utils/getimage';
 
 const columns = [
     { id: 'pname', label: 'Name', minWidth: 170 },
@@ -59,7 +62,7 @@ const columns = [
         id: 'purchasedAddons',
         label: 'purchasedAddons',
         minWidth: 50,
-    }, 
+    },
     {
         id: 'action',
         label: 'Action',
@@ -74,6 +77,8 @@ const columns = [
 const Index = () => {
     const [limit, setlimit] = useState(5)
     const [skip, setskip] = useState(0)
+    const [fileList, setFileList] = useState<any[]>([])
+
     const [order, setorder] = useState()
     const { data, loading, error, refetch } = useUsersDataForTableViewQuery({
         variables: {
@@ -89,9 +94,9 @@ const Index = () => {
             }
         }
     })
-    const { data: categories } = useCategoriesWithoutRelationFieldQuery()
+    const { data: categories , loading:categoryLoading ,  } = useCategoriesWithoutRelationFieldQuery()
 
-    const { data: total, refetch: refetchTotal } = useAggregateUserQuery({
+    const { data: total, refetch: refetchTotal , loading:aggregeateUserDataloading } = useAggregateUserQuery({
         variables: {
             where: {
                 role: {
@@ -102,29 +107,29 @@ const Index = () => {
     })
     const [open, setOpen] = useState(false);
     const [input, setinput] = useState<UserUpdateInput>({
-        name:{
-            set:''
+        name: {
+            set: ''
         },
-        email:{
-            set:''
+        email: {
+            set: ''
         },
         nurgePlus: {
-            set:false
+            set: false
         },
         purchasedAddons: {
             connect: []
         },
         purchasedCategories: {
-            connect:[]
+            connect: []
         }
     })
     const [createInput, setcreateInput] = useState<UserCreateInput>({
         name: '',
-        email:'',
-        password:'',
-        avater:'',
+        email: '',
+        password: '',
+        avater: '',
         nurgePlus: false,
-        purchasedAddons:{
+        purchasedAddons: {
             connect: [
                 // {
                 //     id:''
@@ -132,17 +137,17 @@ const Index = () => {
             ]
         },
         purchasedCategories: {
-            connect:[
+            connect: [
                 // {
                 //     id:''
                 // }
             ]
         },
-        role:UserRole.Public
+        role: UserRole.Public
 
     })
-    const [LoadUser,] = useUserLazyQuery({
-        fetchPolicy:'network-only'
+    const [LoadUser,{loading:singleUserLoading}] = useUserLazyQuery({
+        fetchPolicy: 'network-only'
     })
     const [userId, setuserId] = useState<string>()
     const { data: addonForselect } = useAddonForSelectQuery()
@@ -160,7 +165,7 @@ const Index = () => {
             setuserId(id)
             if (data?.user) {
                 setinput({
-                    
+
                     name: {
                         set: data.user.name as string
                     },
@@ -168,13 +173,13 @@ const Index = () => {
                         set: data.user.email as string
                     },
                     purchasedCategories: {
-                        connect: data.user.purchasedCategories.map((category)=> {return{id:category.id}})
+                        connect: data.user.purchasedCategories.map((category) => { return { id: category.id } })
                     },
                     purchasedAddons: {
-                        connect: data.user.purchasedAddons.map((category)=> {return{id:category.id}})
+                        connect: data.user.purchasedAddons.map((category) => { return { id: category.id } })
                     },
-                    nurgePlus: {set:data.user.nurgePlus}
-                   
+                    nurgePlus: { set: data.user.nurgePlus }
+
                 })
 
 
@@ -190,11 +195,11 @@ const Index = () => {
         setOpen(false);
         setuserId(undefined)
     };
-    const [UpdateUserByAdmin] = useUserUpdateByAdminMutation()
-    const [RegisterUser] = useRegisterByAdminMutation()
-    const [DeleteAddonBlogCategory] = useDeleteOneAddonBlogCategoryMutation()
+    const [UpdateUserByAdmin , {loading:updateLoading}] = useUserUpdateByAdminMutation()
+    const [RegisterUser ,  {loading:createLoading}] = useRegisterByAdminMutation()
+    const [DeleteUser , {loading: deleteUserLoading}] = useDeleteOneUserMutation()
     const deleteData = async (userId: string) => {
-        await DeleteAddonBlogCategory({
+        await DeleteUser({
             variables: {
                 where: {
                     id: userId
@@ -235,42 +240,84 @@ const Index = () => {
     }
     const [previewOpen, setPreviewOpen] = useState(false);
     const [previewImage, setPreviewImage] = useState('');
-    const [previewTitle, setPreviewTitle] = useState('');
-    const [fileList, setFileList] = useState<any[]>([])
     const handleCancel = () => setPreviewOpen(false);
-  
+
     const handlePreview = async (file: UploadFile) => {
-      // if (!file.url && !file.preview) {
-      //   file.preview = await getBase64(file.originFileObj as RcFile);
-      // }
-  // file.url =''
-      setPreviewImage(file.url as string);
-      setPreviewOpen(true);
-      // setPreviewTitle(file.name || file.url!.substring(file.url!.lastIndexOf('/') + 1));
+
+        setPreviewImage(file.url as string);
+        setPreviewOpen(true);
     };
-  
-    const handleChange: UploadProps['onChange'] = ({ fileList: newFileList }) =>
-      setFileList(newFileList);
-  
+
+
+
     const uploadButton = (
-      <Box>
-        <PlusOutlined rev={undefined} />
-        <div style={{ marginTop: 8 }}>Upload</div>
-      </Box>
+        <Box>
+            <PlusOutlined rev={undefined} />
+            <div style={{ marginTop: 8 }}>Upload</div>
+        </Box>
     );
     const COMMON_TAB = [
         { value: '1', icon: <IconPhone width={20} height={20} />, label: 'Profile', disabled: false },
         { value: '2', icon: <IconHeart width={20} height={20} />, label: 'Password', disabled: false },
-      ];
-      
-  
+    ];
+
+
     const [value, setValue] = useState('1');
 
     const handleChangeTab = (event: React.SyntheticEvent, newValue: string) => {
-      setValue(newValue);
+        setValue(newValue);
+    };
+
+
+    const [FileUpload, { loading: loadingUpload }] = useUploadFileMutation()
+
+
+    const handleBeforeUpload = async (file: RcFile): Promise<void> => {
+
+
+        const { data } = await FileUpload({
+            variables: {
+                file
+            },
+        });
+        setFileList([{
+            uid: uniqueId(),
+            name: data?.uploadFile?.file as string,
+            status: 'done',
+            url: getImage(data?.uploadFile?.file as string),
+        }])
+        setcreateInput({
+            ...createInput,
+            avater: data?.uploadFile?.file as string
+        })
+        console.log(createInput);
+        
+    };
+    const handleBeforeUploadUpdate = async (file: RcFile): Promise<void> => {
+
+
+        const { data } = await FileUpload({
+            variables: {
+                file
+            },
+        });
+        setFileList([{
+            uid: uniqueId(),
+            name: data?.uploadFile?.file as string,
+            status: 'done',
+            url: getImage(data?.uploadFile?.file as string),
+        }])
+        setinput({
+            ...input,
+            avater: { set: data?.uploadFile?.file as string }
+        })
+        console.log(input);
+
     };
     return (
         <>
+        <Spin spinning={loadingUpload||singleUserLoading||updateLoading|| createLoading}>
+
             <Grid item xs={12} lg={4} sm={6} display="flex" alignItems="stretch">
 
                 <Dialog hideBackdrop disableEnforceFocus style={{
@@ -279,369 +326,371 @@ const Index = () => {
                     <DialogTitle>{userId ? 'Update' : 'Create'} User</DialogTitle>
                     <DialogContent>
                         {
-                            userId ? 
-                          <>
-                          <Box>
-                          <TabContext value={value}>
-                <Box>
-                  <TabList onChange={handleChangeTab} aria-label="lab API tabs example">
-                    {COMMON_TAB.map((tab, index) => (
-                      <Tab key={tab.value} label={tab.label} value={String(index + 1)} disabled={index+1 ===2}/>
-                    ))}
-                  </TabList>
-                </Box>
-                <Divider />
-                <Box  mt={2}>
-             
-                    <TabPanel value={'1'}>
-                    <>
-                            
-                            <Box mt={2} display={'flex'} justifyContent={'space-around'}>
+                            userId ?
+                                <>
+                                    <Box>
+                                        <TabContext value={value}>
+                                            <Box>
+                                                <TabList onChange={handleChangeTab} aria-label="lab API tabs example">
+                                                    {COMMON_TAB.map((tab, index) => (
+                                                        <Tab key={tab.value} label={tab.label} value={String(index + 1)} disabled={index + 1 === 2} />
+                                                    ))}
+                                                </TabList>
+                                            </Box>
+                                            <Divider />
+                                            <Box mt={2}>
 
-                                <CustomTextField value={input?.name?.set} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                    setinput({
-                                        ...input,
-                                        name: {set:e.target.value}
-                                    })
-                                }} style={{
-                                    margin: '10px'
-                                }}
-                                    autoFocus
-                                    id="name"
-                                    label=" Name"
-                                    type="text"
-                                    fullWidth
-                                />
-<CustomTextField value={input?.email?.set} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                    setinput({
-                                        ...input,
-                                        email: {set:e.target.value}
-                                    })
-                                }} style={{
-                                    margin: '10px'
-                                }}
-                                    autoFocus
-                                    id="name"
-                                    label="email"
-                                    type="email"
-                                    fullWidth
-                                />
+                                                <TabPanel value={'1'}>
+                                                    <>
 
-                             
-                            </Box>
-                            <Box mt={2} display={'flex'} justifyContent={'space-around'} alignItems={'center'}>
+                                                        <Box mt={2} display={'flex'} justifyContent={'space-around'}>
 
-                            <FormControl style={{
-marginTop: '10px'
-}} fullWidth>
-<InputLabel id="demo-simple-select-label">Purchased Categories</InputLabel>
-<Select multiple
-    labelId="demo-simple-select-label"
-    id="demo-simple-select"
-    value={input?.purchasedCategories?.connect?.map((obj)=> obj.id)}
-    label="Purchased Categories"
-   
-    onChange={(event) => {
-        console.log(event.target.value);
-        
-        setinput({
-            ...input,
-            purchasedCategories: {
-                  // @ts-ignore
-
-                connect: event.target.value?.map((id) =>{ 
-                    return{id}
-                }
-                    )
-            }
-        })
-    }}
->
-    {
-        categories?.categories?.map((category) => (
-            <MenuItem value={category.id}>{category.name}</MenuItem>
-        ))
-    }
-
-</Select>
-</FormControl>
+                                                            <CustomTextField value={input?.name?.set} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                                                setinput({
+                                                                    ...input,
+                                                                    name: { set: e.target.value }
+                                                                })
+                                                            }} style={{
+                                                                margin: '10px'
+                                                            }}
+                                                                autoFocus
+                                                                id="name"
+                                                                label=" Name"
+                                                                type="text"
+                                                                fullWidth
+                                                            />
+                                                            <CustomTextField value={input?.email?.set} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                                                setinput({
+                                                                    ...input,
+                                                                    email: { set: e.target.value }
+                                                                })
+                                                            }} style={{
+                                                                margin: '10px'
+                                                            }}
+                                                                autoFocus
+                                                                id="name"
+                                                                label="email"
+                                                                type="email"
+                                                                fullWidth
+                                                            />
 
 
+                                                        </Box>
+                                                        <Box mt={2} display={'flex'} justifyContent={'space-around'} alignItems={'center'}>
 
-</Box>
-<Box>
-<FormControl style={{
-marginTop: '10px'
-}} fullWidth>
-<InputLabel id="demo-simple-select-label">Addons</InputLabel>
-<Select multiple
-    labelId="demo-simple-select-label"
-    id="demo-simple-select"
-    value={input?.purchasedAddons?.connect?.map((obj)=> obj.id)}
-    label="Purchased addons"
-   
-    onChange={(event) => {
-        
-        setinput({
-            ...input,
-            purchasedAddons: {
-                 // @ts-ignore
+                                                            <FormControl style={{
+                                                                marginTop: '10px'
+                                                            }} fullWidth>
+                                                                <InputLabel id="demo-simple-select-label">Purchased Categories</InputLabel>
+                                                                <Select multiple
+                                                                    labelId="demo-simple-select-label"
+                                                                    id="demo-simple-select"
+                                                                    value={input?.purchasedCategories?.connect?.map((obj) => obj.id)}
+                                                                    label="Purchased Categories"
 
-                connect: event.target.value?.map((id) =>{ 
-                    return{id}
-                }
-                    )
-            }
-        })
-    }}
->
-    {
-        addonForselect?.addons?.map((addon) => (
-            <MenuItem value={addon.id}>{addon.name}</MenuItem>
-        ))
-    }
+                                                                    onChange={(event) => {
+                                                                        console.log(event.target.value);
 
-</Select>
-</FormControl>
-</Box>
-<Box mt={2} display={'flex'} justifyContent={'flex-start'} alignItems={'center'}>
+                                                                        setinput({
+                                                                            ...input,
+                                                                            purchasedCategories: {
+                                                                                // @ts-ignore
+
+                                                                                connect: event.target.value?.map((id) => {
+                                                                                    return { id }
+                                                                                }
+                                                                                )
+                                                                            }
+                                                                        })
+                                                                    }}
+                                                                >
+                                                                    {
+                                                                        categories?.categories?.map((category) => (
+                                                                            <MenuItem value={category.id}>{category.name}</MenuItem>
+                                                                        ))
+                                                                    }
+
+                                                                </Select>
+                                                            </FormControl>
 
 
 
-<Upload multiple={false} maxCount={1}
-                 action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                 listType="picture-circle"
+                                                        </Box>
+                                                        <Box>
+                                                            <FormControl style={{
+                                                                marginTop: '10px'
+                                                            }} fullWidth>
+                                                                <InputLabel id="demo-simple-select-label">Addons</InputLabel>
+                                                                <Select multiple
+                                                                    labelId="demo-simple-select-label"
+                                                                    id="demo-simple-select"
+                                                                    value={input?.purchasedAddons?.connect?.map((obj) => obj.id)}
+                                                                    label="Purchased addons"
 
-                //  fileList={fileList}
-                fileList={fileList.map((url, index) => ({
-                  uid: index.toString(),
-                  name: `image-${index}`,
-                  status: 'done',
-                  url: url,
-                }))}
-                 onPreview={handlePreview}
-                 onChange={handleChange}
-               >
-                 {fileList.length >= 8 ? null : uploadButton}
-               </Upload>
+                                                                    onChange={(event) => {
 
-<Box display={'flex'} flexDirection={'row'} alignItems={'center'}>
-    <InputLabel >Nurge plus?</InputLabel>
-    <CustomCheckbox checked={input?.nurgePlus?.set as boolean} onChange={(event) => {
-        setinput({
-            ...input , 
-            nurgePlus: {set:event.target.checked}
-        })
-    }}/>
-</Box>
-</Box>
-                        </>
-                    </TabPanel>
-                    <TabPanel style={{
-                        backgroundColor:'unset'
-                    }}  value={'2'}>
-                    <>
-                            
-                            <Box mt={2} display={'flex'} justifyContent={'space-around'}>
+                                                                        setinput({
+                                                                            ...input,
+                                                                            purchasedAddons: {
+                                                                                // @ts-ignore
 
-                                <CustomTextField value={createInput?.name} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                    setcreateInput({
-                                        ...createInput,
-                                        name: e.target.value
-                                    })
-                                }} style={{
-                                    margin: '10px'
-                                }}
-                                    autoFocus
-                                    id="name"
-                                    label=" Name"
-                                    type="text"
-                                    fullWidth
-                                />
+                                                                                connect: event.target.value?.map((id) => {
+                                                                                    return { id }
+                                                                                }
+                                                                                )
+                                                                            }
+                                                                        })
+                                                                    }}
+                                                                >
+                                                                    {
+                                                                        addonForselect?.addons?.map((addon) => (
+                                                                            <MenuItem value={addon.id}>{addon.name}</MenuItem>
+                                                                        ))
+                                                                    }
 
-<CustomTextField value={createInput?.password} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                    setcreateInput({
-                                        ...createInput,
-                                        password: e.target.value
-                                    })
-                                }} style={{
-                                    margin: '10px'
-                                }}
-                                    autoFocus
-                                    id="name"
-                                    label="password"
-                                    type="password"
-                                    fullWidth
-                                />
-                             
-                            </Box>
-                          
-<Box>
-
-</Box>
-
-                        </>
-                    </TabPanel>
-                </Box>
-
-              </TabContext>
-                          </Box>
-                          </>:
-                            <>
-                            
-                                <Box mt={2} display={'flex'} justifyContent={'space-around'}>
-
-                                    <CustomTextField value={createInput?.name} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                        setcreateInput({
-                                            ...createInput,
-                                            name: e.target.value
-                                        })
-                                    }} style={{
-                                        margin: '10px'
-                                    }}
-                                        autoFocus
-                                        id="name"
-                                        label=" Name"
-                                        type="text"
-                                        fullWidth
-                                    />
- <CustomTextField value={createInput?.email} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                        setcreateInput({
-                                            ...createInput,
-                                            email: e.target.value
-                                        })
-                                    }} style={{
-                                        margin: '10px'
-                                    }}
-                                        autoFocus
-                                        id="name"
-                                        label="email"
-                                        type="email"
-                                        fullWidth
-                                    />
- <CustomTextField value={createInput?.password} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                        setcreateInput({
-                                            ...createInput,
-                                            password: e.target.value
-                                        })
-                                    }} style={{
-                                        margin: '10px'
-                                    }}
-                                        autoFocus
-                                        id="name"
-                                        label="password"
-                                        type="password"
-                                        fullWidth
-                                    />
-                                 
-                                </Box>
-                                <Box mt={2} display={'flex'} justifyContent={'space-around'} alignItems={'center'}>
-
-                                <FormControl style={{
-    marginTop: '10px'
-}} fullWidth>
-    <InputLabel id="demo-simple-select-label">Purchased Categories</InputLabel>
-    <Select multiple
-        labelId="demo-simple-select-label"
-        id="demo-simple-select"
-        value={createInput?.purchasedCategories?.connect?.map((obj)=> obj.id)}
-        label="Purchased Categories"
-       
-        onChange={(event) => {
-            console.log(event.target.value);
-            
-            setcreateInput({
-                ...createInput,
-                purchasedCategories: {
-                      // @ts-ignore
-
-                    connect: event.target.value?.map((id) =>{ 
-                        return{id}
-                    }
-                        )
-                }
-            })
-        }}
-    >
-        {
-            categories?.categories?.map((category) => (
-                <MenuItem value={category.id}>{category.name}</MenuItem>
-            ))
-        }
-
-    </Select>
-</FormControl>
+                                                                </Select>
+                                                            </FormControl>
+                                                        </Box>
+                                                        <Box mt={2} display={'flex'} justifyContent={'flex-start'} alignItems={'center'}>
 
 
 
-</Box>
-<Box>
-<FormControl style={{
-    marginTop: '10px'
-}} fullWidth>
-    <InputLabel id="demo-simple-select-label">Addons</InputLabel>
-    <Select multiple
-        labelId="demo-simple-select-label"
-        id="demo-simple-select"
-        value={createInput?.purchasedAddons?.connect?.map((obj)=> obj.id)}
-        label="Purchased addons"
-       
-        onChange={(event) => {
-            
-            setcreateInput({
-                ...createInput,
-                purchasedAddons: {
-                    // @ts-ignore
 
-                    connect: event.target.value?.map((id) =>{ 
-                        return{id}
-                    }
-                        )
-                }
-            })
-        }}
-    >
-        {
-            addonForselect?.addons?.map((addon) => (
-                <MenuItem value={addon.id}>{addon.name}</MenuItem>
-            ))
-        }
+                                                            <Upload multiple={false} maxCount={1}
 
-    </Select>
-</FormControl>
-</Box>
-<Box mt={2} display={'flex'} justifyContent={'flex-start'} alignItems={'center'}>
- 
-    
+                                                                beforeUpload={(args) => handleBeforeUploadUpdate(args)}
+                                                                onRemove={() => {
+                                                                    setFileList([])
+                                                                    setinput({
+                                                                        ...input,
+                                                                        avater: {
+                                                                            set: ''
+                                                                        }
+                                                                    })
+                                                                }}
+                                                                listType="picture-circle"
+                                                                fileList={fileList}
+                                                                onPreview={handlePreview}
+                                                            >
+                                                                {fileList.length >= 8 ? null : uploadButton}
+                                                            </Upload>
+                                                            <Box display={'flex'} flexDirection={'row'} alignItems={'center'}>
+                                                                <InputLabel >Nurge plus?</InputLabel>
+                                                                <CustomCheckbox checked={input?.nurgePlus?.set as boolean} onChange={(event) => {
+                                                                    setinput({
+                                                                        ...input,
+                                                                        nurgePlus: { set: event.target.checked }
+                                                                    })
+                                                                }} />
+                                                            </Box>
+                                                        </Box>
+                                                    </>
+                                                </TabPanel>
+                                                <TabPanel style={{
+                                                    backgroundColor: 'unset'
+                                                }} value={'2'}>
+                                                    <>
 
-    <Upload multiple={false} maxCount={1}
-                     action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                     listType="picture-circle"
+                                                        <Box mt={2} display={'flex'} justifyContent={'space-around'}>
 
-                    //  fileList={fileList}
-                    fileList={fileList.map((url, index) => ({
-                      uid: index.toString(),
-                      name: `image-${index}`,
-                      status: 'done',
-                      url: url,
-                    }))}
-                     onPreview={handlePreview}
-                     onChange={handleChange}
-                   >
-                     {fileList.length >= 8 ? null : uploadButton}
-                   </Upload>
-   
-    <Box display={'flex'} flexDirection={'row'} alignItems={'center'}>
-        <InputLabel>Nurge plus?</InputLabel>
-        <CustomCheckbox onChange={(event) => {
-            setcreateInput({
-                ...createInput , 
-                nurgePlus: event.target.checked
-            })
-        }}/>
-    </Box>
-</Box>
-                            </>
+                                                            <CustomTextField value={createInput?.name} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                                                setcreateInput({
+                                                                    ...createInput,
+                                                                    name: e.target.value
+                                                                })
+                                                            }} style={{
+                                                                margin: '10px'
+                                                            }}
+                                                                autoFocus
+                                                                id="name"
+                                                                label=" Name"
+                                                                type="text"
+                                                                fullWidth
+                                                            />
+
+                                                            <CustomTextField value={createInput?.password} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                                                setcreateInput({
+                                                                    ...createInput,
+                                                                    password: e.target.value
+                                                                })
+                                                            }} style={{
+                                                                margin: '10px'
+                                                            }}
+                                                                autoFocus
+                                                                id="name"
+                                                                label="password"
+                                                                type="password"
+                                                                fullWidth
+                                                            />
+
+                                                        </Box>
+
+                                                        <Box>
+
+                                                        </Box>
+
+                                                    </>
+                                                </TabPanel>
+                                            </Box>
+
+                                        </TabContext>
+                                    </Box>
+                                </> :
+                                <>
+
+                                    <Box mt={2} display={'flex'} justifyContent={'space-around'}>
+
+                                        <CustomTextField value={createInput?.name} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                            setcreateInput({
+                                                ...createInput,
+                                                name: e.target.value
+                                            })
+                                        }} style={{
+                                            margin: '10px'
+                                        }}
+                                            autoFocus
+                                            id="name"
+                                            label=" Name"
+                                            type="text"
+                                            fullWidth
+                                        />
+                                        <CustomTextField value={createInput?.email} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                            setcreateInput({
+                                                ...createInput,
+                                                email: e.target.value
+                                            })
+                                        }} style={{
+                                            margin: '10px'
+                                        }}
+                                            autoFocus
+                                            id="name"
+                                            label="email"
+                                            type="email"
+                                            fullWidth
+                                        />
+                                        <CustomTextField value={createInput?.password} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                            setcreateInput({
+                                                ...createInput,
+                                                password: e.target.value
+                                            })
+                                        }} style={{
+                                            margin: '10px'
+                                        }}
+                                            autoFocus
+                                            id="name"
+                                            label="password"
+                                            type="password"
+                                            fullWidth
+                                        />
+
+                                    </Box>
+                                    <Box mt={2} display={'flex'} justifyContent={'space-around'} alignItems={'center'}>
+
+                                        <FormControl style={{
+                                            marginTop: '10px'
+                                        }} fullWidth>
+                                            <InputLabel id="demo-simple-select-label">Purchased Categories</InputLabel>
+                                            <Select multiple
+                                                labelId="demo-simple-select-label"
+                                                id="demo-simple-select"
+                                                value={createInput?.purchasedCategories?.connect?.map((obj) => obj.id)}
+                                                label="Purchased Categories"
+
+                                                onChange={(event) => {
+                                                    console.log(event.target.value);
+
+                                                    setcreateInput({
+                                                        ...createInput,
+                                                        purchasedCategories: {
+                                                            // @ts-ignore
+
+                                                            connect: event.target.value?.map((id) => {
+                                                                return { id }
+                                                            }
+                                                            )
+                                                        }
+                                                    })
+                                                }}
+                                            >
+                                                {
+                                                    categories?.categories?.map((category) => (
+                                                        <MenuItem value={category.id}>{category.name}</MenuItem>
+                                                    ))
+                                                }
+
+                                            </Select>
+                                        </FormControl>
+
+
+
+                                    </Box>
+                                    <Box>
+                                        <FormControl style={{
+                                            marginTop: '10px'
+                                        }} fullWidth>
+                                            <InputLabel id="demo-simple-select-label">Addons</InputLabel>
+                                            <Select multiple
+                                                labelId="demo-simple-select-label"
+                                                id="demo-simple-select"
+                                                value={createInput?.purchasedAddons?.connect?.map((obj) => obj.id)}
+                                                label="Purchased addons"
+
+                                                onChange={(event) => {
+
+                                                    setcreateInput({
+                                                        ...createInput,
+                                                        purchasedAddons: {
+                                                            // @ts-ignore
+
+                                                            connect: event.target.value?.map((id) => {
+                                                                return { id }
+                                                            }
+                                                            )
+                                                        }
+                                                    })
+                                                }}
+                                            >
+                                                {
+                                                    addonForselect?.addons?.map((addon) => (
+                                                        <MenuItem value={addon.id}>{addon.name}</MenuItem>
+                                                    ))
+                                                }
+
+                                            </Select>
+                                        </FormControl>
+                                    </Box>
+                                    <Box mt={2} display={'flex'} justifyContent={'flex-start'} alignItems={'center'}>
+
+
+
+
+                                        <Upload multiple={false} maxCount={1}
+
+                                            beforeUpload={(args) => handleBeforeUpload(args)}
+                                            onRemove={() => {
+                                                setFileList([])
+                                                setcreateInput({
+                                                    ...createInput,
+                                                    avater: ''
+                                                })
+                                            }}
+                                            listType="picture-circle"
+                                            fileList={fileList}
+                                            onPreview={handlePreview}
+                                        >
+                                            {fileList.length >= 8 ? null : uploadButton}
+                                        </Upload>
+                                        <Box display={'flex'} flexDirection={'row'} alignItems={'center'}>
+                                            <InputLabel>Nurge plus?</InputLabel>
+                                            <CustomCheckbox onChange={(event) => {
+                                                setcreateInput({
+                                                    ...createInput,
+                                                    nurgePlus: event.target.checked
+                                                })
+                                            }} />
+                                        </Box>
+                                    </Box>
+                                </>
                         }
 
                     </DialogContent>
@@ -651,6 +700,8 @@ marginTop: '10px'
                     </DialogActions>
                 </Dialog>
             </Grid>
+            </Spin>
+<Spin spinning={loading||deleteUserLoading ||aggregeateUserDataloading  }>
 
             <PageContainer>
 
@@ -717,7 +768,7 @@ marginTop: '10px'
                                                     </TableCell>
                                                     <TableCell>
                                                         <Typography color="textSecondary" variant="subtitle2">
-                                                        <Avatar src={user.avater as string}/>
+                                                            <Avatar src={getImage(user.avater as string)} />
 
                                                         </Typography>
 
@@ -726,13 +777,13 @@ marginTop: '10px'
                                                     <TableCell>
                                                         <Typography
                                                             variant="subtitle2" fontWeight="500">
-                                                            {user.nurgePlus?'Yes':'No'}
+                                                            {user.nurgePlus ? 'Yes' : 'No'}
                                                         </Typography>
 
 
                                                     </TableCell>
 
-                                                  
+
                                                     <TableCell>
                                                         <Typography
                                                             variant="subtitle2" fontWeight="500">
@@ -744,26 +795,26 @@ marginTop: '10px'
                                                     <TableCell>
                                                         <Typography
                                                             variant="subtitle2" fontWeight="500">
-                                                          {user?._count?.purchasedAddons}
+                                                            {user?._count?.purchasedAddons}
                                                         </Typography>
 
 
                                                     </TableCell>
-                                                   
-                                                        <Popconfirm onConfirm={() => deleteData(user.id)} title="Are you sure?">
 
-                                                            <IconButton>
-                                                                <IconTrash width={18} />
-                                                            </IconButton>
-                                                        </Popconfirm>
-                                                        <IconButton onClick={() => handleClickOpen(user.id)}>
-                                                            <IconEdit width={18} />
+                                                    <Popconfirm onConfirm={() => deleteData(user.id)} title="Are you sure?">
+
+                                                        <IconButton>
+                                                            <IconTrash width={18} />
                                                         </IconButton>
+                                                    </Popconfirm>
+                                                    <IconButton onClick={() => handleClickOpen(user.id)}>
+                                                        <IconEdit width={18} />
+                                                    </IconButton>
 
 
 
-                                                   
-                                                  
+
+
                                                 </TableRow>
                                             );
                                         })}
@@ -784,6 +835,7 @@ marginTop: '10px'
 
                 </ParentCard>
             </PageContainer>
+</Spin>
         </>
 
     );
