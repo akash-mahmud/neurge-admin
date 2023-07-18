@@ -104,7 +104,7 @@ const Index = () => {
     purchaseUrl:''
 
   })
-  const [LoadAddon,] = useAddonForupdateLazyQuery({ fetchPolicy: 'network-only' })
+  const [LoadAddon,{loading:singleAddonLoading}] = useAddonForupdateLazyQuery({ fetchPolicy: 'network-only' })
   const { data: categories } = useCategoriesWithoutRelationFieldQuery()
   const [productId, setproductId] = useState<string>()
   const handleClickOpen = async (id?: string) => {
@@ -272,7 +272,7 @@ setcreateInput({
   
   return (
     <>
-    <Spin spinning={loading || loadingDelete}>
+   
 
       <Grid item xs={12} lg={4} sm={6} display="flex" alignItems="stretch">
 
@@ -569,7 +569,7 @@ setcreateInput({
           </DialogActions>
         </Dialog>
       </Grid>
-
+      <Spin spinning={loading || loadingDelete || singleAddonLoading}>
       <PageContainer>
 
         <ParentCard title="">

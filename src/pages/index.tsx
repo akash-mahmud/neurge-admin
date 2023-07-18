@@ -84,7 +84,7 @@ const Index = () => {
       }]
     }
   })
-  const { data: total, refetch: refetchTotal } = useAggregateTaskQuery()
+  const { data: total, refetch: refetchTotal,loading:loadingAgregete } = useAggregateTaskQuery()
   const [open, setOpen] = useState(false);
   const [input, setinput] = useState<TaskUpdateInput>({
   })
@@ -107,11 +107,13 @@ const Index = () => {
     slug: ''
   })
   const [LoadCategory,] = useCategoryDataForUpdateLazyQuery()
-  const [LoadTask] = useTaskLazyQuery({ fetchPolicy: 'network-only' })
+  const [LoadTask , {loading:SingleTaskLoading}] = useTaskLazyQuery({ fetchPolicy: 'network-only' })
+
   const [LoadPrompts] = usePromptsAfterDeleteFromtasksLazyQuery()
   const [LoadTips] = useTipsAfterDeleteFromTaskLazyQuery()
   const [taskId, settaskId] = useState<string>()
   const handleClickOpen = async (id?: string) => {
+
     if (id) {
       const { data } = await LoadTask({
         variables: {
@@ -121,7 +123,9 @@ const Index = () => {
           }
         }
       })
-      settaskId(id)
+      settaskId(() => id)
+
+
       if (data?.task) {
         const { name, description, tags, imoji, prompts: taskPrompts, tips, categoryId, slug } = data?.task
         setinput(() => {
@@ -153,10 +157,11 @@ const Index = () => {
       }
     }
 
-
     setOpen(true);
 
+
   };
+console.log(SingleTaskLoading);
 
   const handleClose = () => {
     setOpen(false);
@@ -176,15 +181,15 @@ const Index = () => {
     setprompts([{ id: uniqueId(), name: '', description: '' }])
     settips([{ id: uniqueId(), description: '' }])
   };
-  const [UpdateTask] = useUpdateOneTaskMutation()
+  const [UpdateTask , {loading:updateTaskLoading}] = useUpdateOneTaskMutation()
   const [UpdateManyTips, { loading: updatetipsLoading }] = useUpdateManyTipMutation()
   const [UpdateManyPrompts, { loading: promptsUpdateLoading }] = useUpdateManyPromptMutation()
-  const [CreateOneTask] = useCreateOneTaskMutation()
-  const [DeleteTask] = useDeleteOneTaskMutation()
-  const [DeleteTipsRelatedTask] = useDeleteManyTipMutation()
-  const [DeletePromptsRelatedTask] = useDeleteManyPromptMutation()
-  const [DeletePrompt] = useDeleteOnePromptMutation()
-  const [DeleteTips] = useDeleteOneTipMutation()
+  const [CreateOneTask , {loading:createTaskLoading}] = useCreateOneTaskMutation()
+  const [DeleteTask , {loading:deleteTask}] = useDeleteOneTaskMutation()
+  const [DeleteTipsRelatedTask, {loading:DeleteTipsRelatedTaskLoading}] = useDeleteManyTipMutation()
+  const [DeletePromptsRelatedTask , { loading:DeletePromptsRelatedTaskLoading}] = useDeleteManyPromptMutation()
+  const [DeletePrompt, {loading:deletePromptsLoading}] = useDeleteOnePromptMutation()
+  const [DeleteTips , {loading:deleteTipsLoading}] = useDeleteOneTipMutation()
   const deleteData = async (taskId: string) => {
     const { data } = await LoadTask({
       variables: {
@@ -310,6 +315,8 @@ const Index = () => {
   const { data: categories } = useCategoriesWithoutRelationFieldQuery()
   const [updateingPrompt, setupdateingPrompt] = useState('')
   const [updatingTip, setupdatingTip] = useState('')
+  console.log(SingleTaskLoading);
+  
   return (
     <>
       <Grid item xs={12} lg={4} sm={6} display="flex" alignItems="stretch">
@@ -320,7 +327,8 @@ const Index = () => {
           <DialogTitle>{taskId ? 'Update' : 'Create'} Category</DialogTitle>
           <DialogContent>
             {
-              taskId ? <>
+              taskId ? <Spin spinning={deletePromptsLoading|| deleteTipsLoading|| updatetipsLoading || promptsUpdateLoading ||updateTaskLoading }>
+              
                 <Box mt={2} display={'flex'} justifyContent={'space-around'} alignItems={'center'} flexWrap={"wrap"}>
                   <Box flexBasis={'calc(33.33% - 10px)'}>
 
@@ -371,6 +379,7 @@ const Index = () => {
                   </Box>
 
                   <Box flexBasis={'calc(33.33% - 10px)'}>
+
                     <TextField
 
                       onChange={(event) => {
@@ -670,8 +679,8 @@ const Index = () => {
                 </Box>
                 {/* End update form  */}
 
-              </> :
-                <>
+              </Spin> :
+                <Spin spinning={createTaskLoading}>
                   <Box mt={2} display={'flex'} justifyContent={'space-around'} alignItems={'center'} flexWrap={"wrap"}>
                     <Box flexBasis={'calc(33.33% - 10px)'}>
 
@@ -943,7 +952,7 @@ const Index = () => {
                   </Box>
 
 
-                </>
+                </Spin>
 
             }
 
@@ -954,6 +963,7 @@ const Index = () => {
           </DialogActions>
         </Dialog>
       </Grid>
+<Spin spinning={loading || loadingAgregete||SingleTaskLoading ||deleteTask|| DeleteTipsRelatedTaskLoading|| DeletePromptsRelatedTaskLoading}>
 
       <PageContainer>
 
@@ -1077,6 +1087,7 @@ const Index = () => {
 
         </ParentCard>
       </PageContainer>
+</Spin>
     </>
 
   );

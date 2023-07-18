@@ -21,7 +21,7 @@ import {
     Select,
     MenuItem
 } from '@mui/material';
-import { Button, Pagination, Popconfirm } from 'antd';
+import { Button, Pagination, Popconfirm, Spin } from 'antd';
 
 import PageContainer from '../../../src/components/container/PageContainer';
 
@@ -65,7 +65,7 @@ const Index = () => {
             }]
         }
     })
-    const { data: total, refetch: refetchTotal } = useAggregateAddonBlogCategoryQuery()
+    const { data: total, refetch: refetchTotal , loading:aggregeateLoading } = useAggregateAddonBlogCategoryQuery()
     const [open, setOpen] = useState(false);
     const [input, setinput] = useState<AddonBlogCategoryUpdateInput>({
     })
@@ -77,7 +77,7 @@ const Index = () => {
             }
         }
     })
-    const [LoadAddonBlogCategory,] = useAddonBlogCategoryForUpdateLazyQuery()
+    const [LoadAddonBlogCategory,{loading:loadAddonBlogSingleLoading}] = useAddonBlogCategoryForUpdateLazyQuery()
     const [addonBlogCategoryId, setaddonBlogCategoryId] = useState<string>()
     const handleClickOpen = async (id?: string) => {
         if (id) {
@@ -115,9 +115,9 @@ const Index = () => {
         setOpen(false);
         setaddonBlogCategoryId(undefined)
     };
-    const [UpdateAddonVlogCategory] = useUpdateOneAddonBlogCategoryMutation()
-    const [CreateAddonBlogCategory] = useCreateOneAddonBlogCategoryMutation()
-    const [DeleteAddonBlogCategory] = useDeleteOneAddonBlogCategoryMutation()
+    const [UpdateAddonVlogCategory, {loading:updateLoading}] = useUpdateOneAddonBlogCategoryMutation()
+    const [CreateAddonBlogCategory , {loading:createLoading}] = useCreateOneAddonBlogCategoryMutation()
+    const [DeleteAddonBlogCategory , {loading:deleteLoading}] = useDeleteOneAddonBlogCategoryMutation()
     const deleteData = async (addonBlogCategoryId: string) => {
         await DeleteAddonBlogCategory({
             variables: {
@@ -169,99 +169,104 @@ const Index = () => {
                     <DialogTitle>{addonBlogCategoryId ? 'Update' : 'Create'} Category</DialogTitle>
                     <DialogContent>
                         {
-                            addonBlogCategoryId ? <Box mt={2} display={'flex'} justifyContent={'space-around'}>
+                            addonBlogCategoryId ? <Spin spinning={updateLoading}>
+ <Box mt={2} display={'flex'} justifyContent={'space-around'}>
 
-                                <CustomTextField value={input.name?.set} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                    setinput({
-                                        ...input,
-                                        name: {
-                                            set: e.target.value
-                                        }
-                                    })
-                                }} style={{
-                                    margin: '10px'
-                                }}
-                                    autoFocus
-                                    id="name"
-                                    label="Category Name"
-                                    type="text"
-                                    fullWidth
-                                />
-                                <FormControl style={{
-                                    marginTop: '5px'
-                                }} fullWidth>
-                                    <InputLabel id="demo-simple-select-label">Category</InputLabel>
-                                    <Select
-                                        labelId="demo-simple-select-label"
-                                        id="demo-simple-select"
-                                        value={input?.addon?.connect?.id}
-                                        label="Category"
-                                        onChange={(event) => {
-                                            setinput({
-                                                ...input,
-                                                addon: {
-                                                    connect: {
-                                                        id: event.target.value
-                                                    }
-                                                }
-                                            })
-                                        }}
-                                    >
-                                        {
-                                            addonForselect?.addons?.map((addon) => (
-                                                <MenuItem value={addon.id}>{addon.name}</MenuItem>
-                                            ))
-                                        }
+<CustomTextField value={input.name?.set} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+    setinput({
+        ...input,
+        name: {
+            set: e.target.value
+        }
+    })
+}} style={{
+    margin: '10px'
+}}
+    autoFocus
+    id="name"
+    label="Category Name"
+    type="text"
+    fullWidth
+/>
+<FormControl style={{
+    marginTop: '5px'
+}} fullWidth>
+    <InputLabel id="demo-simple-select-label">Category</InputLabel>
+    <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={input?.addon?.connect?.id}
+        label="Category"
+        onChange={(event) => {
+            setinput({
+                ...input,
+                addon: {
+                    connect: {
+                        id: event.target.value
+                    }
+                }
+            })
+        }}
+    >
+        {
+            addonForselect?.addons?.map((addon) => (
+                <MenuItem value={addon.id}>{addon.name}</MenuItem>
+            ))
+        }
 
-                                    </Select>
-                                </FormControl>
-                            </Box> :
-                                <Box mt={2} display={'flex'} justifyContent={'space-around'}>
+    </Select>
+</FormControl>
+</Box> 
+                            </Spin>
+                           : <Spin spinning={createLoading}>
+   <Box mt={2} display={'flex'} justifyContent={'space-around'}>
 
-                                    <CustomTextField value={createInput?.name} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                        setcreateInput({
-                                            ...createInput,
-                                            name: e.target.value
-                                        })
-                                    }} style={{
-                                        margin: '10px'
-                                    }}
-                                        autoFocus
-                                        id="name"
-                                        label="Category Name"
-                                        type="text"
-                                        fullWidth
-                                    />
+<CustomTextField value={createInput?.name} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+    setcreateInput({
+        ...createInput,
+        name: e.target.value
+    })
+}} style={{
+    margin: '10px'
+}}
+    autoFocus
+    id="name"
+    label="Category Name"
+    type="text"
+    fullWidth
+/>
 
-                                    <FormControl style={{
-                                        marginTop: '5px'
-                                    }} fullWidth>
-                                        <InputLabel id="demo-simple-select-label">Category</InputLabel>
-                                        <Select
-                                            labelId="demo-simple-select-label"
-                                            id="demo-simple-select"
-                                            value={createInput?.addon?.connect?.id}
-                                            label="Category"
-                                            onChange={(event) => {
-                                                setcreateInput({
-                                                    ...createInput,
-                                                    addon: {
-                                                        connect: {
-                                                            id: event.target.value
-                                                        }
-                                                    }
-                                                })
-                                            }}
-                                        >
-                                            {
-                                                addonForselect?.addons?.map((addon) => (
-                                                    <MenuItem value={addon.id}>{addon.name}</MenuItem>
-                                                ))
-                                            }
+<FormControl style={{
+    marginTop: '5px'
+}} fullWidth>
+    <InputLabel id="demo-simple-select-label">Category</InputLabel>
+    <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={createInput?.addon?.connect?.id}
+        label="Category"
+        onChange={(event) => {
+            setcreateInput({
+                ...createInput,
+                addon: {
+                    connect: {
+                        id: event.target.value
+                    }
+                }
+            })
+        }}
+    >
+        {
+            addonForselect?.addons?.map((addon) => (
+                <MenuItem value={addon.id}>{addon.name}</MenuItem>
+            ))
+        }
 
-                                        </Select>
-                                    </FormControl>
-                                </Box>
+    </Select>
+</FormControl>
+</Box>
+                           </Spin>
+                             
                         }
 
                     </DialogContent>
@@ -271,6 +276,7 @@ const Index = () => {
                     </DialogActions>
                 </Dialog>
             </Grid>
+<Spin spinning={loadAddonBlogSingleLoading || loading || deleteLoading || aggregeateLoading}>
 
             <PageContainer>
 
@@ -377,6 +383,7 @@ const Index = () => {
 
                 </ParentCard>
             </PageContainer>
+</Spin>
         </>
 
     );

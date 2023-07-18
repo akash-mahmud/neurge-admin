@@ -14,7 +14,7 @@ const Editor = () => {
 return (
     <MDEditor   value="Hello Markdown!"
     onChange={(val) => {
-      setValue(val);
+      setValue(val as string);
     }}/>
 )
 }

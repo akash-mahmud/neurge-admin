@@ -5,6 +5,10 @@
     "@next/next/no-img-element": "off",
     "react-hooks/exhaustive-deps":"off",
     "react/display-name":"off",
-"react/jsx-key":"off"
-  }
+"react/jsx-key":"off",
+
+  },
+  "plugins": [
+    "@typescript-eslint"
+  ]
 }

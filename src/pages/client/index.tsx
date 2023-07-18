@@ -150,7 +150,7 @@ const Index = () => {
         fetchPolicy: 'network-only'
     })
     const [userId, setuserId] = useState<string>()
-    const { data: addonForselect } = useAddonForSelectQuery()
+    const { data: addonForselect , loading:AddonLoading} = useAddonForSelectQuery()
 
     const handleClickOpen = async (id?: string) => {
         if (id) {
@@ -181,7 +181,12 @@ const Index = () => {
                     nurgePlus: { set: data.user.nurgePlus }
 
                 })
-
+                data.user.avater ?   setFileList([{
+                    uid: uniqueId(),
+                    name:data.user.avater ,
+                    status: 'done',
+                    url: getImage(data.user.avater  ),
+                  }]): null
 
             }
         }
@@ -316,7 +321,6 @@ const Index = () => {
     };
     return (
         <>
-        <Spin spinning={loadingUpload||singleUserLoading||updateLoading|| createLoading}>
 
             <Grid item xs={12} lg={4} sm={6} display="flex" alignItems="stretch">
 
@@ -325,9 +329,11 @@ const Index = () => {
                 }} open={open} onClose={handleClose} fullWidth maxWidth={'md'} >
                     <DialogTitle>{userId ? 'Update' : 'Create'} User</DialogTitle>
                     <DialogContent>
+                        <Spin spinning={loadingUpload}>
+
                         {
                             userId ?
-                                <>
+                                <Spin spinning={updateLoading}>
                                     <Box>
                                         <TabContext value={value}>
                                             <Box>
@@ -535,8 +541,8 @@ const Index = () => {
 
                                         </TabContext>
                                     </Box>
-                                </> :
-                                <>
+                                </Spin> :
+                                <Spin spinning={createLoading}>
 
                                     <Box mt={2} display={'flex'} justifyContent={'space-around'}>
 
@@ -690,8 +696,9 @@ const Index = () => {
                                             }} />
                                         </Box>
                                     </Box>
-                                </>
+                                </Spin>
                         }
+                        </Spin>
 
                     </DialogContent>
                     <DialogActions>
@@ -700,8 +707,7 @@ const Index = () => {
                     </DialogActions>
                 </Dialog>
             </Grid>
-            </Spin>
-<Spin spinning={loading||deleteUserLoading ||aggregeateUserDataloading  }>
+<Spin spinning={loading||deleteUserLoading ||aggregeateUserDataloading || singleUserLoading || categoryLoading|| AddonLoading }>
 
             <PageContainer>
 

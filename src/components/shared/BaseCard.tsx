@@ -1,6 +1,6 @@
+import { AppState, useSelector } from '@/store';
 import { Card, CardHeader, CardContent, Divider } from '@mui/material';
-import { useSelector } from '../../../store/Store';
-import { AppState } from '../../../store/Store';
+
 
 type Props = {
   title: string;

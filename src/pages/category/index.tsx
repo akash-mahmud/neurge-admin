@@ -17,7 +17,7 @@ import {
   TextField,
   InputAdornment
 } from '@mui/material';
-import { Button, Pagination, Popconfirm } from 'antd';
+import { Button, Pagination, Popconfirm, Spin } from 'antd';
 
 import PageContainer from '../../../src/components/container/PageContainer';
 
@@ -65,12 +65,12 @@ const Index = () => {
       }]
     }
   })
-  const { data: total, refetch: refetchTotal } = useAggregateCategoryQuery()
+  const { data: total, refetch: refetchTotal , loading:aggregaeateLoading} = useAggregateCategoryQuery()
   const [open, setOpen] = useState(false);
   const [input, setinput] = useState<CategoryUpdateInput>({
   })
   const [createInput, setcreateInput] = useState<CategoryCreateInput>()
-  const [LoadCategory,] = useCategoryDataForUpdateLazyQuery()
+  const [LoadCategory,{loading:categoryDartaLoading}] = useCategoryDataForUpdateLazyQuery()
   const [categoryId, setcategoryId] = useState<string>()
   const handleClickOpen = async (id?: string) => {
     if (id) {
@@ -103,9 +103,9 @@ const Index = () => {
     setOpen(false);
     setcategoryId(undefined)
   };
-  const [UpdateCategory] = useUpdateOneCategoryMutation()
-  const [CreateCategory] = useCreateOneCategoryMutation()
-  const [DeleteCategory] = useDeleteOneCategoryMutation()
+  const [UpdateCategory, {loading:updateCategoryLoading}] = useUpdateOneCategoryMutation()
+  const [CreateCategory , {loading:createCategoryLoading}] = useCreateOneCategoryMutation()
+  const [DeleteCategory , {loading:deleteCategortLoading}] = useDeleteOneCategoryMutation()
   const deleteData = async (categoryId: string) => {
     await DeleteCategory({
       variables: {
@@ -155,25 +155,28 @@ const Index = () => {
           <DialogTitle>{categoryId ? 'Update' : 'Create'} Category</DialogTitle>
           <DialogContent>
             {
-              categoryId ? <Box mt={2} display={'flex'} justifyContent={'space-around'}>
+              categoryId ?<Spin spinning={updateCategoryLoading}><Box mt={2} display={'flex'} justifyContent={'space-around'}>
 
-                <CustomTextField value={input.name?.set} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  setinput({
-                    name: {
-                      set: e.target.value
-                    }
-                  })
-                }} style={{
-                  margin: '10px'
-                }}
-                  autoFocus
-                  id="name"
-                  label="Category Name"
-                  type="text"
-                  fullWidth
-                />
+              <CustomTextField value={input.name?.set} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setinput({
+                  name: {
+                    set: e.target.value
+                  }
+                })
+              }} style={{
+                margin: '10px'
+              }}
+                autoFocus
+                id="name"
+                label="Category Name"
+                type="text"
+                fullWidth
+              />
 
-              </Box> : <Box mt={2} display={'flex'} justifyContent={'space-around'}>
+            </Box> </Spin> 
+              : <Spin spinning={createCategoryLoading}>
+
+              <Box mt={2} display={'flex'} justifyContent={'space-around'}>
 
                 <CustomTextField value={createInput?.name} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   setcreateInput({
@@ -190,6 +193,7 @@ const Index = () => {
                 />
 
               </Box>
+              </Spin>
             }
 
           </DialogContent>
@@ -199,6 +203,7 @@ const Index = () => {
           </DialogActions>
         </Dialog>
       </Grid>
+<Spin spinning={loading || aggregaeateLoading || categoryDartaLoading || deleteCategortLoading}>
 
       <PageContainer>
 
@@ -310,6 +315,7 @@ const Index = () => {
 
         </ParentCard>
       </PageContainer>
+</Spin>
     </>
 
   );

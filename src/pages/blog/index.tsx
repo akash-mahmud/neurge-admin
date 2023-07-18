@@ -21,7 +21,7 @@ import {
     Select,
     MenuItem
 } from '@mui/material';
-import { Button, Pagination, Popconfirm, Popover } from 'antd';
+import { Button, Pagination, Popconfirm, Popover, Spin } from 'antd';
 import { default as emojiData } from '@emoji-mart/data'
 import Picker from '@emoji-mart/react'
 import PageContainer from '../../../src/components/container/PageContainer';
@@ -74,7 +74,7 @@ const Index = () => {
             }]
         }
     })
-    const { data: total, refetch: refetchTotal } = useAggregateBlogQuery()
+    const { data: total, refetch: refetchTotal, loading:aggregeateLoading } = useAggregateBlogQuery()
     const [open, setOpen] = useState(false);
     const [input, setinput] = useState<BlogUpdateInput>({
     })
@@ -94,7 +94,7 @@ const Index = () => {
         }
 
     })
-    const [LoadBlog,] = useBlogForUpdateLazyQuery({
+    const [LoadBlog,{loading:singleBlogDataLoading}] = useBlogForUpdateLazyQuery({
         fetchPolicy:'network-only'
     })
     const [blogId, setblogId] = useState<string>()
@@ -144,9 +144,9 @@ const Index = () => {
         setOpen(false);
         setblogId(undefined)
     };
-    const [UpdateBlog] = useUpdateOneBlogMutation()
-    const [CreateOneBlog] = useCreateOneBlogMutation()
-    const [DeleteBlog] = useDeleteOneBlogMutation()
+    const [UpdateBlog, {loading: updateLoading}] = useUpdateOneBlogMutation()
+    const [CreateOneBlog , {loading: createLoading}] = useCreateOneBlogMutation()
+    const [DeleteBlog , {loading:deleteLoading}] = useDeleteOneBlogMutation()
     const deleteData = async (blogId: string) => {
         await DeleteBlog({
             variables: {
@@ -208,7 +208,7 @@ const Index = () => {
                     <DialogContent>
                         {
                             blogId ?
-                                <>
+                                <Spin spinning={updateLoading}>
 
                                     <Box mt={2} display={'flex'} justifyContent={'space-around'}>
 
@@ -356,10 +356,10 @@ const Index = () => {
                                         />
                                     </Box>
 
-                                </>
+                                </Spin>
 
                                 :
-                                <>
+                                <Spin spinning={createLoading}>
 
                                     <Box mt={2} display={'flex'} justifyContent={'space-around'}>
 
@@ -506,7 +506,7 @@ const Index = () => {
                                         />
                                     </Box>
 
-                                </>
+                                </Spin>
                         }
 
                     </DialogContent>
@@ -516,6 +516,7 @@ const Index = () => {
                     </DialogActions>
                 </Dialog>
             </Grid>
+<Spin spinning={loading || aggregeateLoading || deleteLoading || singleBlogDataLoading}>
 
             <PageContainer>
 
@@ -625,6 +626,7 @@ const Index = () => {
 
                 </ParentCard>
             </PageContainer>
+</Spin>
         </>
 
     );

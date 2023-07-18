@@ -670,7 +670,7 @@ setinput({
         </Dialog>
 
       </Grid>
-<Spin spinning={loading || categoryLoading ||productAgregetaedataLoading}>
+<Spin spinning={loading || categoryLoading ||productAgregetaedataLoading || singleProductLoading}>
 
       <PageContainer>
 

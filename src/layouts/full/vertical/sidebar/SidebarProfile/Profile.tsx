@@ -6,6 +6,7 @@ import { AppState } from '../../../../../store';
 import Link from 'next/link';
 import { logout } from '@/store/slices/auth/authSlice';
 import { useRouter } from 'next/router';
+import { getImage } from '@/utils/getimage';
 
 export const Profile = () => {
   const customizer = useSelector((state: AppState) => state.customizer);
@@ -29,7 +30,7 @@ export const Profile = () => {
     >
       {!hideMenu ? (
         <>
-          <Avatar alt="Remy Sharp" src={`${user?.avater? user.avater: '/images/profile/user-1.jpg'}`} />
+          <Avatar alt="Remy Sharp" src={`${user?.avater? getImage(user.avater): '/images/profile/user-1.jpg'}`} />
 
           <Box>
             <Typography variant="h6">
