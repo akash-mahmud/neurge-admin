@@ -26,7 +26,7 @@ if (typeof window !== 'undefined')  {
 
 
 const uploadLink = createUploadLink({
-  uri: 'http://localhost:8000/graphql',
+  uri: process.env.NEXT_PUBLIC_SERVER_URL,
   headers: {
     Authorization: token,
     'Apollo-Require-Preflight': 'true'
