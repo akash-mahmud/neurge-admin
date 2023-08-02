@@ -37,6 +37,7 @@
     "antd": "^5.6.4",
     "antd-mobile": "^5.31.1",
     "apexcharts": "3.36.3",
+    "apollo-link-context": "^1.0.20",
     "apollo-upload-client": "^17.0.0",
     "axios": "^1.2.5",
     "axios-mock-adapter": "^1.21.2",
