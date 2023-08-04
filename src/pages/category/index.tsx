@@ -17,7 +17,7 @@ import {
   TextField,
   InputAdornment
 } from '@mui/material';
-import { Button, Pagination, Popconfirm, Spin } from 'antd';
+import { Button, ColorPicker, Pagination, Popconfirm, Spin } from 'antd';
 
 import PageContainer from '../../../src/components/container/PageContainer';
 
@@ -87,7 +87,11 @@ const Index = () => {
         setinput({
           name: {
             set: data.category.name as string
+          },
+          colour:{
+            set: data.category.colour as string
           }
+
         })
 
 
@@ -155,7 +159,7 @@ const Index = () => {
           <DialogTitle>{categoryId ? 'Update' : 'Create'} Category</DialogTitle>
           <DialogContent>
             {
-              categoryId ?<Spin spinning={updateCategoryLoading}><Box mt={2} display={'flex'} justifyContent={'space-around'}>
+              categoryId ?<Spin spinning={updateCategoryLoading}><Box mt={2} display={'flex'} justifyContent={'space-around'} alignItems={'center'}>
 
               <CustomTextField value={input.name?.set} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setinput({
@@ -172,11 +176,16 @@ const Index = () => {
                 type="text"
                 fullWidth
               />
+      <ColorPicker format='hex' value={input?.colour?.set as string}  allowClear onChange={(colour) => setinput((previousState) => {
+        
+        return{...previousState , colour:{
+        set:`#${colour.toHex()}`
+      }}})} />
 
             </Box> </Spin> 
               : <Spin spinning={createCategoryLoading}>
 
-              <Box mt={2} display={'flex'} justifyContent={'space-around'}>
+              <Box mt={2} display={'flex'} justifyContent={'space-around'} alignItems={'center'}>
 
                 <CustomTextField value={createInput?.name} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   setcreateInput({
@@ -191,6 +200,10 @@ const Index = () => {
                   type="text"
                   fullWidth
                 />
+                <Box width={'60px'}>
+
+      <ColorPicker value={createInput?.colour as string}  allowClear onChange={(colour) => setcreateInput((previousState) => {return{...previousState , colour:`#${colour.toHex()}`}})} />
+                </Box>
 
               </Box>
               </Spin>

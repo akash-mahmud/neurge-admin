@@ -7,3 +7,7 @@
     .MuiDialog-root {
         z-index: 10000; /* Set a higher z-index value than the Popconfirm */
       }
+      .ant-color-picker{
+        z-index: 100099; /* Set a higher z-index value than the Popconfirm */
+
+      }

@@ -17,6 +17,7 @@ query TasksViewTable($where: TaskWhereInput, $orderBy: [TaskOrderByWithRelationI
     category {
       name
       id
+      colour
     }
     createdAt
     imoji
@@ -60,7 +61,7 @@ query AggregateTask($where: TaskWhereInput, $cursor: TaskWhereUniqueInput) {
     }
      category {
       name
-      
+      colour
     }
  
   }

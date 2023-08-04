@@ -1300,6 +1300,7 @@ export type BoolWithAggregatesFilter = {
 export type Category = {
   __typename?: 'Category';
   _count?: Maybe<CategoryCount>;
+  colour: Scalars['String']['output'];
   createdAt: Scalars['DateTime']['output'];
   id: Scalars['String']['output'];
   name: Scalars['String']['output'];
@@ -1364,6 +1365,7 @@ export type CategoryCountTasksArgs = {
 export type CategoryCountAggregate = {
   __typename?: 'CategoryCountAggregate';
   _all: Scalars['Int']['output'];
+  colour: Scalars['Int']['output'];
   createdAt: Scalars['Int']['output'];
   id: Scalars['Int']['output'];
   name: Scalars['Int']['output'];
@@ -1371,6 +1373,7 @@ export type CategoryCountAggregate = {
 };
 
 export type CategoryCountOrderByAggregateInput = {
+  colour?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
@@ -1378,6 +1381,7 @@ export type CategoryCountOrderByAggregateInput = {
 };
 
 export type CategoryCreateInput = {
+  colour?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
@@ -1388,6 +1392,7 @@ export type CategoryCreateInput = {
 };
 
 export type CategoryCreateManyInput = {
+  colour?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
@@ -1428,6 +1433,7 @@ export type CategoryCreateOrConnectWithoutTasksInput = {
 };
 
 export type CategoryCreateWithoutProductsInput = {
+  colour?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
@@ -1437,6 +1443,7 @@ export type CategoryCreateWithoutProductsInput = {
 };
 
 export type CategoryCreateWithoutPurchasedByUsersInput = {
+  colour?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
@@ -1446,6 +1453,7 @@ export type CategoryCreateWithoutPurchasedByUsersInput = {
 };
 
 export type CategoryCreateWithoutTasksInput = {
+  colour?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
@@ -1459,6 +1467,7 @@ export type CategoryGroupBy = {
   _count?: Maybe<CategoryCountAggregate>;
   _max?: Maybe<CategoryMaxAggregate>;
   _min?: Maybe<CategoryMinAggregate>;
+  colour: Scalars['String']['output'];
   createdAt: Scalars['DateTime']['output'];
   id: Scalars['String']['output'];
   name: Scalars['String']['output'];
@@ -1473,6 +1482,7 @@ export type CategoryListRelationFilter = {
 
 export type CategoryMaxAggregate = {
   __typename?: 'CategoryMaxAggregate';
+  colour?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   id?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
@@ -1480,6 +1490,7 @@ export type CategoryMaxAggregate = {
 };
 
 export type CategoryMaxOrderByAggregateInput = {
+  colour?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
@@ -1488,6 +1499,7 @@ export type CategoryMaxOrderByAggregateInput = {
 
 export type CategoryMinAggregate = {
   __typename?: 'CategoryMinAggregate';
+  colour?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   id?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
@@ -1495,6 +1507,7 @@ export type CategoryMinAggregate = {
 };
 
 export type CategoryMinOrderByAggregateInput = {
+  colour?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
@@ -1509,6 +1522,7 @@ export type CategoryOrderByWithAggregationInput = {
   _count?: InputMaybe<CategoryCountOrderByAggregateInput>;
   _max?: InputMaybe<CategoryMaxOrderByAggregateInput>;
   _min?: InputMaybe<CategoryMinOrderByAggregateInput>;
+  colour?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
@@ -1516,6 +1530,7 @@ export type CategoryOrderByWithAggregationInput = {
 };
 
 export type CategoryOrderByWithRelationInput = {
+  colour?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
@@ -1531,6 +1546,7 @@ export type CategoryRelationFilter = {
 };
 
 export enum CategoryScalarFieldEnum {
+  Colour = 'colour',
   CreatedAt = 'createdAt',
   Id = 'id',
   Name = 'name',
@@ -1541,6 +1557,7 @@ export type CategoryScalarWhereInput = {
   AND?: InputMaybe<Array<CategoryScalarWhereInput>>;
   NOT?: InputMaybe<Array<CategoryScalarWhereInput>>;
   OR?: InputMaybe<Array<CategoryScalarWhereInput>>;
+  colour?: InputMaybe<StringFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<StringFilter>;
   name?: InputMaybe<StringFilter>;
@@ -1551,6 +1568,7 @@ export type CategoryScalarWhereWithAggregatesInput = {
   AND?: InputMaybe<Array<CategoryScalarWhereWithAggregatesInput>>;
   NOT?: InputMaybe<Array<CategoryScalarWhereWithAggregatesInput>>;
   OR?: InputMaybe<Array<CategoryScalarWhereWithAggregatesInput>>;
+  colour?: InputMaybe<StringWithAggregatesFilter>;
   createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
   id?: InputMaybe<StringWithAggregatesFilter>;
   name?: InputMaybe<StringWithAggregatesFilter>;
@@ -1558,6 +1576,7 @@ export type CategoryScalarWhereWithAggregatesInput = {
 };
 
 export type CategoryUpdateInput = {
+  colour?: InputMaybe<StringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -1568,6 +1587,7 @@ export type CategoryUpdateInput = {
 };
 
 export type CategoryUpdateManyMutationInput = {
+  colour?: InputMaybe<StringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -1618,6 +1638,7 @@ export type CategoryUpdateWithWhereUniqueWithoutPurchasedByUsersInput = {
 };
 
 export type CategoryUpdateWithoutProductsInput = {
+  colour?: InputMaybe<StringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -1627,6 +1648,7 @@ export type CategoryUpdateWithoutProductsInput = {
 };
 
 export type CategoryUpdateWithoutPurchasedByUsersInput = {
+  colour?: InputMaybe<StringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -1636,6 +1658,7 @@ export type CategoryUpdateWithoutPurchasedByUsersInput = {
 };
 
 export type CategoryUpdateWithoutTasksInput = {
+  colour?: InputMaybe<StringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -1664,6 +1687,7 @@ export type CategoryWhereInput = {
   AND?: InputMaybe<Array<CategoryWhereInput>>;
   NOT?: InputMaybe<Array<CategoryWhereInput>>;
   OR?: InputMaybe<Array<CategoryWhereInput>>;
+  colour?: InputMaybe<StringFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<StringFilter>;
   name?: InputMaybe<StringFilter>;
@@ -1839,6 +1863,7 @@ export type Mutation = {
   updateOneTask?: Maybe<Task>;
   updateOneTip?: Maybe<Tip>;
   updateOneUser?: Maybe<User>;
+  updateProfile?: Maybe<DefaultResponsce>;
   uploadFile?: Maybe<FileUploadResponsce>;
   upsertOneAddon: Addon;
   upsertOneAddonBlogCategory: AddonBlogCategory;
@@ -2169,6 +2194,15 @@ export type MutationUpdateOneTipArgs = {
 export type MutationUpdateOneUserArgs = {
   data: UserUpdateInput;
   where: UserWhereUniqueInput;
+};
+
+
+export type MutationUpdateProfileArgs = {
+  email: Scalars['String']['input'];
+  input: UserUpdateInput;
+  newPass?: InputMaybe<Scalars['String']['input']>;
+  oldPassword?: InputMaybe<Scalars['String']['input']>;
+  updatePass?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
@@ -5007,7 +5041,7 @@ export type DefaultResponsce = {
 
 export type FileUploadResponsce = {
   __typename?: 'fileUploadResponsce';
-  file: Scalars['String']['output'];
+  file?: Maybe<Scalars['String']['output']>;
   message: Scalars['String']['output'];
   success: Scalars['Boolean']['output'];
 };
@@ -5203,7 +5237,7 @@ export type LoginAdminMutation = { __typename?: 'Mutation', loginAdmin?: { __typ
 export type CategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CategoriesQuery = { __typename?: 'Query', categories: Array<{ __typename?: 'Category', id: string, name: string, createdAt: any }> };
+export type CategoriesQuery = { __typename?: 'Query', categories: Array<{ __typename?: 'Category', id: string, name: string, colour: string, createdAt: any }> };
 
 export type CategoriesWithoutRelationFieldQueryVariables = Exact<{
   where?: InputMaybe<CategoryWhereInput>;
@@ -5215,7 +5249,7 @@ export type CategoriesWithoutRelationFieldQueryVariables = Exact<{
 }>;
 
 
-export type CategoriesWithoutRelationFieldQuery = { __typename?: 'Query', categories: Array<{ __typename?: 'Category', createdAt: any, id: string, name: string, _count?: { __typename?: 'CategoryCount', products: number, purchasedByUsers: number, tasks: number } | null }> };
+export type CategoriesWithoutRelationFieldQuery = { __typename?: 'Query', categories: Array<{ __typename?: 'Category', createdAt: any, id: string, name: string, colour: string, _count?: { __typename?: 'CategoryCount', products: number, purchasedByUsers: number, tasks: number } | null }> };
 
 export type UpdateOneCategoryMutationVariables = Exact<{
   data: CategoryUpdateInput;
@@ -5237,7 +5271,7 @@ export type CategoryDataForUpdateQueryVariables = Exact<{
 }>;
 
 
-export type CategoryDataForUpdateQuery = { __typename?: 'Query', category?: { __typename?: 'Category', id: string, name: string } | null };
+export type CategoryDataForUpdateQuery = { __typename?: 'Query', category?: { __typename?: 'Category', id: string, name: string, colour: string } | null };
 
 export type AggregateCategoryQueryVariables = Exact<{
   where?: InputMaybe<CategoryWhereInput>;
@@ -5260,7 +5294,7 @@ export type UploadFileMutationVariables = Exact<{
 }>;
 
 
-export type UploadFileMutation = { __typename?: 'Mutation', uploadFile?: { __typename?: 'fileUploadResponsce', message: string, success: boolean, file: string } | null };
+export type UploadFileMutation = { __typename?: 'Mutation', uploadFile?: { __typename?: 'fileUploadResponsce', message: string, success: boolean, file?: string | null } | null };
 
 export type ProductsForTableViewQueryVariables = Exact<{
   where?: InputMaybe<ProductWhereInput>;
@@ -5362,7 +5396,7 @@ export type TasksViewTableQueryVariables = Exact<{
 }>;
 
 
-export type TasksViewTableQuery = { __typename?: 'Query', tasks: Array<{ __typename?: 'Task', createdAt: any, imoji: string, name: string, slug: string, tags: Array<string>, id: string, _count?: { __typename?: 'TaskCount', prompts: number, tips: number } | null, category?: { __typename?: 'Category', name: string, id: string } | null }> };
+export type TasksViewTableQuery = { __typename?: 'Query', tasks: Array<{ __typename?: 'Task', createdAt: any, imoji: string, name: string, slug: string, tags: Array<string>, id: string, _count?: { __typename?: 'TaskCount', prompts: number, tips: number } | null, category?: { __typename?: 'Category', name: string, id: string, colour: string } | null }> };
 
 export type AggregateTaskQueryVariables = Exact<{
   where?: InputMaybe<TaskWhereInput>;
@@ -5377,7 +5411,7 @@ export type TaskQueryVariables = Exact<{
 }>;
 
 
-export type TaskQuery = { __typename?: 'Query', task?: { __typename?: 'Task', slug: string, tags: Array<string>, description: string, createdAt: any, id: string, imoji: string, name: string, updatedAt: any, categoryId: string, prompts: Array<{ __typename?: 'Prompt', description: string, id: string, name: string }>, tips: Array<{ __typename?: 'Tip', id: string, description: string }>, category?: { __typename?: 'Category', name: string } | null } | null };
+export type TaskQuery = { __typename?: 'Query', task?: { __typename?: 'Task', slug: string, tags: Array<string>, description: string, createdAt: any, id: string, imoji: string, name: string, updatedAt: any, categoryId: string, prompts: Array<{ __typename?: 'Prompt', description: string, id: string, name: string }>, tips: Array<{ __typename?: 'Tip', id: string, description: string }>, category?: { __typename?: 'Category', name: string, colour: string } | null } | null };
 
 export type CreateOneTaskMutationVariables = Exact<{
   data: TaskCreateInput;
@@ -6368,6 +6402,7 @@ export const CategoriesDocument = gql`
   categories {
     id
     name
+    colour
     createdAt
   }
 }
@@ -6417,6 +6452,7 @@ export const CategoriesWithoutRelationFieldDocument = gql`
     createdAt
     id
     name
+    colour
   }
 }
     `;
@@ -6525,6 +6561,7 @@ export const CategoryDataForUpdateDocument = gql`
   category(where: $where) {
     id
     name
+    colour
   }
 }
     `;
@@ -7104,6 +7141,7 @@ export const TasksViewTableDocument = gql`
     category {
       name
       id
+      colour
     }
     createdAt
     imoji
@@ -7208,6 +7246,7 @@ export const TaskDocument = gql`
     }
     category {
       name
+      colour
     }
   }
 }

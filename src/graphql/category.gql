@@ -2,6 +2,7 @@ query Categories {
   categories {
     id
     name
+    colour
     createdAt
   }
 }
@@ -16,6 +17,7 @@ query CategoriesWithoutRelationField($where: CategoryWhereInput, $orderBy: [Cate
     createdAt
     id
     name
+    colour
   }
 }
 
@@ -35,6 +37,7 @@ query CategoryDataForUpdate($where: CategoryWhereUniqueInput!) {
   category(where: $where) {
     id
     name
+    colour
   }
 }
 
