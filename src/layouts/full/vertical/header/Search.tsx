@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEventHandler, useState } from 'react';
 import {
   IconButton,
   Dialog,
@@ -33,7 +33,7 @@ const Search = () => {
     setIsSearching(true);
   };
 
-  const handleSearchChange = (e) => {
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
   };
 

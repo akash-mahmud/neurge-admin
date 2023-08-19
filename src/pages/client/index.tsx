@@ -18,21 +18,21 @@ import {
     InputAdornment,
     FormControl,
     InputLabel,
-    Select,
-    MenuItem,
+    // Select,
+    // MenuItem,
     Avatar,
     SelectChangeEvent,
     Chip,
     Tab
 } from '@mui/material';
-import { Button, Divider, Pagination, Popconfirm, Spin, Upload, UploadFile, UploadProps } from 'antd';
+import { Button, Divider, Pagination, Popconfirm, Spin, Upload, UploadFile, UploadProps , Select } from 'antd';
 
 import PageContainer from '../../../src/components/container/PageContainer';
 
 import ParentCard from '../../../src/components/shared/ParentCard';
 import BlankCard from '../../../src/components/shared/BlankCard';
 import { IconEdit, IconHeart, IconPhone, IconSearch, IconTrash, IconUser } from '@tabler/icons-react';
-import { CategoryCreateInput, CategoryUpdateInput, SortOrder, useAggregateCategoryQuery, useAddonBlogCategoriesForTableViewQuery, useCategoryDataForUpdateLazyQuery, useCreateOneCategoryMutation, useDeleteOneCategoryMutation, useUpdateOneCategoryMutation, AddonBlogCategoryCreateInput, useAddonForSelectQuery, useCreateOneAddonBlogCategoryMutation, useAggregateAddonBlogCategoryQuery, useDeleteOneAddonBlogCategoryMutation, AddonBlogCategoryUpdateInput, useAddonBlogCategoryForUpdateLazyQuery, useUpdateOneAddonBlogCategoryMutation, useUsersDataForTableViewQuery, UserRole, useAggregateUserQuery, UserCreateInput, useCategoriesWithoutRelationFieldQuery, useRegisterByAdminMutation, useUserLazyQuery, MutationUpdateOneUserArgs, useUploadFileMutation, useDeleteOneUserMutation } from '@/graphql/generated/schema';
+import { CategoryCreateInput, CategoryUpdateInput, SortOrder, useAggregateCategoryQuery, useAddonBlogCategoriesForTableViewQuery, useCategoryDataForUpdateLazyQuery, useCreateOneCategoryMutation, useDeleteOneCategoryMutation, useUpdateOneCategoryMutation, AddonBlogCategoryCreateInput, useAddonForSelectQuery, useCreateOneAddonBlogCategoryMutation, useAggregateAddonBlogCategoryQuery, useDeleteOneAddonBlogCategoryMutation, AddonBlogCategoryUpdateInput, useAddonBlogCategoryForUpdateLazyQuery, useUpdateOneAddonBlogCategoryMutation, useUsersDataForTableViewQuery, UserRole, useAggregateUserQuery, UserCreateInput, useCategoriesWithoutRelationFieldQuery, useRegisterByAdminMutation, useUserLazyQuery, MutationUpdateOneUserArgs, useUploadFileMutation, useDeleteOneUserMutation, CategoryWhereUniqueInput } from '@/graphql/generated/schema';
 import CustomTextField from '@/components/forms/theme-elements/CustomTextField';
 import { useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
@@ -120,7 +120,8 @@ const Index = () => {
             connect: []
         },
         purchasedCategories: {
-            connect: []
+            connect: [],
+            disconnect:[]
         }
     })
     const [createInput, setcreateInput] = useState<UserCreateInput>({
@@ -298,6 +299,8 @@ const Index = () => {
         console.log(createInput);
         
     };
+    const [disconnectCategories, setdisconnectCategories] = useState([])
+    const [disconnectAddons, setdisconnectAddons] = useState([])
     const handleBeforeUploadUpdate = async (file: RcFile): Promise<void> => {
 
 
@@ -387,32 +390,45 @@ const Index = () => {
                                                             <FormControl style={{
                                                                 marginTop: '10px'
                                                             }} fullWidth>
-                                                                <InputLabel id="demo-simple-select-label">Purchased Categories</InputLabel>
-                                                                <Select multiple
-                                                                    labelId="demo-simple-select-label"
-                                                                    id="demo-simple-select"
+                                                                <label>Purchased Categories</label>
+                                                                <Select 
+                                                                    // labelId="demo-simple-select-label"
+                                                                    mode="multiple"
+                                                                    // placeholder="Purchased Categories"
                                                                     value={input?.purchasedCategories?.connect?.map((obj) => obj.id)}
-                                                                    label="Purchased Categories"
+                                                                    // label="Purchased Categories"
 
-                                                                    onChange={(event) => {
-                                                                        console.log(event.target.value);
+                                                                    onChange={(value) => {
+const disconnect =  input.purchasedCategories?.connect?.filter((obj) => !value.includes(obj.id) )
+let allDisconnectValues = []
+if (input.purchasedCategories?.disconnect ) {
+    // @ts-ignore
+    allDisconnectValues = [ ...input.purchasedCategories?.disconnect , ...disconnect  ]
+}else{
+    // @ts-ignore
+    allDisconnectValues = disconnect  
+
+}
 
                                                                         setinput({
                                                                             ...input,
                                                                             purchasedCategories: {
                                                                                 // @ts-ignore
 
-                                                                                connect: event.target.value?.map((id) => {
+                                                                                connect: value.map((id) => {
                                                                                     return { id }
-                                                                                }
-                                                                                )
+                                                                                },
+                                                                               
+                                                                                
+                                                                                ),
+                                                                                disconnect:allDisconnectValues
                                                                             }
                                                                         })
                                                                     }}
                                                                 >
                                                                     {
                                                                         categories?.categories?.map((category) => (
-                                                                            <MenuItem value={category.id}>{category.name}</MenuItem>
+                                                                            <Select.Option value={category.id}>{category.name}</Select.Option>
                                                                         ))
                                                                     }
 
@@ -426,31 +442,40 @@ const Index = () => {
                                                             <FormControl style={{
                                                                 marginTop: '10px'
                                                             }} fullWidth>
-                                                                <InputLabel id="demo-simple-select-label">Addons</InputLabel>
-                                                                <Select multiple
-                                                                    labelId="demo-simple-select-label"
-                                                                    id="demo-simple-select"
+                                                                <label>Purchased addons</label>
+                                                                <Select 
+                                                                  mode="multiple"
                                                                     value={input?.purchasedAddons?.connect?.map((obj) => obj.id)}
-                                                                    label="Purchased addons"
 
                                                                     onChange={(event) => {
-
+                                                                        // @ts-ignore
+                                                                        const disconnect =  input.purchasedAddons?.connect?.filter((obj) => !value.includes(obj.id) )
+                                                                        let allDisconnectValues = []
+                                                                        if (input.purchasedAddons?.disconnect ) {
+                                                                            // @ts-ignore
+                                                                            allDisconnectValues = [ ...input.purchasedAddons?.disconnect , ...disconnect  ]
+                                                                        }else{
+                                                                            // @ts-ignore
+                                                                            allDisconnectValues = disconnect  
+                                                                        
+                                                                        }
                                                                         setinput({
                                                                             ...input,
                                                                             purchasedAddons: {
-                                                                                // @ts-ignore
+                                                                               
 
-                                                                                connect: event.target.value?.map((id) => {
+                                                                                connect: event?.map((id) => {
                                                                                     return { id }
-                                                                                }
-                                                                                )
+                                                                                }, 
+                                                                                ),
+                                                                                disconnect:allDisconnectValues
                                                                             }
                                                                         })
                                                                     }}
                                                                 >
                                                                     {
                                                                         addonForselect?.addons?.map((addon) => (
-                                                                            <MenuItem value={addon.id}>{addon.name}</MenuItem>
+                                                                            <Select.Option value={addon.id}>{addon.name}</Select.Option>
                                                                         ))
                                                                     }
 
@@ -595,22 +620,21 @@ const Index = () => {
                                         <FormControl style={{
                                             marginTop: '10px'
                                         }} fullWidth>
-                                            <InputLabel id="demo-simple-select-label">Purchased Categories</InputLabel>
-                                            <Select multiple
-                                                labelId="demo-simple-select-label"
-                                                id="demo-simple-select"
+                                            <label id="demo-simple-select-label">Purchased Categories</label>
+                                            <Select     mode="multiple"
+                                              
                                                 value={createInput?.purchasedCategories?.connect?.map((obj) => obj.id)}
-                                                label="Purchased Categories"
+                                             
 
-                                                onChange={(event) => {
-                                                    console.log(event.target.value);
+                                                onChange={(value) => {
+                                                   
 
                                                     setcreateInput({
                                                         ...createInput,
                                                         purchasedCategories: {
                                                             // @ts-ignore
 
-                                                            connect: event.target.value?.map((id) => {
+                                                            connect: value?.map((id) => {
                                                                 return { id }
                                                             }
                                                             )
@@ -620,7 +644,7 @@ const Index = () => {
                                             >
                                                 {
                                                     categories?.categories?.map((category) => (
-                                                        <MenuItem value={category.id}>{category.name}</MenuItem>
+                                                        <Select.Option value={category.id}>{category.name}</Select.Option>
                                                     ))
                                                 }
 
@@ -634,12 +658,11 @@ const Index = () => {
                                         <FormControl style={{
                                             marginTop: '10px'
                                         }} fullWidth>
-                                            <InputLabel id="demo-simple-select-label">Addons</InputLabel>
-                                            <Select multiple
-                                                labelId="demo-simple-select-label"
-                                                id="demo-simple-select"
+                                            <label id="demo-simple-select-label">Addons</label>
+                                            <Select     mode="multiple"
+                                             
                                                 value={createInput?.purchasedAddons?.connect?.map((obj) => obj.id)}
-                                                label="Purchased addons"
+                                               
 
                                                 onChange={(event) => {
 
@@ -648,7 +671,7 @@ const Index = () => {
                                                         purchasedAddons: {
                                                             // @ts-ignore
 
-                                                            connect: event.target.value?.map((id) => {
+                                                            connect: event?.map((id) => {
                                                                 return { id }
                                                             }
                                                             )
@@ -658,7 +681,7 @@ const Index = () => {
                                             >
                                                 {
                                                     addonForselect?.addons?.map((addon) => (
-                                                        <MenuItem value={addon.id}>{addon.name}</MenuItem>
+                                                        <Select.Option value={addon.id}>{addon.name}</Select.Option>
                                                     ))
                                                 }
 
