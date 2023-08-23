@@ -371,7 +371,7 @@ setcreateInput({
                    autoFocus
                    id="name"
                    label="purchase url"
-                   type="number"
+                   type="text"
                    fullWidth
                  />
                </Box>

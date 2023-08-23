@@ -35,7 +35,9 @@ import { useState } from 'react';
 import { EmojiEmotions } from '@mui/icons-material';
 import dynamic from "next/dynamic";
 import { useUpdateOneBlogMutation } from '@/graphql/generated/schema';
-const ReactQuill = dynamic(import('react-quill'), { ssr: false })
+const QuillEditorComp = dynamic(import('@/components/QuillEditorComp'), {ssr: false})
+
+
 const columns = [
     { id: 'title', label: 'title', minWidth: 170 },
     { id: 'imoji', label: 'imoji', minWidth: 100 },
@@ -74,6 +76,7 @@ const Index = () => {
             }]
         }
     })
+
     const { data: total, refetch: refetchTotal, loading:aggregeateLoading } = useAggregateBlogQuery()
     const [open, setOpen] = useState(false);
     const [input, setinput] = useState<BlogUpdateInput>({
@@ -342,17 +345,14 @@ const Index = () => {
                                         />
                                     </Box>
                                     <Box mt={3}>
-                                        <ReactQuill style={{
-                                            height: 200
-                                        }}
+                                        <QuillEditorComp 
                                             value={input.description?.set as string}
-                                            onChange={(value) => {
+                                            onChange={(value:any) => {
                                                 setinput({
                                                     ...input,
                                                     description: {set:value}
                                                 })
                                             }}
-                                            placeholder="Description"
                                         />
                                     </Box>
 
@@ -492,17 +492,14 @@ const Index = () => {
                                         />
                                     </Box>
                                     <Box mt={3}>
-                                        <ReactQuill style={{
-                                            height: 200
-                                        }}
+                                        <QuillEditorComp 
                                             value={createInput.description}
-                                            onChange={(value) => {
+                                            onChange={(value:any) => {
                                                 setcreateInput({
                                                     ...createInput,
                                                     description: value
                                                 })
                                             }}
-                                            placeholder="Description"
                                         />
                                     </Box>
 
